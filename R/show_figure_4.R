@@ -16,7 +16,7 @@ library(ggeffects)
 
 ### Start ###
 rm(list = ls())
-setwd("Z:/Documents/0_Ziegelprojekt/3_Aufnahmen_und_Ergebnisse/waste_bricks_for_restoration/data/processed")
+setwd("Z:/Documents/0_Ziegelprojekt/3_Aufnahmen_und_Ergebnisse/2020_waste_bricks_for_restoration/data/processed")
 
 ### Load data ###
 edata <- read_table2("experiment_1_site_processed.txt", col_names = T, na = "na", col_types = 
@@ -78,7 +78,7 @@ ggplot(pdata, aes(brickRatio, biomass, shape = brickRatio, ymin = conf.low, ymax
   guides(shape = F)+
   themeMB()
 #ggsave("figure_4_(800dpi_10x5cm).tiff",
-#       dpi = 800, width = 10, height = 5, units = "cm", path = "Z:/Documents/0_Ziegelprojekt/3_Aufnahmen_und_Ergebnisse/waste_bricks_for_restoration/outputs/figures/raw")
+#       dpi = 800, width = 10, height = 5, units = "cm", path = "Z:/Documents/0_Ziegelprojekt/3_Aufnahmen_und_Ergebnisse/2020_waste_bricks_for_restoration/outputs/figures/raw")
 #visreg(m5, "brickRatio", by = "f.watering", data = edata,
 #       ylab = expression(paste(Delta,"biomass [g g"^"-1"*"]")), xlab = "",
 #       trans = exp, type = "contrast",

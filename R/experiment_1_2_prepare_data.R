@@ -7,7 +7,7 @@ library(tidyverse)
 
 ### Start----------------------------------------------------------------------------------------------
 rm(list = ls())
-setwd("Z:/Documents/0_Ziegelprojekt/3_Aufnahmen_und_Ergebnisse/waste_bricks_for_restoration/data/raw")
+setwd("Z:/Documents/0_Ziegelprojekt/3_Aufnahmen_und_Ergebnisse/2020_waste_bricks_for_restoration/data/raw")
 
 ### Load data ----------------------------------------------------------------------------------------
 edata <- read_table2("experiment_1_2_site_raw.txt", col_names = T, na = "na", col_types = 

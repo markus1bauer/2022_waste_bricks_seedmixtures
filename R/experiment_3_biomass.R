@@ -64,52 +64,6 @@ library(emmeans)
 
 ## 1. Frequentist #############################################################################################
 
-####Data exploration####
-#####Homogenity of variances? Find potential effects and interactions
-par(mfrow = c(2,2));boxplot(biomass ~ brickRatio, edata);plot(biomass ~ texture, edata);plot(biomass ~ compaction, edata);plot(biomass ~ coal, edata)
-#2way: brickRatio:compaction, texture:compaction possible
-ggplot(edata,aes(texture, biomass, color = brickRatio)) + geom_boxplot() + geom_quasirandom(dodge.width=.7)
-ggplot(edata,aes(brickRatio, biomass, color = compaction)) + geom_boxplot() + geom_quasirandom(dodge.width=.7)
-ggplot(edata,aes(texture, biomass, color = compaction)) + geom_boxplot() + geom_quasirandom(dodge.width=.7)
-#coal: no interaction
-ggplot(edata,aes(brickRatio, biomass, color = coal)) + geom_boxplot() + geom_quasirandom(dodge.width=.7)
-ggplot(edata,aes(texture, biomass, color = coal)) + geom_boxplot() + geom_quasirandom(dodge.width=.7)
-pd <- position_dodge(1.5)
-#3way: brickRatio:texture:compaction possible
-ggplot(edata,aes(brickRatio, biomass, color=compaction)) + geom_boxplot()+  geom_quasirandom(data=edata,aes(brickRatio, biomass, color=compaction),dodge.width=.7)+  facet_grid(.~texture)
-#3way: no interaction
-ggplot(edata,aes(brickRatio, biomass, color=coal))+geom_boxplot()+geom_quasirandom(data=edata,aes(brickRatio, biomass, color=coal),dodge.width=.7)+facet_grid(.~texture)
-#####Outliers and lots of zeroes and transformations?
-par(mfrow=c(1,1));boxplot(edata$biomass, ylim = c(0,20));#identify(rep(1,length(edata$bioMass)),edata$bioMass, labels = c(edata$no))
-ggplot(edata, aes(biomass)) + geom_density()
-ggplot(edata, aes(sqrt(biomass))) + geom_density()
-ggplot(edata, aes(log(biomass))) + geom_density()
-par(mfrow = c(2,2));dotchart((edata$biomass), groups=factor(edata$brickRatio), main="Cleveland dotplot");dotchart((edata$biomass), groups=factor(edata$texture), main="Cleveland dotplot");dotchart((edata$biomass), groups=factor(edata$compaction), main="Cleveland dotplot comp");dotchart((edata$biomass), groups=factor(edata$coal), main="Cleveland dotplot coal")
-####Model building####
-m1a <- lm(log(biomass) ~ (brickRatio + texture + compaction + coal)^2 +
-            brickRatio:texture:compaction + brickRatio:texture:coal, edata); simulationOutput <- simulateResiduals(m1a, plot = T)
-m1b <- lm(log(biomass) ~ (brickRatio + texture + compaction)^2 + coal +
-            brickRatio:texture:compaction, edata); simulationOutput <- simulateResiduals(m1b, plot = T)
-m1c <- lm(log(biomass) ~ brickRatio + texture + compaction + coal +
-            brickRatio:compaction + texture:compaction + texture:brickRatio, edata); simulationOutput <- simulateResiduals(m1c, plot = T)
-m1d <- lm(log(biomass) ~ brickRatio + texture + compaction + coal +
-          brickRatio:compaction + texture:compaction, edata); simulationOutput <- simulateResiduals(m1d, plot = T)
-m1e <- lm(log(biomass) ~ brickRatio + texture + compaction + coal + 
-            brickRatio:texture, edata); simulationOutput <- simulateResiduals(m1e, plot = T)
-anova(m1a,m1b,m1c,m1d,m1e) #--> m1b because of hypotheses
-rm(m1a,m1c,m1d)
-par(mfrow=c(2,2));
-plotResiduals(main = "brickRatio", simulationOutput, form = edata$brickRatio);
-plotResiduals(main = "texture", simulationOutput, form = edata$texture);
-plotResiduals(main = "compaction", simulationOutput, form = edata$compaction);
-plotResiduals(main = "coal", simulationOutput, form = edata$coal);
-####Model output####
-summary(m1b) # R2adj = 0.4143
-Anova(m1b, type = 3) #3w non-sig
-(emm <- emmeans(m1b, revpairwise ~ brickRatio | texture, type = "response")); plot(emm, comparisons=T)
-eff_size(emmeans(m1b, "brickRatio", "texture"), sigma = sigma(m1b), edf = 59)
-(emm <- emmeans(m1b, revpairwise ~ brickRatio * compaction | texture, type = "response")); plot(emm, comparisons=T)
-emm3way <- emmeans(m1b, ~ brickRatio * texture * compaction); pwpp((emm3way), by="texture", type="response")
 
 ## 2. Bayesian #############################################################################################
 library(rjags);

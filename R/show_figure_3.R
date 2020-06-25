@@ -16,7 +16,7 @@ library(ggeffects)
 
 ### Start ###
 rm(list = ls())
-setwd("Z:/Documents/0_Ziegelprojekt/3_Aufnahmen_und_Ergebnisse/waste_bricks_for_restoration/data/processed")
+setwd("Z:/Documents/0_Ziegelprojekt/3_Aufnahmen_und_Ergebnisse/2020_waste_bricks_for_restoration/data/processed")
 
 ### Load data ###
 edata <- read_table2("experiment_2_site_processed.txt", col_names = T, na = "na", col_types = 
@@ -78,8 +78,8 @@ ggplot(pdata,aes(brickRatio, biomass, ymin = conf.low, ymax = conf.high))+
   labs(x="",y=expression(paste("Biomass [g]")), shape = "",color="") +
   guides(shape = F)+
   themeMB()
-ggsave("figure_3_(800dpi_6.5x5cm).tiff",
-       dpi = 800, width = 6.5, height = 5, units = "cm", path = "Z:/Documents/0_Ziegelprojekt/3_Aufnahmen_und_Ergebnisse/waste_bricks_for_restoration/outputs/figures/raw")
+#ggsave("figure_3_(800dpi_6.5x5cm).tiff",
+#       dpi = 800, width = 6.5, height = 5, units = "cm", path = "Z:/Documents/0_Ziegelprojekt/3_Aufnahmen_und_Ergebnisse/2020:waste_bricks_for_restoration/outputs/figures/raw")
 #visreg(m5, "treatment", ylab = expression(paste(Delta,"Biomass [g g"^"-1"*"]")), xlab = "",data = edataBricktype,
 #       trans = exp, type = "contrast", partial = T, rug = F, gg = T, overlay = F, band = T,
 #       points = list(cex = 0.5, pch = 16), line = list(col="black"), whitespace=.2) +
