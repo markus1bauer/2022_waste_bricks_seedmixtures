@@ -77,8 +77,8 @@ ggplot(pdata, aes(brickRatio, biomass, shape = brickRatio, ymin = conf.low, ymax
   labs(x = "Brick ratio [vol%]", y = expression(paste("Biomass [g]")), shape = "", color = "") +
   guides(shape = F)+
   themeMB()
-#ggsave("main_biomass_watering_brickRatio_(800dpi_10x5cm)2.tiff",
-#       dpi = 800, width = 10, height = 5, units = "cm", path = "Z:/Documents/0_Ziegelprojekt/3_Aufnahmen_und_Ergebnisse/waste_bricks_for_restoration/output/figures/raw")
+#ggsave("figure_4_(800dpi_10x5cm).tiff",
+#       dpi = 800, width = 10, height = 5, units = "cm", path = "Z:/Documents/0_Ziegelprojekt/3_Aufnahmen_und_Ergebnisse/waste_bricks_for_restoration/outputs/figures/raw")
 #visreg(m5, "brickRatio", by = "f.watering", data = edata,
 #       ylab = expression(paste(Delta,"biomass [g g"^"-1"*"]")), xlab = "",
 #       trans = exp, type = "contrast",

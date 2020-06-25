@@ -1,5 +1,6 @@
-### Script to prepare data
-#library(installr);updateR(browse_news=F, install_R=T, copy_packages = T,copy_Rprofile.site = T,keep_old_packages = T, update_packages = T)
+### Script to prepare data of experiment 1 and 2 ###
+
+
 
 ### Packages ---------------------------------------------------------------------------------------------
 library(tidyverse)
@@ -39,5 +40,5 @@ edata2 <- filter(edata, acid == "Acid" & seedmix == "Robust" | seedmix == "Vigor
 edata2$seedmix <- factor(edata2$seedmix)
 
 ### Save processed data-------------------------------------------------------------------------------
-write.table(edata1,"experiment_1_site_processed.txt", sep="\t", row.names=F)
-write.table(edata2,"experiment_2_site_processed.txt", sep="\t", row.names=F)
+#write.table(edata1,"experiment_1_site_processed.txt", sep="\t", row.names=F)
+#write.table(edata2,"experiment_2_site_processed.txt", sep="\t", row.names=F)

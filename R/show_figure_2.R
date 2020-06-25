@@ -78,5 +78,5 @@ ggplot(pdata, aes(brickRatio, biomass, shape = brickRatio, color = acid, ymin = 
   labs(x = "Brick ratio [vol%]", y = expression(paste("Biomass [g]")), shape = "", color = "") +
   guides(shape = F)+
   themeMB()
-#ggsave("main_biomass_acid_brickRatio_seedmix_(800dpi_16x5cm).tiff",
-#       dpi = 800, width = 16, height = 5, units = "cm", path = "Z:/Documents/0_Ziegelprojekt/3_Aufnahmen_und_Ergebnisse/waste_bricks_for_restoration/output/figures/raw")
+#ggsave("figure_2_(800dpi_16x5cm).tiff",
+#       dpi = 800, width = 16, height = 5, units = "cm", path = "Z:/Documents/0_Ziegelprojekt/3_Aufnahmen_und_Ergebnisse/waste_bricks_for_restoration/outputs/figures/raw")

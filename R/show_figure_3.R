@@ -49,7 +49,7 @@ m5 <- lmer(log(biomass) ~ f.watering + brickRatio + brickType + seedmix +
 themeMB <- function(){
   theme(
     panel.background = element_rect(fill = "white"),
-    text  = element_text(size=10, color = "black"),
+    text  = element_text(size=9, color = "black"),
     axis.line.y = element_line(),
     axis.line.x = element_blank(),
     axis.ticks.x = element_blank(),
@@ -66,20 +66,20 @@ pdata <- ggemmeans(m5, terms = c("brickRatio","brickType"), type = "fe")
 pdata <- rename(pdata, biomass = predicted, brickRatio = x, brickType = group);
 meandata <- filter(pdata, brickRatio == "5% bricks")
 pd <- position_dodge(.6)
-ggplot(pdata,aes(brickRatio, biomass, shape = brickRatio, ymin = conf.low, ymax = conf.high))+
+ggplot(pdata,aes(brickRatio, biomass, ymin = conf.low, ymax = conf.high))+
   geom_quasirandom(data = edata, aes(brickRatio, biomass),
                    color = "grey70", dodge.width = .6, size = 0.7)+
   geom_hline(aes(yintercept = biomass), meandata, color = "grey70")+
   geom_errorbar(position = pd, width = 0.0, size = 0.4)+
   geom_point(position = pd, size = 2.5)+
-  facet_grid(~brickType)
+  facet_grid(~brickType) +
   scale_y_continuous(limits=c(0,25), breaks = seq(-100,100,5)) +
   scale_shape_manual(values=c(1,16,16)) +
   labs(x="",y=expression(paste("Biomass [g]")), shape = "",color="") +
   guides(shape = F)+
   themeMB()
-#ggsave("main_biomass_brickType_(800dpi_6.5x5cm).tiff",
-#       dpi = 800, width = 6.5, height = 5, units = "cm", path = "Z:/Documents/0_Ziegelprojekt/3_Aufnahmen_und_Ergebnisse/waste_bricks_for_restoration/output/figures/raw")
+ggsave("figure_3_(800dpi_6.5x5cm).tiff",
+       dpi = 800, width = 6.5, height = 5, units = "cm", path = "Z:/Documents/0_Ziegelprojekt/3_Aufnahmen_und_Ergebnisse/waste_bricks_for_restoration/outputs/figures/raw")
 #visreg(m5, "treatment", ylab = expression(paste(Delta,"Biomass [g g"^"-1"*"]")), xlab = "",data = edataBricktype,
 #       trans = exp, type = "contrast", partial = T, rug = F, gg = T, overlay = F, band = T,
 #       points = list(cex = 0.5, pch = 16), line = list(col="black"), whitespace=.2) +
