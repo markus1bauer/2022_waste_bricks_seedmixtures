@@ -1,0 +1,161 @@
+no	plot	block	watering	brickType	seedmix	seetDensity	brickRatio	acid	grassMass	forbMass	specPres	specAbs	estRate	conf.low	conf.high	biomass	grassRatio	f.watering
+1	A01	A	0.5	Clean	Standard	20	30	Acid	12.1	4.8	11	5	0.6875	1	1	16.9	0.72	Dry
+2	A02	A	0.5	Clean	Standard	20	30	Control	10.1	3.5	12	4	0.75	2	2	13.6	0.74	Dry
+3	A03	A	0.5	Clean	Standard	20	5	Acid	11	4.1	12	4	0.75	3	3	15.1	0.73	Dry
+4	A04	A	0.5	Clean	Standard	20	5	Control	20.3	2.1	12	4	0.75	4	4	22.4	0.91	Dry
+5	A05	A	0.5	Clean	Robust	4	30	Acid	2.9	11.7	12	8	0.6	5	5	14.6	0.20	Dry
+6	A06	A	0.5	Clean	Robust	4	30	Control	1.9	10.0	11	9	0.55	6	6	11.9	0.16	Dry
+7	A07	A	0.5	Clean	Robust	4	5	Acid	6.1	10.9	12	8	0.6	7	7	17	0.36	Dry
+8	A08	A	0.5	Clean	Robust	4	5	Control	5.6	10.9	13	7	0.65	8	8	16.5	0.34	Dry
+9	A09	A	0.5	Clean	Intermediate	4	30	Acid	8.3	12.0	10	10	0.5	9	9	20.3	0.41	Dry
+10	A10	A	0.5	Clean	Intermediate	4	30	Control	14.8	3.0	10	10	0.5	10	10	17.8	0.83	Dry
+11	A11	A	0.5	Clean	Intermediate	4	5	Acid	6.5	11.7	11	9	0.55	11	11	18.2	0.36	Dry
+12	A12	A	0.5	Clean	Intermediate	4	5	Control	9.7	10.7	15	5	0.75	12	12	20.4	0.48	Dry
+13	A13	A	0.5	Clean	Vigorous	4	30	Acid	10.2	5.6	11	9	0.55	13	13	15.8	0.65	Dry
+14	A14	A	0.5	Clean	Vigorous	4	30	Control	6.1	15.7	7	13	0.35	14	14	21.8	0.28	Dry
+15	A15	A	0.5	Clean	Vigorous	4	5	Acid	2.7	16.1	11	9	0.55	15	15	18.8	0.14	Dry
+16	A16	A	0.5	Clean	Vigorous	4	5	Control	14.5	12.7	10	10	0.5	16	16	27.2	0.53	Dry
+17	Ae1	A	0.5	Demolition	Robust	4	30	Acid	2.8	8.7	10	10	0.5	17	17	11.5	0.24	Dry
+18	Ae2	A	0.5	Demolition	Robust	4	5	Acid	1.1	14.9	10	10	0.5	18	18	16	0.07	Dry
+19	Ae3	A	0.5	Demolition	Vigorous	4	30	Acid	12	2.8	10	10	0.5	19	19	14.8	0.81	Dry
+20	Ae4	A	0.5	Demolition	Vigorous	4	5	Acid	7.2	10.2	12	8	0.6	20	20	17.4	0.41	Dry
+21	B01	B	0.5	Clean	Standard	20	30	Acid	13.2	3.0	14	2	0.875	21	21	16.2	0.81	Dry
+22	B02	B	0.5	Clean	Standard	20	30	Control	13.2	2.7	14	2	0.875	22	22	15.9	0.83	Dry
+23	B03	B	0.5	Clean	Standard	20	5	Acid	15.3	3.2	11	5	0.6875	23	23	18.5	0.83	Dry
+24	B04	B	0.5	Clean	Standard	20	5	Control	13.2	1.2	10	6	0.625	24	24	14.4	0.92	Dry
+25	B05	B	0.5	Clean	Robust	4	30	Acid	3.3	10.9	11	9	0.55	25	25	14.2	0.23	Dry
+26	B06	B	0.5	Clean	Robust	4	30	Control	1.4	10.9	13	7	0.65	26	26	12.3	0.11	Dry
+27	B07	B	0.5	Clean	Robust	4	5	Acid	2.7	10.5	11	9	0.55	27	27	13.2	0.20	Dry
+28	B08	B	0.5	Clean	Robust	4	5	Control	6	7.2	12	8	0.6	28	28	13.2	0.45	Dry
+29	B09	B	0.5	Clean	Intermediate	4	30	Acid	6	8.9	11	9	0.55	29	29	14.9	0.40	Dry
+30	B10	B	0.5	Clean	Intermediate	4	30	Control	4.7	9.1	12	8	0.6	30	30	13.8	0.34	Dry
+31	B11	B	0.5	Clean	Intermediate	4	5	Acid	4.2	10.8	12	8	0.6	31	31	15	0.28	Dry
+32	B12	B	0.5	Clean	Intermediate	4	5	Control	5.1	6.7	8	12	0.4	32	32	11.8	0.43	Dry
+33	B13	B	0.5	Clean	Vigorous	4	30	Acid	9.4	1.5	10	10	0.5	33	33	10.9	0.86	Dry
+34	B14	B	0.5	Clean	Vigorous	4	30	Control	14.6	0.8	10	10	0.5	34	34	15.4	0.95	Dry
+35	B15	B	0.5	Clean	Vigorous	4	5	Acid	2.9	10.5	10	10	0.5	35	35	13.4	0.22	Dry
+36	B16	B	0.5	Clean	Vigorous	4	5	Control	8.8	5.4	11	9	0.55	36	36	14.2	0.62	Dry
+37	Be1	B	0.5	Demolition	Robust	4	30	Acid	3.9	3.3	12	8	0.6	37	37	7.2	0.54	Dry
+38	Be2	B	0.5	Demolition	Robust	4	5	Acid	4.1	3.9	11	9	0.55	38	38	8	0.51	Dry
+39	Be3	B	0.5	Demolition	Vigorous	4	30	Acid	0.9	6.6	9	11	0.45	39	39	7.5	0.12	Dry
+40	Be4	B	0.5	Demolition	Vigorous	4	5	Acid	10.6	2.0	8	12	0.4	40	40	12.6	0.84	Dry
+41	C01	C	3	Clean	Standard	20	30	Acid	34.1	6.8	12	4	0.75	41	41	40.9	0.83	Moist
+42	C02	C	3	Clean	Standard	20	30	Control	17	3.6	10	6	0.625	42	42	20.6	0.83	Moist
+43	C03	C	3	Clean	Standard	20	5	Acid	21.4	1.8	12	4	0.75	43	43	23.2	0.92	Moist
+44	C04	C	3	Clean	Standard	20	5	Control	19.7	5.6	12	4	0.75	44	44	25.3	0.78	Moist
+45	C05	C	3	Clean	Robust	4	30	Acid	2.6	12.5	12	8	0.6	45	45	15.1	0.17	Moist
+46	C06	C	3	Clean	Robust	4	30	Control	1.5	16.0	10	10	0.5	46	46	17.5	0.09	Moist
+47	C07	C	3	Clean	Robust	4	5	Acid	3.9	18.5	11	9	0.55	47	47	22.4	0.17	Moist
+48	C08	C	3	Clean	Robust	4	5	Control	7	10.3	11	9	0.55	48	48	17.3	0.40	Moist
+49	C09	C	3	Clean	Intermediate	4	30	Acid	9	12.5	9	11	0.45	49	49	21.5	0.42	Moist
+50	C10	C	3	Clean	Intermediate	4	30	Control	9.1	12.0	10	10	0.5	50	50	21.1	0.43	Moist
+51	C11	C	3	Clean	Intermediate	4	5	Acid	7.7	11.8	11	9	0.55	51	51	19.5	0.39	Moist
+52	C12	C	3	Clean	Intermediate	4	5	Control	7.1	8.2	9	11	0.45	52	52	15.3	0.46	Moist
+53	C13	C	3	Clean	Vigorous	4	30	Acid	8.4	10.8	9	11	0.45	53	53	19.2	0.44	Moist
+54	C14	C	3	Clean	Vigorous	4	30	Control	13.1	4.9	9	11	0.45	54	54	18	0.73	Moist
+55	C15	C	3	Clean	Vigorous	4	5	Acid	4.4	17.1	8	12	0.4	55	55	21.5	0.20	Moist
+56	C16	C	3	Clean	Vigorous	4	5	Control	5.1	7.5	9	11	0.45	56	56	12.6	0.40	Moist
+57	Ce1	C	3	Demolition	Robust	4	30	Acid	13.5	6.8	11	9	0.55	57	57	20.3	0.67	Moist
+58	Ce2	C	3	Demolition	Robust	4	5	Acid	3.9	21.0	11	9	0.55	58	58	24.9	0.16	Moist
+59	Ce3	C	3	Demolition	Vigorous	4	30	Acid	8.5	8.4	8	12	0.4	59	59	16.9	0.50	Moist
+60	Ce4	C	3	Demolition	Vigorous	4	5	Acid	13.7	3.2	12	8	0.6	60	60	16.9	0.81	Moist
+61	D01	D	3	Clean	Standard	20	30	Acid	19.4	8.0	13	3	0.8125	61	61	27.4	0.71	Moist
+62	D02	D	3	Clean	Standard	20	30	Control	13.1	3.4	12	4	0.75	62	62	16.5	0.79	Moist
+63	D03	D	3	Clean	Standard	20	5	Acid	15.2	3.5	11	5	0.6875	63	63	18.7	0.81	Moist
+64	D04	D	3	Clean	Standard	20	5	Control	13.8	2.3	11	5	0.6875	64	64	16.1	0.86	Moist
+65	D05	D	3	Clean	Robust	4	30	Acid	5.2	5.6	7	13	0.35	65	65	10.8	0.48	Moist
+66	D06	D	3	Clean	Robust	4	30	Control	5.2	10.2	7	13	0.35	66	66	15.4	0.34	Moist
+67	D07	D	3	Clean	Robust	4	5	Acid	2.9	9.0	7	13	0.35	67	67	11.9	0.24	Moist
+68	D08	D	3	Clean	Robust	4	5	Control	2.5	12.0	9	11	0.45	68	68	14.5	0.17	Moist
+69	D09	D	3	Clean	Intermediate	4	30	Acid	4.7	13.5	11	9	0.55	69	69	18.2	0.26	Moist
+70	D10	D	3	Clean	Intermediate	4	30	Control	2.3	12.8	7	13	0.35	70	70	15.1	0.15	Moist
+71	D11	D	3	Clean	Intermediate	4	5	Acid	2.3	6.4	11	9	0.55	71	71	8.7	0.26	Moist
+72	D12	D	3	Clean	Intermediate	4	5	Control	4.7	8.7	7	13	0.35	72	72	13.4	0.35	Moist
+73	D13	D	3	Clean	Vigorous	4	30	Acid	5.3	6.6	9	11	0.45	73	73	11.9	0.45	Moist
+74	D14	D	3	Clean	Vigorous	4	30	Control	7.6	4.0	9	11	0.45	74	74	11.6	0.66	Moist
+75	D15	D	3	Clean	Vigorous	4	5	Acid	10.5	0.2	6	14	0.3	75	75	10.7	0.98	Moist
+76	D16	D	3	Clean	Vigorous	4	5	Control	7.2	4.1	7	13	0.35	76	76	11.3	0.64	Moist
+77	De1	D	3	Demolition	Robust	4	30	Acid	6.1	4.5	10	10	0.5	77	77	10.6	0.58	Moist
+78	De2	D	3	Demolition	Robust	4	5	Acid	3.6	12.8	9	11	0.45	78	78	16.4	0.22	Moist
+79	De3	D	3	Demolition	Vigorous	4	30	Acid	6.3	2.5	7	13	0.35	79	79	8.8	0.72	Moist
+80	De4	D	3	Demolition	Vigorous	4	5	Acid	2.9	6.4	11	9	0.55	80	80	9.3	0.31	Moist
+81	E01	E	1	Clean	Standard	20	30	Acid	25	7.5	12	4	0.75	81	81	32.5	0.77	Medium dry
+82	E02	E	1	Clean	Standard	20	30	Control	19.2	2.7	13	3	0.8125	82	82	21.9	0.88	Medium dry
+83	E03	E	1	Clean	Standard	20	5	Acid	19.1	5.8	13	3	0.8125	83	83	24.9	0.77	Medium dry
+84	E04	E	1	Clean	Standard	20	5	Control	16.3	4.0	12	4	0.75	84	84	20.3	0.80	Medium dry
+85	E05	E	1	Clean	Robust	4	30	Acid	8.7	15.4	8	12	0.4	85	85	24.1	0.36	Medium dry
+86	E06	E	1	Clean	Robust	4	30	Control	1.9	15.0	11	9	0.55	86	86	16.9	0.11	Medium dry
+87	E07	E	1	Clean	Robust	4	5	Acid	5.8	19.0	9	11	0.45	87	87	24.8	0.23	Medium dry
+88	E08	E	1	Clean	Robust	4	5	Control	2.9	18.7	10	10	0.5	88	88	21.6	0.13	Medium dry
+89	E09	E	1	Clean	Intermediate	4	30	Acid	9.5	17.9	11	9	0.55	89	89	27.4	0.35	Medium dry
+90	E10	E	1	Clean	Intermediate	4	30	Control	6.2	9.3	11	9	0.55	90	90	15.5	0.40	Medium dry
+91	E11	E	1	Clean	Intermediate	4	5	Acid	9.2	9.7	11	9	0.55	91	91	18.9	0.49	Medium dry
+92	E12	E	1	Clean	Intermediate	4	5	Control	4	17.2	10	10	0.5	92	92	21.2	0.19	Medium dry
+93	E13	E	1	Clean	Vigorous	4	30	Acid	9.4	9.1	12	8	0.6	93	93	18.5	0.51	Medium dry
+94	E14	E	1	Clean	Vigorous	4	30	Control	7.3	7.7	13	7	0.65	94	94	15	0.49	Medium dry
+95	E15	E	1	Clean	Vigorous	4	5	Acid	5.2	13.0	13	7	0.65	95	95	18.2	0.29	Medium dry
+96	E16	E	1	Clean	Vigorous	4	5	Control	12.7	4.4	12	8	0.6	96	96	17.1	0.74	Medium dry
+97	Ee1	E	1	Demolition	Robust	4	30	Acid	6.3	8.8	15	5	0.75	97	97	15.1	0.42	Medium dry
+98	Ee2	E	1	Demolition	Robust	4	5	Acid	4.2	10.7	12	8	0.6	98	98	14.9	0.28	Medium dry
+99	Ee3	E	1	Demolition	Vigorous	4	30	Acid	14.2	5.4	10	10	0.5	99	99	19.6	0.72	Medium dry
+100	Ee4	E	1	Demolition	Vigorous	4	5	Acid	14	0.9	7	13	0.35	100	100	14.9	0.94	Medium dry
+101	F01	F	1	Clean	Standard	20	30	Acid	20	3.8	12	4	0.75	101	101	23.8	0.84	Medium dry
+102	F02	F	1	Clean	Standard	20	30	Control	16.5	0.5	12	4	0.75	102	102	17	0.97	Medium dry
+103	F03	F	1	Clean	Standard	20	5	Acid	15.4	0.4	9	7	0.5625	103	103	15.8	0.97	Medium dry
+104	F04	F	1	Clean	Standard	20	5	Control	2.4	14.4	10	6	0.625	104	104	16.8	0.14	Medium dry
+105	F05	F	1	Clean	Robust	4	30	Acid	3.6	13.3	10	10	0.5	105	105	16.9	0.21	Medium dry
+106	F06	F	1	Clean	Robust	4	30	Control	2.3	5.7	10	10	0.5	106	106	8	0.29	Medium dry
+107	F07	F	1	Clean	Robust	4	5	Acid	4	10.6	10	10	0.5	107	107	14.6	0.27	Medium dry
+108	F08	F	1	Clean	Robust	4	5	Control	3.3	9.3	9	11	0.45	108	108	12.6	0.26	Medium dry
+109	F09	F	1	Clean	Intermediate	4	30	Acid	3.1	11.0	10	10	0.5	109	109	14.1	0.22	Medium dry
+110	F10	F	1	Clean	Intermediate	4	30	Control	5.2	4.2	15	5	0.75	110	110	9.4	0.55	Medium dry
+111	F11	F	1	Clean	Intermediate	4	5	Acid	4.8	11.9	9	11	0.45	111	111	16.7	0.29	Medium dry
+112	F12	F	1	Clean	Intermediate	4	5	Control	3.9	6.1	10	10	0.5	112	112	10	0.39	Medium dry
+113	F13	F	1	Clean	Vigorous	4	30	Acid	13.3	1.8	12	8	0.6	113	113	15.1	0.88	Medium dry
+114	F14	F	1	Clean	Vigorous	4	30	Control	9.4	2.6	12	8	0.6	114	114	12	0.78	Medium dry
+115	F15	F	1	Clean	Vigorous	4	5	Acid	14.1	1.6	12	8	0.6	115	115	15.7	0.90	Medium dry
+116	F16	F	1	Clean	Vigorous	4	5	Control	4.6	4.3	11	9	0.55	116	116	8.9	0.52	Medium dry
+117	Fe1	F	1	Demolition	Robust	4	30	Acid	3.6	4.5	12	8	0.6	117	117	8.1	0.44	Medium dry
+118	Fe2	F	1	Demolition	Robust	4	5	Acid	3.4	10.8	11	9	0.55	118	118	14.2	0.24	Medium dry
+119	Fe3	F	1	Demolition	Vigorous	4	30	Acid	10.5	0.8	10	10	0.5	119	119	11.3	0.93	Medium dry
+120	Fe4	F	1	Demolition	Vigorous	4	5	Acid	4.9	5.3	8	12	0.4	120	120	10.2	0.48	Medium dry
+121	G01	G	2	Clean	Standard	20	30	Acid	19	4.7	11	5	0.6875	121	121	23.7	0.80	Medium moist
+122	G02	G	2	Clean	Standard	20	30	Control	10.4	3.3	12	4	0.75	122	122	13.7	0.76	Medium moist
+123	G03	G	2	Clean	Standard	20	5	Acid	15.3	0.9	10	6	0.625	123	123	16.2	0.94	Medium moist
+124	G04	G	2	Clean	Standard	20	5	Control	14.2	0.4	11	5	0.6875	124	124	14.6	0.97	Medium moist
+125	G05	G	2	Clean	Robust	4	30	Acid	3.7	8.4	9	11	0.45	125	125	12.1	0.31	Medium moist
+126	G06	G	2	Clean	Robust	4	30	Control	8.7	3.4	12	8	0.6	126	126	12.1	0.72	Medium moist
+127	G07	G	2	Clean	Robust	4	5	Acid	3.5	7.5	10	10	0.5	127	127	11	0.32	Medium moist
+128	G08	G	2	Clean	Robust	4	5	Control	2.3	7.1	6	14	0.3	128	128	9.4	0.24	Medium moist
+129	G09	G	2	Clean	Intermediate	4	30	Acid	7.8	12.4	9	11	0.45	129	129	20.2	0.39	Medium moist
+130	G10	G	2	Clean	Intermediate	4	30	Control	6	1.0	11	9	0.55	130	130	7	0.86	Medium moist
+131	G11	G	2	Clean	Intermediate	4	5	Acid	5.9	6.1	12	8	0.6	131	131	12	0.49	Medium moist
+132	G12	G	2	Clean	Intermediate	4	5	Control	11.8	1.4	11	9	0.55	132	132	13.2	0.89	Medium moist
+133	G13	G	2	Clean	Vigorous	4	30	Acid	5.1	8.6	14	6	0.7	133	133	13.7	0.37	Medium moist
+134	G14	G	2	Clean	Vigorous	4	30	Control	11.1	1.5	9	11	0.45	134	134	12.6	0.88	Medium moist
+135	G15	G	2	Clean	Vigorous	4	5	Acid	6.4	3.6	10	10	0.5	135	135	10	0.64	Medium moist
+136	G16	G	2	Clean	Vigorous	4	5	Control	8	1.3	7	13	0.35	136	136	9.3	0.86	Medium moist
+137	Ge1	G	2	Demolition	Robust	4	30	Acid	5	4.4	14	6	0.7	137	137	9.4	0.53	Medium moist
+138	Ge2	G	2	Demolition	Robust	4	5	Acid	5.2	6.9	11	9	0.55	138	138	12.1	0.43	Medium moist
+139	Ge3	G	2	Demolition	Vigorous	4	30	Acid	4.4	4.2	8	12	0.4	139	139	8.6	0.51	Medium moist
+140	Ge4	G	2	Demolition	Vigorous	4	5	Acid	4.8	8.4	9	11	0.45	140	140	13.2	0.36	Medium moist
+141	H01	H	2	Clean	Standard	20	30	Acid	17.8	6.4	10	6	0.625	141	141	24.2	0.74	Medium moist
+142	H02	H	2	Clean	Standard	20	30	Control	14.4	3.2	12	4	0.75	142	142	17.6	0.82	Medium moist
+143	H03	H	2	Clean	Standard	20	5	Acid	15.4	2.0	12	4	0.75	143	143	17.4	0.89	Medium moist
+144	H04	H	2	Clean	Standard	20	5	Control	12.4	2.4	12	4	0.75	144	144	14.8	0.84	Medium moist
+145	H05	H	2	Clean	Robust	4	30	Acid	5	6.5	8	12	0.4	145	145	11.5	0.43	Medium moist
+146	H06	H	2	Clean	Robust	4	30	Control	6.3	2.6	10	10	0.5	146	146	8.9	0.71	Medium moist
+147	H07	H	2	Clean	Robust	4	5	Acid	5.3	12.3	10	10	0.5	147	147	17.6	0.30	Medium moist
+148	H08	H	2	Clean	Robust	4	5	Control	5.5	6.0	15	5	0.75	148	148	11.5	0.48	Medium moist
+149	H09	H	2	Clean	Intermediate	4	30	Acid	15.7	2.2	13	7	0.65	149	149	17.9	0.88	Medium moist
+150	H10	H	2	Clean	Intermediate	4	30	Control	10.3	5.0	12	8	0.6	150	150	15.3	0.67	Medium moist
+151	H11	H	2	Clean	Intermediate	4	5	Acid	4.9	5.5	11	9	0.55	151	151	10.4	0.47	Medium moist
+152	H12	H	2	Clean	Intermediate	4	5	Control	11.5	5.2	7	13	0.35	152	152	16.7	0.69	Medium moist
+153	H13	H	2	Clean	Vigorous	4	30	Acid	7.1	3.8	8	12	0.4	153	153	10.9	0.65	Medium moist
+154	H14	H	2	Clean	Vigorous	4	30	Control	4.6	6.8	8	12	0.4	154	154	11.4	0.40	Medium moist
+155	H15	H	2	Clean	Vigorous	4	5	Acid	9.1	4.6	9	11	0.45	155	155	13.7	0.66	Medium moist
+156	H16	H	2	Clean	Vigorous	4	5	Control	3.1	10.7	11	9	0.55	156	156	13.8	0.22	Medium moist
+157	He1	H	2	Demolition	Robust	4	30	Acid	2.4	11.9	10	10	0.5	157	157	14.3	0.17	Medium moist
+158	He2	H	2	Demolition	Robust	4	5	Acid	6.2	2.1	14	6	0.7	158	158	8.3	0.75	Medium moist
+159	He3	H	2	Demolition	Vigorous	4	30	Acid	7.3	3.4	9	11	0.45	159	159	10.7	0.68	Medium moist
+160	He4	H	2	Demolition	Vigorous	4	5	Acid	8.1	3.5	15	5	0.75	160	160	11.6	0.70	Medium moist
