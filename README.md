@@ -26,7 +26,7 @@ _Markus Bauer and Johannes Kollmann_
 
 When using the __data available__ in this repository, please cite the original publication and the dataset.  
 
-Contact markusbauer@mailbox.org for any further information.  
+Contact markus1.bauer@tum.de for any further information.  
 
 **Citation:**
 
