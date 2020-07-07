@@ -30,7 +30,7 @@ Contact markusbauer@mailbox.org for any further information.
 
 **Citation:**
 
-> Bauer, M., Krause, M., Heizinger, V., Kollmann, J. (20??). Waste bricks as restoration substrate for landfills: response of contrasting trait-based seed mixtures to brick-added substrates and different moisture regimes. ???, ??-???. https://doi.org/10.hopefullycomingup
+> Bauer, M., Kollmann, J. (20??). Waste bricks as restoration substrate for landfills: response of contrasting trait-based seed mixtures to brick-added substrates and different moisture regimes. ???, ??-???. https://doi.org/10.xxx
 
 ***
 
