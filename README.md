@@ -17,7 +17,7 @@ _Markus Bauer and Johannes Kollmann_
     * The raw and processed data files of the third experiment (.csv) 
     
 2. __Outputs__: the folder `outputs` contains  
-    * The figures, tables and temporary files generated.
+    * The figures and tables generated.
     
 3. __R__: the folder `R` contains  
     * Scripts (.R) to generate all figures and tables used in the manuscript and in the supporting information.
