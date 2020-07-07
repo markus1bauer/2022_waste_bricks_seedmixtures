@@ -16,13 +16,10 @@ _Markus Bauer and Johannes Kollmann_
     * The raw and processed data files of the first and second experiment (.csv) 
     * The raw and processed data files of the third experiment (.csv) 
     
-2. __Images__: the folder `images` contains  
-    * Nothing
-
-3. __Outputs__: the folder `outputs` contains  
+2. __Outputs__: the folder `outputs` contains  
     * The figures, tables and temporary files generated.
     
-4. __R__: the folder `R` contains  
+3. __R__: the folder `R` contains  
     * Scripts (.R) to generate all figures and tables used in the manuscript and in the supporting information.
     
 ***
