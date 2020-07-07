@@ -28,4 +28,4 @@ edata$conf.low <- c(1:72);
 edata$conf.high <- c(1:72)
 
 ### Save processed data-------------------------------------------------------------------------------
-#write.table(edata,"experiment_3_data_processed.txt", sep="\t", row.names=F)
+#write.table(edata,"data/processed/experiment_3_data_processed.txt", sep="\t", row.names=F)

@@ -40,5 +40,5 @@ edata2 <- filter(edata, acid == "Acid" & seedmix == "Robust" | seedmix == "Vigor
 edata2$seedmix <- factor(edata2$seedmix)
 
 ### Save processed data-------------------------------------------------------------------------------
-#write.table(edata1,"experiment_1_data_processed.txt", sep="\t", row.names=F)
-#write.table(edata2,"experiment_2_data_processed.txt", sep="\t", row.names=F)
+#write.table(edata1,"data/processed/experiment_1_data_processed.txt", sep="\t", row.names=F)
+#write.table(edata2,"data/processed/experiment_2_data_processed.txt", sep="\t", row.names=F)
