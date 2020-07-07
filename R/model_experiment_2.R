@@ -27,7 +27,7 @@ rm(list = ls())
 setwd("Z:/Documents/0_Ziegelprojekt/3_Aufnahmen_und_Ergebnisse/2020_waste_bricks_for_restoration/data/processed")
 
 ### Load data ###
-edata <- read_table2("experiment_2_data_processed.txt", col_names = T, na = "na", col_types = 
+edata <- read_table2("data_processed_experiment_2.txt", col_names = T, na = "na", col_types = 
                        cols(
                          .default = col_double(),
                          plot = col_factor(),
