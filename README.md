@@ -1,6 +1,6 @@
 # Waste bricks as restoration substrate for landfills
 
-_Markus Bauer, Martin Krause, Valentin Heizinger and Johannes Kollmann_  
+_Markus Bauer and Johannes Kollmann_  
     
 ***
 
@@ -16,13 +16,10 @@ _Markus Bauer, Martin Krause, Valentin Heizinger and Johannes Kollmann_
     * The raw and processed data files of the first and second experiment (.csv) 
     * The raw and processed data files of the third experiment (.csv) 
     
-2. __Images__: the folder `images` contains  
-    * Nothing
-
-3. __Outputs__: the folder `outputs` contains  
-    * The figures, tables and temporary files generated.
+2. __Outputs__: the folder `outputs` contains  
+    * The figures and tables generated.
     
-4. __R__: the folder `R` contains  
+3. __R__: the folder `R` contains  
     * Scripts (.R) to generate all figures and tables used in the manuscript and in the supporting information.
     
 ***
@@ -33,7 +30,7 @@ Contact markusbauer@mailbox.org for any further information.
 
 **Citation:**
 
-> Bauer, M., Krause, M., Heizinger, V., Kollmann, J. (20??). Waste bricks as restoration substrate for landfills: response of contrasting trait-based seed mixtures to brick-added substrates and different moisture regimes. ???, ??-???. https://doi.org/10.hopefullycomingup
+> Bauer, M., Kollmann, J. (20??). Waste bricks as restoration substrate for landfills: response of contrasting trait-based seed mixtures to brick-added substrates and different moisture regimes. ???, ??-???. https://doi.org/10.xxx
 
 ***
 
