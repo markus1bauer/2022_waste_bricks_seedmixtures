@@ -13,13 +13,16 @@ _Markus Bauer and Johannes Kollmann_
 ## Content of the repository
 
 1. __Data__: the folder `data` contains  
-    * The raw and processed data files of the first and second experiment (.csv) 
-    * The raw and processed data files of the third experiment (.csv) 
+    * The raw and processed data files of the first and second experiment (.xlsx, .txt) 
+    * The raw and processed data files of the third experiment (.txt) 
+
+2. __Images__: the folder `images` contains 
+    * The images of the grain size distribution (.tiff)
     
-2. __Outputs__: the folder `outputs` contains  
-    * The figures and tables generated.
+3. __Outputs__: the folder `outputs` contains  
+    * The figures (.tiff) and tables generated.
     
-3. __R__: the folder `R` contains  
+4. __R__: the folder `R` contains  
     * Scripts (.R) to generate all figures and tables used in the manuscript and in the supporting information.
     
 ***
