@@ -1,6 +1,6 @@
 # Waste bricks as restoration substrate for landfills
 
-_Markus Bauer, Martin Krause, Valentin Heizinger and Johannes Kollmann_  
+_Markus Bauer and Johannes Kollmann_  
     
 ***
 
