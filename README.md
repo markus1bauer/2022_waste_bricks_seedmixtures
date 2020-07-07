@@ -14,7 +14,7 @@ _Markus Bauer and Johannes Kollmann_
 
 1. __Data__: the folder `data` contains  
     * The raw and processed data files of the first and second experiment (.xlsx, .txt) 
-    * The raw and processed data files of the third experiment (.txt) 
+    * The raw and processed data files of the third experiment (.xlsx, .txt) 
 
 2. __Images__: the folder `images` contains 
     * The images of the grain size distribution (.tiff)
