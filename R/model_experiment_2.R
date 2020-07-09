@@ -33,11 +33,11 @@ edata <- read_table2("data_processed_experiment_2.txt", col_names = T, na = "na"
                          plot = col_factor(),
                          block = col_factor(),
                          position = col_factor(),
-                         brickType = col_factor(levels = c("Clean","Demolition")),
+                         f.watering = col_factor(levels = c("Dry", "Medium_dry", "Medium_moist","Moist")),
                          seedmix = col_factor(levels = c("Standard","Robust","Intermediate","Vigorous")),
-                         brickRatio = col_factor(levels = c("5","30")),
-                         acid = col_factor(levels = c("Control","Acid")),
-                         f.watering = col_factor(levels = c("Dry", "Medium_dry", "Medium_moist","Moist"))
+                         brickType = col_factor(levels = c("Demolition","Clean")),
+                         brickRatio = col_factor(levels = c("30","5")),
+                         acid = col_factor(levels = c("Acid","Control"))
                        )        
 )
 
@@ -110,7 +110,7 @@ m4 <- lmer(log(biomass) ~ (f.watering + brickRatio + brickType)^2 + seedmix +
 isSingular(m4)
 simulationOutput <- simulateResiduals(m4, plot = T)
 #2way (brickType:brickRatio):
-m5 <- lmer(log(biomass) ~ f.watering + brickRatio + brickType + seedmix + 
+m5 <- lmer(log(biomass) ~ f.watering + seedmix + brickType + brickRatio + 
               brickType:brickRatio + 
               (1|block), edata, REML = F)
 isSingular(m5)
@@ -135,8 +135,8 @@ plotResiduals(main = "block", simulationOutput$scaledResiduals, edata$block)
 ## 3 Chosen model output ################################################################################
 
 ### Model output ---------------------------------------------------------------------------------------------
-m5 <- lmer(log(biomass) ~ f.watering + brickRatio + brickType + seedmix + 
-             brickType:brickRatio + 
+m5 <- lmer(log(biomass) ~ f.watering + seedmix + brickType + brickRatio +
+             brickType:brickRatio +
              (1|block), edata, REML = F)
 VarCorr(m5)
 r.squaredGLMM(m5)
@@ -144,4 +144,5 @@ Anova(m5, type = 3)
 
 ### Effect sizes -----------------------------------------------------------------------------------------
 (emm <- emmeans(m5, pairwise ~ brickType|brickRatio, typ = "response"))
+(emm <- emmeans(m5, pairwise ~ brickType*brickRatio, typ = "response"))
 plot(emm, comparison = T)

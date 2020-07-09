@@ -19,7 +19,7 @@ rm(list = ls())
 setwd("Z:/Documents/0_Ziegelprojekt/3_Aufnahmen_und_Ergebnisse/2020_waste_bricks_for_restoration/data/processed")
 
 ### Load data ###
-edata <- read_table2("experiment_3_data_processed.txt", col_names = T, na="na", col_types =
+edata <- read_table2("data_processed_experiment_3.txt", col_names = T, na="na", col_types =
                        cols(
                          plot = col_factor(),
                          brickRatio = col_factor(levels = c("5","30")),
@@ -67,11 +67,11 @@ ggplot(pdata,aes(brickRatio, biomass, shape = brickRatio, ymin = conf.low, ymax 
   scale_y_continuous(limits = c(0,18), breaks = seq(-100,100,5)) +
   scale_colour_manual(values = c("grey40","black")) +
   scale_shape_manual(values = c(1,16)) +
-  labs(x = "Brick ratio [Vol.%]",y = expression(paste("Biomass [g]")), shape = "",color = "") +
+  labs(x = "Brick ratio [vol%]",y = expression(paste("Biomass [g]")), shape = "",color = "") +
   guides(shape = F)+
   themeMB()
-#ggsave("figure_5_(800dpi_8x5cm).tiff",
-#       dpi = 800, width = 8, height = 5, units = "cm", path = "Z:/Documents/0_Ziegelprojekt/3_Aufnahmen_und_Ergebnisse/2020_waste_bricks_for_restoration/outputs/figures/raw")
+ggsave("figure_5_(800dpi_8x5cm).tiff",
+       dpi = 800, width = 8, height = 5, units = "cm", path = "Z:/Documents/0_Ziegelprojekt/3_Aufnahmen_und_Ergebnisse/2020_waste_bricks_for_restoration/outputs/figures")
 #visreg(m2, "brickRatio", by = "texture", ylab = "Biomass [g]", xlab = "Brick ratio [Vol.-%]",data = edata,
 #       trans = exp, type = "conditional",
 #       partial = T, rug = F, gg = T, overlay = F, band = T, points = list(cex = 0.5, pch = 16), line = list(col = "black"), whitespace = .2) +

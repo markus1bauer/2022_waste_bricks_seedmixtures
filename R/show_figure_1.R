@@ -19,7 +19,7 @@ rm(list = ls())
 setwd("Z:/Documents/0_Ziegelprojekt/3_Aufnahmen_und_Ergebnisse/2020_waste_bricks_for_restoration/data/processed")
 
 ### Load data ###
-edata <- read_table2("experiment_1_data_processed.txt", col_names = T, na = "na", col_types = 
+edata <- read_table2("data_processed_experiment_1.txt", col_names = T, na = "na", col_types = 
                        cols(
                          .default = col_double(),
                          plot = col_factor(),
@@ -78,7 +78,7 @@ ggplot(pdata, aes(seedmix, biomass, shape = seedmix, ymin = conf.low, ymax = con
   guides(x = guide_axis(angle = 45), shape = F)+
   themeMB()
 #ggsave("figure_1_(800dpi_16x6cm).tiff",
-#      dpi = 800, width = 16, height = 6, units = "cm", path = "Z:/Documents/0_Ziegelprojekt/3_Aufnahmen_und_Ergebnisse/2020_waste_bricks_for_restoration/outputs/figures/raw")
+#      dpi = 800, width = 16, height = 6, units = "cm", path = "Z:/Documents/0_Ziegelprojekt/3_Aufnahmen_und_Ergebnisse/2020_waste_bricks_for_restoration/outputs/figures")
 #visreg(m5, "seedmix", by = "f.watering", ylab = expression(paste(Delta,"biomass [g g"^"-1"*"]")), xlab = "", data = edata,
 #       type = "contrast", partial = T, rug = F, gg = T, overlay = F, band = T, points = list(cex = 0.5, pch = 16), line = list(col = "black"), whitespace = .2) +
 #  themeMB()
