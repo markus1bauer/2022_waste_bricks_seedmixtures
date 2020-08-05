@@ -10,7 +10,7 @@ rm(list = ls())
 setwd("Z:/Documents/0_Ziegelprojekt/3_Aufnahmen_und_Ergebnisse/2020_waste_bricks_for_restoration/data/raw")
 
 ### Load data ----------------------------------------------------------------------------------------
-edata <- read_table2("experiment_1_2_data_raw.txt", col_names = T, na = "na", col_types = 
+edata <- read_table2("data_raw_experiment_1_2_environment.txt", col_names = T, na = "na", col_types = 
                        cols(
                          .default = col_double(),
                          plot = col_factor(),
@@ -40,5 +40,5 @@ edata2 <- filter(edata, acid == "Acid" & seedmix == "Robust" | seedmix == "Vigor
 edata2$seedmix <- factor(edata2$seedmix)
 
 ### Save processed data-------------------------------------------------------------------------------
-#write.table(edata1,"data/processed/experiment_1_data_processed.txt", sep="\t", row.names=F)
-#write.table(edata2,"data/processed/experiment_2_data_processed.txt", sep="\t", row.names=F)
+#write.table(edata1,"data/processed/data_processed_experiment_1_environment.txt", sep="\t", row.names=F)
+#write.table(edata2,"data/processed/data_processed_experiment_2_environment.txt", sep="\t", row.names=F)
