@@ -9,14 +9,13 @@
 
 ### Packages ###
 library(tidyverse)
-library(ggplot2)
-library(ggbeeswarm)
 
 ### Start ###
 rm(list = ls())
 setwd("Z:/Documents/0_Ziegelprojekt/3_Aufnahmen_und_Ergebnisse/2020_waste_bricks_for_restoration/data/processed")
 
-estdata <- read_table2("data_processed_experiment_3_estabilshment.txt", col_names = T, na="na", col_types =
+### Load data ###
+estdata <- read_table2("data_processed_experiment_3_seed_mixtures.txt", col_names = T, na="na", col_types =
                          cols(
                            name = col_factor(),
                            presence = col_double(),
@@ -34,7 +33,7 @@ edata <- read_table2("data_processed_experiment_3_environment.txt", col_names = 
                          coal = col_factor()
                          )        
 )
-sdata <- read_table2("data_processed_experiment_3_species.txt", col_names = T, na = "na", col_types = 
+sdata <- read_table2("data_processed_experiment_3_traits.txt", col_names = T, na = "na", col_types = 
                        cols(
                          .default = col_double(),
                          name = col_factor()

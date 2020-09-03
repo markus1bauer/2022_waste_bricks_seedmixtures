@@ -8,7 +8,6 @@
 
 ### Packages ###
 library(tidyverse)
-library(ggplot2)
 library(ggbeeswarm)
 
 ### Start ###
@@ -16,7 +15,7 @@ rm(list = ls())
 setwd("Z:/Documents/0_Ziegelprojekt/3_Aufnahmen_und_Ergebnisse/2020_waste_bricks_for_restoration/data/processed")
 
 ### Load data ###
-estdata <- read_table2("data_processed_experiment_1_establishment.txt", col_names = T, na="na", col_types =
+estdata <- read_table2("data_processed_experiment_1_seed_mixtures.txt", col_names = T, na="na", col_types =
                        cols(
                          name = col_factor(),
                          presence = col_double(),
@@ -37,7 +36,7 @@ edata <- read_table2("data_processed_experiment_1_environment.txt", col_names = 
                          f.watering = col_factor()
                        )        
 )
-sdata <- read_table2("data_processed_experiment_1_2_species.txt", col_names = T, na = "na", col_types = 
+sdata <- read_table2("data_processed_experiment_1_2_traits.txt", col_names = T, na = "na", col_types = 
                        cols(
                          name = col_factor(),
                          family = col_factor(),

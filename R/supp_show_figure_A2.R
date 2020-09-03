@@ -1,15 +1,13 @@
-# Show figure A2 grain size distribution ####
+# Show figure A2 grain size distribution ###
 
 
 
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 # A Preparation ################################################################################################################
 #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-#library(installr);updateR(browse_news=F, install_R=T, copy_packages = T,copy_Rprofile.site = T,keep_old_packages = T, update_packages = T)
 
 ### Packages ###
 library(tidyverse)
-library(ggplot2)
 
 ### Start ###
 rm(list = ls())
@@ -44,7 +42,6 @@ themeMB <- function(){
     plot.margin = margin(0, 0, 0, 0, "cm")
   )
 }
-
 
 ggplot(edata, aes(x = grainSize, y = grainSizeCum, color = substrateAbb)) +
   geom_line(size = 0.8) +

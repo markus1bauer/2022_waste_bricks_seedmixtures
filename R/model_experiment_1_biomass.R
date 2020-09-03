@@ -1,4 +1,4 @@
-# Model for experiment 1 ####
+# Model for experiment 1 ###
 
 
 
@@ -9,25 +9,17 @@
 
 ### Packages ###
 library(tidyverse)
-library(ggplot2)
 library(ggbeeswarm)
-library(car); #Anova(); vif(): variance inflation factors --> checking for dependence (Collinearity) (below 3 is ok)
-library(nlme); #use for vif()
-library(lme4)
 library(lmerTest)
 library(DHARMa)
-#library(vcd)
-library(sjPlot) #plot random effects
-library(MuMIn)
 library(emmeans)
-library(ggeffects)
 
 ### Start ###
 rm(list = ls())
 setwd("Z:/Documents/0_Ziegelprojekt/3_Aufnahmen_und_Ergebnisse/2020_waste_bricks_for_restoration/data/processed")
 
 ### Load data ###
-edata <- read_table2("experiment_1_data_processed_environment.txt", col_names = T, na = "na", col_types = 
+edata <- read_table2("data_processed_experiment_1_environment.txt", col_names = T, na = "na", col_types = 
                        cols(
                          .default = col_double(),
                          plot = col_factor(),
@@ -98,11 +90,11 @@ dotchart((edata$biomass), groups = factor(edata$watering), main = "Cleveland dot
 dotchart((edata$biomass), groups = factor(edata$seedmix), main = "Cleveland dotplot")
 dotchart((edata$biomass), groups = factor(edata$grassRatio), main = "Cleveland dotplot")
 par(mfrow=c(1,1));
-boxplot(edata$biomass, ylim = c(0,45));#identify(rep(1,length(edata$biomass)),edata$biomass, labels = c(edata$no))
+boxplot(edata$biomass, ylim = c(0,45));#identify(rep(1, length(edata$biomass)),edata$biomass, labels = c(edata$no))
 par(mfrow = c(2,2));
 plot(table((edata$biomass)),type = "h", xlab = "Observed values", ylab = "Frequency")
-plot(table(log(edata$biomass)), type = "h", xlab = "Observed values", ylab = "Frequency");
 ggplot(edata, aes(biomass)) + geom_density()
+ggplot(edata, aes(log(biomass))) + geom_density()
 
 
 ## 2 Model building ################################################################################
@@ -116,47 +108,46 @@ m2 <- lmer(log(biomass) ~ (brickRatio + acid + f.watering + seedmix)^2 +
               brickRatio:f.watering:seedmix + brickRatio:acid:seedmix + 
               brickRatio:acid:f.watering:seedmix + 
               (1|block), edata, REML = F)
+simulateResiduals(m2, plot = T)
 isSingular(m2)
-simulationOutput <- simulateResiduals(m2, plot = T)
 #full 3w-model
 m3 <- lmer(log(biomass) ~ (brickRatio + acid + f.watering + seedmix) +
               brickRatio:acid + brickRatio:f.watering + brickRatio:seedmix + 
               f.watering:seedmix + acid:seedmix +
               brickRatio:f.watering:seedmix + brickRatio:acid:seedmix + 
               (1|block), edata, REML = F)
+simulateResiduals(m3, plot = T)
 isSingular(m3)
-simulationOutput <- simulateResiduals(m3, plot = T)
 #3w-model brick:water:mix
 m4 <- lmer(log(biomass) ~ (brickRatio + acid + f.watering + seedmix) +
               brickRatio:acid + brickRatio:f.watering + brickRatio:seedmix + 
               f.watering:seedmix +
               brickRatio:f.watering:seedmix + 
               (1|block), edata, REML = F)
+simulateResiduals(m4, plot = T)
 isSingular(m4)
-simulationOutput <- simulateResiduals(m4, plot = T)
 #3w-model brick:acid:mix
 m5 <- lmer(log(biomass) ~ (brickRatio + acid + f.watering + seedmix) +  
               brickRatio:acid + brickRatio:f.watering + brickRatio:seedmix + 
               f.watering:seedmix + acid:seedmix + 
               brickRatio:acid:seedmix + 
               (1|block), edata, REML = F)
+simulateResiduals(m5, plot = T)
 isSingular(m5)
-simulationOutput <- simulateResiduals(m5, plot = T)
 #2w-model
 m6 <- lmer(log(biomass) ~ (brickRatio + acid + f.watering + seedmix) + 
               brickRatio:acid + brickRatio:f.watering + brickRatio:seedmix + 
               f.watering:seedmix + 
               (1|block), edata, REML = F)
+simulateResiduals(m6, plot = T)
 isSingular(m6)
-simulationOutput <- simulateResiduals(m6, plot = T);
 
 #### b comparison -----------------------------------------------------------------------------------------
-AIC(m2,m3,m4,m5,m6) # --> m5
-(re.effects <- plot_model(m5, type = "re", show.values = TRUE))
+anova(m2,m3,m4,m5,m6) # --> m5
 rm(m1,m2,m3,m4,m6)
 
 #### c model check -----------------------------------------------------------------------------------------
-simulationOutput <- simulateResiduals(m5, plot = F)
+simulationOutput <- simulateResiduals(m5, plot = T)
 par(mfrow=c(2,2));
 plotResiduals(main = "brickRatio", simulationOutput$scaledResiduals, edata$brickRatio)
 plotResiduals(main = "acid", simulationOutput$scaledResiduals, edata$acid)
@@ -174,9 +165,10 @@ m5 <- lmer(log(biomass) ~ (brickRatio + acid + f.watering + seedmix) +
              f.watering:seedmix + acid:seedmix + 
              brickRatio:acid:seedmix + 
              (1|block), edata, REML = F)
+MuMIn::r.squaredGLMM(m5)
 VarCorr(m5)
-r.squaredGLMM(m5)
-Anova(m5, type = 3)
+sjPlot::plot_model(m5, type = "re", show.values = T)
+car::Anova(m5, type = 3)
 
 ### Effect sizes -----------------------------------------------------------------------------------------
 (emm <- emmeans(m5, revpairwise ~ seedmix | f.watering, type = "response"))

@@ -2,14 +2,14 @@
 
 
 
-### Packages ---------------------------------------------------------------------------------------------
+### Packages ###
 library(tidyverse)
 
-### Start----------------------------------------------------------------------------------------------
+### Start ###
 rm(list = ls())
 setwd("Z:/Documents/0_Ziegelprojekt/3_Aufnahmen_und_Ergebnisse/2020_waste_bricks_for_restoration/data/raw")
 
-### Load data ----------------------------------------------------------------------------------------
+### Load data ###
 edata <- read_table2("data_raw_experiment_3_environment.txt", col_names = T, na="na", col_types =
                        cols(
                          plot = col_factor(),
@@ -23,9 +23,9 @@ edata <- read_table2("data_raw_experiment_3_environment.txt", col_names = T, na=
                        )
 )
 
-### Create variables ----------------------------------------------------------------------------------
+### Create variables ###
 edata$conf.low <- c(1:72);
 edata$conf.high <- c(1:72)
 
-### Save processed data-------------------------------------------------------------------------------
-#write.table(edata,"data/processed/data_processed_experiment_3_environment.txt", sep="\t", row.names=F)
+### Save processed data ###
+#write.table(edata, "data/processed/data_processed_experiment_3_environment.txt", sep = "\t", row.names = F)

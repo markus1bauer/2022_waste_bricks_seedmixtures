@@ -1,4 +1,4 @@
-# Show Figure 4 ####
+# Show Figure 4 ###
 
 
 
@@ -8,7 +8,6 @@
 
 ### Packages ###
 library(tidyverse)
-library(ggplot2)
 library(ggbeeswarm)
 library(lme4)
 library(emmeans)
@@ -34,6 +33,7 @@ edata <- read_table2("experiment_1_data_processed.txt", col_names = T, na = "na"
 )
 edata$f.watering <- dplyr::recode(edata$f.watering,
                                   "Medium_dry" = "Medium dry", "Medium_moist" = "Medium moist")
+
 #### Chosen model ###
 m5 <- lmer(log(biomass) ~ (brickRatio + acid + f.watering + seedmix) +  
              brickRatio:acid + brickRatio:f.watering + brickRatio:seedmix + 
@@ -79,8 +79,3 @@ ggplot(pdata, aes(brickRatio, biomass, shape = brickRatio, ymin = conf.low, ymax
   themeMB()
 #ggsave("figure_4_(800dpi_10x5cm).tiff",
 #       dpi = 800, width = 10, height = 5, units = "cm", path = "Z:/Documents/0_Ziegelprojekt/3_Aufnahmen_und_Ergebnisse/2020_waste_bricks_for_restoration/outputs/figures/raw")
-#visreg(m5, "brickRatio", by = "f.watering", data = edata,
-#       ylab = expression(paste(Delta,"biomass [g g"^"-1"*"]")), xlab = "",
-#       trans = exp, type = "contrast",
-#       partial = T, rug = F, gg = T, overlay = F, band = T, points = list(cex = 0.5, pch = 16), line=list(col = "black"), whitespace = .2) +
-#  theme_MB()

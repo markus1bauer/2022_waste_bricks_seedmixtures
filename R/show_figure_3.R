@@ -1,4 +1,4 @@
-# Show Figure 3 ####
+# Show Figure 3 ###
 
 
 
@@ -8,7 +8,6 @@
 
 ### Packages ###
 library(tidyverse)
-library(ggplot2)
 library(ggbeeswarm)
 library(lme4)
 library(emmeans)
@@ -59,7 +58,6 @@ themeMB <- function(){
   )
 }
 
-
 ### brickType:brickRatio ###
 pdata <- ggemmeans(m5, terms = c("brickRatio","brickType"), type = "fe")
 pdata <- rename(pdata, biomass = predicted, brickRatio = x, brickType = group);
@@ -77,9 +75,5 @@ ggplot(pdata, aes(brickRatio, biomass, shape = brickRatio, ymin = conf.low, ymax
   labs(x = "Brick ratio [vol%]", y = expression(paste("Biomass [g]")), shape = "", color = "") +
   guides(shape = F)+
   themeMB()
-ggsave("figure_3_(800dpi_6.5x5cm).tiff",
-       dpi = 800, width = 6.5, height = 5, units = "cm", path = "Z:/Documents/0_Ziegelprojekt/3_Aufnahmen_und_Ergebnisse/2020_waste_bricks_for_restoration/outputs/figures")
-#visreg(m5, "treatment", ylab = expression(paste(Delta,"Biomass [g g"^"-1"*"]")), xlab = "",data = edataBricktype,
-#       trans = exp, type = "contrast", partial = T, rug = F, gg = T, overlay = F, band = T,
-#       points = list(cex = 0.5, pch = 16), line = list(col="black"), whitespace=.2) +
-#  themeMB()
+#ggsave("figure_3_(800dpi_6.5x5cm).tiff",
+#       dpi = 800, width = 6.5, height = 5, units = "cm", path = "Z:/Documents/0_Ziegelprojekt/3_Aufnahmen_und_Ergebnisse/2020_waste_bricks_for_restoration/outputs/figures")

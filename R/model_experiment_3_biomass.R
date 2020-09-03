@@ -1,4 +1,4 @@
-# Model for experiment 3 ####
+# Model for experiment 3 ###
 
 
 
@@ -9,18 +9,10 @@
 
 ### Packages ###
 library(tidyverse)
-library(ggplot2)
 library(ggbeeswarm)
-library(car); #Anova(); vif(): variance inflation factors --> checking for dependence (Collinearity) (below 3 is ok)
-library(nlme); #use for vif()
-library(lme4)
 library(lmerTest)
 library(DHARMa)
-#library(vcd)
-library(sjPlot) #plot random effects
-library(MuMIn)
 library(emmeans)
-library(ggeffects)
 
 ### Start ###
 rm(list = ls())
@@ -68,16 +60,17 @@ ggplot(edata,aes(brickRatio, biomass, color=compaction)) + geom_boxplot()+  geom
 ggplot(edata,aes(brickRatio, biomass, color=coal)) + geom_boxplot() + geom_quasirandom(data=edata,aes(brickRatio, biomass, color = coal),dodge.width = .7) + facet_grid(.~texture)
 
 ##### b Outliers, zero-inflation, transformations? -----------------------------------------------------
-par(mfrow=c(1,1))
-boxplot(edata$biomass, ylim = c(0,20));#identify(rep(1,length(edata$bioMass)),edata$bioMass, labels = c(edata$no))
-ggplot(edata, aes(biomass)) + geom_density()
-ggplot(edata, aes(sqrt(biomass))) + geom_density()
-ggplot(edata, aes(log(biomass))) + geom_density()
 par(mfrow = c(2,2))
 dotchart((edata$biomass), groups = factor(edata$brickRatio), main = "Cleveland dotplot")
 dotchart((edata$biomass), groups = factor(edata$texture), main = "Cleveland dotplot")
 dotchart((edata$biomass), groups = factor(edata$compaction), main = "Cleveland dotplot comp")
 dotchart((edata$biomass), groups = factor(edata$coal), main = "Cleveland dotplot coal")
+par(mfrow=c(1,1))
+boxplot(edata$biomass);#identify(rep(1, length(edata$bioMass)),edata$bioMass, labels = c(edata$no))
+plot(table((edata$biomass)), type = "h", xlab = "Observed values", ylab = "Frequency")
+ggplot(edata, aes(biomass)) + geom_density()
+ggplot(edata, aes(sqrt(biomass))) + geom_density()
+ggplot(edata, aes(log(biomass))) + geom_density()
 
 
 ## 2 Model building ################################################################################
@@ -85,43 +78,45 @@ dotchart((edata$biomass), groups = factor(edata$coal), main = "Cleveland dotplot
 #### a models ----------------------------------------------------------------------------------------
 m1 <- lm(log(biomass) ~ (brickRatio + texture + compaction + coal)^2 +
             brickRatio:texture:compaction + brickRatio:texture:coal, edata)
-simulationOutput <- simulateResiduals(m1, plot = T)
+simulateResiduals(m1, plot = T)
 m2 <- lm(log(biomass) ~ (brickRatio + texture + compaction)^2 + coal +
             brickRatio:texture:compaction, edata)
-simulationOutput <- simulateResiduals(m2, plot = T)
+simulateResiduals(m2, plot = T)
 m3 <- lm(log(biomass) ~ brickRatio + texture + compaction + coal +
             brickRatio:compaction + texture:compaction + texture:brickRatio, edata)
-simulationOutput <- simulateResiduals(m3, plot = T)
+simulateResiduals(m3, plot = T)
 m4 <- lm(log(biomass) ~ brickRatio + texture + compaction + coal +
             brickRatio:compaction + texture:compaction, edata)
-simulationOutput <- simulateResiduals(m4, plot = T)
+simulateResiduals(m4, plot = T)
 m5 <- lm(log(biomass) ~ brickRatio + texture + compaction + coal + 
             brickRatio:texture, edata)
-simulationOutput <- simulateResiduals(m5, plot = T)
+simulateResiduals(m5, plot = T)
 
 #### b comparison -----------------------------------------------------------------------------------------
 anova(m1,m2,m3,m4,m5) #--> m2
 rm(m1,m3,m4,m5)
 
 #### c model check -----------------------------------------------------------------------------------------
+simulationOutput <- simulateResiduals(m2, plot = T)
 par(mfrow=c(2,2));
-plotResiduals(main = "brickRatio", simulationOutput, form = edata$brickRatio);
-plotResiduals(main = "texture", simulationOutput, form = edata$texture);
-plotResiduals(main = "compaction", simulationOutput, form = edata$compaction);
-plotResiduals(main = "coal", simulationOutput, form = edata$coal);
+plotResiduals(main = "brickType", simulationOutput$scaledResiduals, edata$brickType)
+plotResiduals(main = "f.watering", simulationOutput$scaledResiduals, edata$f.watering)
+plotResiduals(main = "seedmix", simulationOutput$scaledResiduals, edata$seedmix)
+plotResiduals(main = "brickRatio", simulationOutput$scaledResiduals, edata$brickRatio)
+plotResiduals(main = "position", simulationOutput$scaledResiduals, edata$position)
+plotResiduals(main = "block", simulationOutput$scaledResiduals, edata$block)
 
 
 ## 3 Chosen model output ################################################################################
 
 ### Model output ---------------------------------------------------------------------------------------------
 summary(m2)
-Anova(m2, type = 3)
+car::Anova(m2, type = 3)
 
 ### Effect sizes -----------------------------------------------------------------------------------------
 (emm <- emmeans(m2, revpairwise ~ brickRatio | texture, type = "response"))
-plot(emm, comparisons=T)
-eff_size(emmeans(m2, "brickRatio", "texture"), sigma = sigma(m2), edf = 59)
+plot(emm, comparisons = T)
 (emm <- emmeans(m2, revpairwise ~ brickRatio * compaction | texture, type = "response"))
-plot(emm, comparisons=T)
+plot(emm, comparisons = T)
 emm3way <- emmeans(m2, ~ brickRatio * texture * compaction)
 pwpp((emm3way), by = "texture", type = "response")

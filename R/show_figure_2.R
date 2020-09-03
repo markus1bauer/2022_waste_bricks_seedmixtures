@@ -1,4 +1,4 @@
-# Show Figure 2 ####
+# Show Figure 2 ###
 
 
 
@@ -8,7 +8,6 @@
 
 ### Packages ###
 library(tidyverse)
-library(ggplot2)
 library(ggbeeswarm)
 library(lme4)
 library(emmeans)
@@ -34,6 +33,7 @@ edata <- read_table2("experiment_1_data_processed.txt", col_names = T, na = "na"
 )
 edata$f.watering <- dplyr::recode(edata$f.watering,
                                   "Medium_dry" = "Medium dry", "Medium_moist" = "Medium moist")
+
 ### Chosen model ###
 m5 <- lmer(log(biomass) ~ (brickRatio + acid + f.watering + seedmix) +  
              brickRatio:acid + brickRatio:f.watering + brickRatio:seedmix + 

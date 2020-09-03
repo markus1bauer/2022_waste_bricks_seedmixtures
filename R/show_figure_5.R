@@ -1,4 +1,4 @@
-# Show Figure 5 ####
+# Show Figure 5 ###
 
 
 
@@ -8,7 +8,6 @@
 
 ### Packages ###
 library(tidyverse)
-library(ggplot2)
 library(ggbeeswarm)
 library(lme4)
 library(emmeans)
@@ -30,6 +29,7 @@ edata <- read_table2("data_processed_experiment_3.txt", col_names = T, na="na", 
                          estRate = col_double()
                        )
 )
+
 #### Chosen model ###
 m2 <- lm(log(biomass) ~ (brickRatio + texture + compaction)^2 + coal +
            brickRatio:texture:compaction, edata)
@@ -53,6 +53,7 @@ themeMB <- function(){
   )
 }
 
+### brickRatio:soil texture ###
 pd <- position_dodge(.6)
 pdata <- ggemmeans(m2, terms = c("brickRatio","texture"), type = "fe")
 pdata <- rename(pdata, biomass = predicted, brickRatio = x, texture = group);
@@ -70,10 +71,5 @@ ggplot(pdata,aes(brickRatio, biomass, shape = brickRatio, ymin = conf.low, ymax 
   labs(x = "Brick ratio [vol%]",y = expression(paste("Biomass [g]")), shape = "",color = "") +
   guides(shape = F)+
   themeMB()
-ggsave("figure_5_(800dpi_8x5cm).tiff",
-       dpi = 800, width = 8, height = 5, units = "cm", path = "Z:/Documents/0_Ziegelprojekt/3_Aufnahmen_und_Ergebnisse/2020_waste_bricks_for_restoration/outputs/figures")
-#visreg(m2, "brickRatio", by = "texture", ylab = "Biomass [g]", xlab = "Brick ratio [Vol.-%]",data = edata,
-#       trans = exp, type = "conditional",
-#       partial = T, rug = F, gg = T, overlay = F, band = T, points = list(cex = 0.5, pch = 16), line = list(col = "black"), whitespace = .2) +
-#  scale_y_continuous(limits = c(0,21), breaks = seq(-100, 100, 5)) +
-#  themeMB()
+#ggsave("figure_5_(800dpi_8x5cm).tiff",
+#       dpi = 800, width = 8, height = 5, units = "cm", path = "Z:/Documents/0_Ziegelprojekt/3_Aufnahmen_und_Ergebnisse/2020_waste_bricks_for_restoration/outputs/figures")
