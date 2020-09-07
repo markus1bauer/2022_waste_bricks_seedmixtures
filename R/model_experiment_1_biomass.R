@@ -5,7 +5,6 @@
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 # A Preparation ################################################################################################################
 #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-#library(installr);updateR(browse_news=F, install_R=T, copy_packages = T,copy_Rprofile.site = T,keep_old_packages = T, update_packages = T)
 
 ### Packages ###
 library(tidyverse)
@@ -19,7 +18,7 @@ rm(list = ls())
 setwd("Z:/Documents/0_Ziegelprojekt/3_Aufnahmen_und_Ergebnisse/2020_waste_bricks_for_restoration/data/processed")
 
 ### Load data ###
-edata <- read_table2("data_processed_experiment_1_environment.txt", col_names = T, na = "na", col_types = 
+environment <- read_table2("data_processed_experiment_1_environment.txt", col_names = T, na = "na", col_types = 
                        cols(
                          .default = col_double(),
                          plot = col_factor(),
@@ -33,7 +32,7 @@ edata <- read_table2("data_processed_experiment_1_environment.txt", col_names = 
                        )        
 )
 
-edata$f.watering <- dplyr::recode(edata$f.watering,
+environment$f.watering <- dplyr::recode(environment$f.watering,
                                   "Medium_dry" = "Medium dry", "Medium_moist" = "Medium moist")
 
 
@@ -48,66 +47,66 @@ edata$f.watering <- dplyr::recode(edata$f.watering,
 #### a Graphs ---------------------------------------------------------------------------------------------
 #simple effects:
 par(mfrow = c(2,2))
-plot(biomass ~ brickRatio, edata)
-plot(biomass ~ acid, edata)
-plot(biomass ~ f.watering, edata)
-plot(biomass ~ seedmix, edata)
+plot(biomass ~ brickRatio, environment)
+plot(biomass ~ acid, environment)
+plot(biomass ~ f.watering, environment)
+plot(biomass ~ seedmix, environment)
 par(mfrow = c(2,2))
-plot(biomass ~ vegCov13, edata)
-plot(biomass ~ grassRatio, edata)
+plot(biomass ~ vegCov13, environment)
+plot(biomass ~ grassRatio, environment)
 par(mfrow = c(2,2))
-plot(biomass ~ position, edata)
-plot(biomass ~ pump, edata)
-plot(biomass ~ block, edata)
+plot(biomass ~ position, environment)
+plot(biomass ~ pump, environment)
+plot(biomass ~ block, environment)
 #2way (brickRatio:acid):
-ggplot(edata,aes(brickRatio, biomass, color = acid)) + geom_boxplot() + geom_quasirandom(dodge.width = .7)
+ggplot(environment,aes(brickRatio, biomass, color = acid)) + geom_boxplot() + geom_quasirandom(dodge.width = .7)
 #2way (brickRatio:watering):
-ggplot(edata,aes(f.watering, biomass,color = brickRatio)) + geom_boxplot() + geom_quasirandom(dodge.width = .7)
+ggplot(environment,aes(f.watering, biomass,color = brickRatio)) + geom_boxplot() + geom_quasirandom(dodge.width = .7)
 #2way (brickRatio:seedmix):
-ggplot(edata,aes(seedmix, biomass, color = brickRatio)) + geom_boxplot() + geom_quasirandom(dodge.width = .7)
+ggplot(environment,aes(seedmix, biomass, color = brickRatio)) + geom_boxplot() + geom_quasirandom(dodge.width = .7)
 #2way (seedmix:watering):
-ggplot(edata,aes(f.watering, biomass,color = seedmix)) + geom_boxplot() + geom_quasirandom(dodge.width = .7)
+ggplot(environment,aes(f.watering, biomass,color = seedmix)) + geom_boxplot() + geom_quasirandom(dodge.width = .7)
 #2way (acid:watering):
-ggplot(edata,aes(f.watering, biomass, color = acid)) + geom_boxplot() + geom_quasirandom(dodge.width = .7)
+ggplot(environment,aes(f.watering, biomass, color = acid)) + geom_boxplot() + geom_quasirandom(dodge.width = .7)
 #3way (brickRatio:acid:seedmix):
-ggplot(edata,aes(brickRatio, biomass, color = acid)) + facet_grid(~seedmix) + geom_boxplot() + geom_quasirandom(dodge.width = .7)
+ggplot(environment,aes(brickRatio, biomass, color = acid)) + facet_grid(~seedmix) + geom_boxplot() + geom_quasirandom(dodge.width = .7)
 #3way (brickRatio:watering:seedmix):
-ggplot(edata,aes(f.watering, biomass, color = brickRatio)) + facet_grid(~seedmix) + geom_boxplot() + geom_quasirandom(dodge.width = .7)
+ggplot(environment,aes(f.watering, biomass, color = brickRatio)) + facet_grid(~seedmix) + geom_boxplot() + geom_quasirandom(dodge.width = .7)
 #3way (brickRatio:acid:watering):
-ggplot(edata,aes(brickRatio, biomass, color = acid)) + facet_grid(~f.watering) + geom_boxplot() + geom_quasirandom(dodge.width = .7)
+ggplot(environment,aes(brickRatio, biomass, color = acid)) + facet_grid(~f.watering) + geom_boxplot() + geom_quasirandom(dodge.width = .7)
 #4way (focus only on standard and intermediate): --> no effect under dry conditions
-ggplot(edata,aes(f.watering, biomass, color = brickRatio, shape = acid)) + facet_grid(~seedmix) + geom_boxplot() + geom_quasirandom(dodge.width = .7)
+ggplot(environment,aes(f.watering, biomass, color = brickRatio, shape = acid)) + facet_grid(~seedmix) + geom_boxplot() + geom_quasirandom(dodge.width = .7)
 # interactions with block:
-ggplot(edata,aes(brickRatio, biomass, color = acid)) + geom_boxplot() + facet_wrap(~block) + geom_quasirandom(dodge.width = .7)
-ggplot(edata,aes(block, biomass, color = f.watering)) + geom_boxplot() + geom_quasirandom(dodge.width = .7)
-ggplot(edata,aes(block, biomass, color = seedmix)) + geom_boxplot() + geom_quasirandom(dodge.width = .7)
+ggplot(environment,aes(brickRatio, biomass, color = acid)) + geom_boxplot() + facet_wrap(~block) + geom_quasirandom(dodge.width = .7)
+ggplot(environment,aes(block, biomass, color = f.watering)) + geom_boxplot() + geom_quasirandom(dodge.width = .7)
+ggplot(environment,aes(block, biomass, color = seedmix)) + geom_boxplot() + geom_quasirandom(dodge.width = .7)
 
 ##### b Outliers, zero-inflation, transformations? -----------------------------------------------------
 par(mfrow = c(2,2))
-dotchart((edata$biomass), groups = factor(edata$brickRatio), main = "Cleveland dotplot")
-dotchart((edata$biomass), groups = factor(edata$acid), main = "Cleveland dotplot")
-dotchart((edata$biomass), groups = factor(edata$watering), main = "Cleveland dotplot")
-dotchart((edata$biomass), groups = factor(edata$seedmix), main = "Cleveland dotplot")
-dotchart((edata$biomass), groups = factor(edata$grassRatio), main = "Cleveland dotplot")
+dotchart((environment$biomass), groups = factor(environment$brickRatio), main = "Cleveland dotplot")
+dotchart((environment$biomass), groups = factor(environment$acid), main = "Cleveland dotplot")
+dotchart((environment$biomass), groups = factor(environment$watering), main = "Cleveland dotplot")
+dotchart((environment$biomass), groups = factor(environment$seedmix), main = "Cleveland dotplot")
+dotchart((environment$biomass), groups = factor(environment$grassRatio), main = "Cleveland dotplot")
 par(mfrow=c(1,1));
-boxplot(edata$biomass, ylim = c(0,45));#identify(rep(1, length(edata$biomass)),edata$biomass, labels = c(edata$no))
+boxplot(environment$biomass, ylim = c(0,45));#identify(rep(1, length(environment$biomass)),environment$biomass, labels = c(environment$no))
 par(mfrow = c(2,2));
-plot(table((edata$biomass)),type = "h", xlab = "Observed values", ylab = "Frequency")
-ggplot(edata, aes(biomass)) + geom_density()
-ggplot(edata, aes(log(biomass))) + geom_density()
+plot(table((environment$biomass)),type = "h", xlab = "Observed values", ylab = "Frequency")
+ggplot(environment, aes(biomass)) + geom_density()
+ggplot(environment, aes(log(biomass))) + geom_density()
 
 
 ## 2 Model building ################################################################################
 
 #### a models ----------------------------------------------------------------------------------------
 #random structure
-m1 <- lmer((biomass) ~ f.watering * seedmix + (1|block), edata, REML = F)
+m1 <- lmer((biomass) ~ f.watering * seedmix + (1|block), environment, REML = F)
 VarCorr(m1)
 #4w-model
 m2 <- lmer(log(biomass) ~ (brickRatio + acid + f.watering + seedmix)^2 +  
               brickRatio:f.watering:seedmix + brickRatio:acid:seedmix + 
               brickRatio:acid:f.watering:seedmix + 
-              (1|block), edata, REML = F)
+              (1|block), environment, REML = F)
 simulateResiduals(m2, plot = T)
 isSingular(m2)
 #full 3w-model
@@ -115,7 +114,7 @@ m3 <- lmer(log(biomass) ~ (brickRatio + acid + f.watering + seedmix) +
               brickRatio:acid + brickRatio:f.watering + brickRatio:seedmix + 
               f.watering:seedmix + acid:seedmix +
               brickRatio:f.watering:seedmix + brickRatio:acid:seedmix + 
-              (1|block), edata, REML = F)
+              (1|block), environment, REML = F)
 simulateResiduals(m3, plot = T)
 isSingular(m3)
 #3w-model brick:water:mix
@@ -123,7 +122,7 @@ m4 <- lmer(log(biomass) ~ (brickRatio + acid + f.watering + seedmix) +
               brickRatio:acid + brickRatio:f.watering + brickRatio:seedmix + 
               f.watering:seedmix +
               brickRatio:f.watering:seedmix + 
-              (1|block), edata, REML = F)
+              (1|block), environment, REML = F)
 simulateResiduals(m4, plot = T)
 isSingular(m4)
 #3w-model brick:acid:mix
@@ -131,14 +130,14 @@ m5 <- lmer(log(biomass) ~ (brickRatio + acid + f.watering + seedmix) +
               brickRatio:acid + brickRatio:f.watering + brickRatio:seedmix + 
               f.watering:seedmix + acid:seedmix + 
               brickRatio:acid:seedmix + 
-              (1|block), edata, REML = F)
+              (1|block), environment, REML = F)
 simulateResiduals(m5, plot = T)
 isSingular(m5)
 #2w-model
 m6 <- lmer(log(biomass) ~ (brickRatio + acid + f.watering + seedmix) + 
               brickRatio:acid + brickRatio:f.watering + brickRatio:seedmix + 
               f.watering:seedmix + 
-              (1|block), edata, REML = F)
+              (1|block), environment, REML = F)
 simulateResiduals(m6, plot = T)
 isSingular(m6)
 
@@ -149,12 +148,12 @@ rm(m1,m2,m3,m4,m6)
 #### c model check -----------------------------------------------------------------------------------------
 simulationOutput <- simulateResiduals(m5, plot = T)
 par(mfrow=c(2,2));
-plotResiduals(main = "brickRatio", simulationOutput$scaledResiduals, edata$brickRatio)
-plotResiduals(main = "acid", simulationOutput$scaledResiduals, edata$acid)
-plotResiduals(main = "f.watering", simulationOutput$scaledResiduals, edata$f.watering)
-plotResiduals(main = "seedmix", simulationOutput$scaledResiduals,edata$seedmix)
-plotResiduals(main = "position", simulationOutput$scaledResiduals, edata$position)
-plotResiduals(main = "block", simulationOutput$scaledResiduals, edata$block)
+plotResiduals(main = "brickRatio", simulationOutput$scaledResiduals, environment$brickRatio)
+plotResiduals(main = "acid", simulationOutput$scaledResiduals, environment$acid)
+plotResiduals(main = "f.watering", simulationOutput$scaledResiduals, environment$f.watering)
+plotResiduals(main = "seedmix", simulationOutput$scaledResiduals,environment$seedmix)
+plotResiduals(main = "position", simulationOutput$scaledResiduals, environment$position)
+plotResiduals(main = "block", simulationOutput$scaledResiduals, environment$block)
 
 
 ## 3 Chosen model output ################################################################################
@@ -164,7 +163,7 @@ m5 <- lmer(log(biomass) ~ (brickRatio + acid + f.watering + seedmix) +
              brickRatio:acid + brickRatio:f.watering + brickRatio:seedmix + 
              f.watering:seedmix + acid:seedmix + 
              brickRatio:acid:seedmix + 
-             (1|block), edata, REML = F)
+             (1|block), environment, REML = F)
 MuMIn::r.squaredGLMM(m5)
 VarCorr(m5)
 sjPlot::plot_model(m5, type = "re", show.values = T)
