@@ -1,6 +1,6 @@
-# Waste bricks as restoration substrate for landfills
+# Testing waste bricks as recultivation substrate
 
-_Markus Bauer and Johannes Kollmann_  
+_Markus Bauer, Martin Krause, Valentin Heizinger and Johannes Kollmann_  
     
 ***
 
