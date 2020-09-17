@@ -20,10 +20,10 @@ _Markus Bauer and Johannes Kollmann_
     * The images of the grain size distribution (.tiff)
     
 3. __Outputs__: the folder `outputs` contains  
-    * The figures (.tiff) and tables generated.
+    * The figures (.tiff) generated.
     
 4. __R__: the folder `R` contains  
-    * Scripts (.R) to generate all figures and tables used in the manuscript and in the supporting information.
+    * Scripts (.R) to generate all figures used in the manuscript and in the supporting information.
     
 ***
 
@@ -33,7 +33,7 @@ Contact markus1.bauer@tum.de for any further information.
 
 **Citation:**
 
-> Bauer, M., Kollmann, J. (20??). Waste bricks as restoration substrate for landfills: response of contrasting trait-based seed mixtures to brick-added substrates and different moisture regimes. ???, ??-???. https://doi.org/10.xxx
+> Bauer, M., Krause, M., Heizinger, V. & Kollmann, J. (20??). Using waste bricks for recultivation: no negative effects of brick-augmented substrates with varying acid pre-treatment, soil type and moisture on contrasting seed mixtures. ???, ??-???. https://doi.org/10.xxx
 
 ***
 
