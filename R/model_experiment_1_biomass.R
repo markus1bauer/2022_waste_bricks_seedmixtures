@@ -12,6 +12,7 @@ library(ggbeeswarm)
 library(lmerTest)
 library(DHARMa)
 library(emmeans)
+library(ggplot2)
 
 ### Start ###
 rm(list = ls())
