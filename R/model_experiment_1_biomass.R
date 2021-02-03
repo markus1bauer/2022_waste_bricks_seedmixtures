@@ -159,15 +159,11 @@ plotResiduals(main = "block", simulationOutput$scaledResiduals, environment$bloc
 ## 3 Chosen model output ################################################################################
 
 ### Model output ---------------------------------------------------------------------------------------------
-m5 <- lmer(log(biomass) ~ (brickRatio + acid + f.watering + seedmix) +  
-             brickRatio:acid + brickRatio:f.watering + brickRatio:seedmix + 
-             f.watering:seedmix + acid:seedmix + 
-             brickRatio:acid:seedmix + 
-             (1|block), environment, REML = F)
 MuMIn::r.squaredGLMM(m5)
 VarCorr(m5)
 sjPlot::plot_model(m5, type = "re", show.values = T)
 car::Anova(m5, type = 3)
+summary(m5)
 
 ### Effect sizes -----------------------------------------------------------------------------------------
 (emm <- emmeans(m5, revpairwise ~ seedmix | f.watering, type = "response"))
