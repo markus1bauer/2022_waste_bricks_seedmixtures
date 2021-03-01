@@ -11,10 +11,10 @@ library(tidyverse)
 
 ### Start ###
 rm(list = ls())
-setwd("Z:/Documents/0_Ziegelprojekt/3_Aufnahmen_und_Ergebnisse/2020_waste_bricks_for_restoration/data/processed")
+setwd("Z:/Documents/0_ZIM/3_Aufnahmen_und_Ergebnisse/2020_waste_bricks_for_restoration/data/processed")
 
 ### Load data ###
-edata <- read_table2("supp_data_processed_experiment_3.txt", col_names = T, na = "na", col_types = 
+data <- read_table2("supp_data_processed_experiment_3.txt", col_names = T, na = "na", col_types = 
                        cols(
                          .default = col_double(),
                          substrate = col_factor(),
@@ -43,7 +43,7 @@ themeMB <- function(){
   )
 }
 
-ggplot(edata, aes(x = grainSize, y = grainSizeCum, color = substrateAbb, linetype = substrateAbb)) +
+ggplot(data, aes(x = grainSize, y = grainSizeCum, color = substrateAbb, linetype = substrateAbb)) +
   geom_line(size = 0.8) +
   scale_color_manual(values = c("red","green","red2","green2","red4","green4")) +
   scale_linetype_manual(values = c("dotted","dotted","dashed","dashed","solid","solid")) +
