@@ -46,7 +46,7 @@ Contact markus1.bauer@tum.de for any further information.
 
 **Citation:**
 
-> Bauer, M., Krause, M., Heizinger, V. & Kollmann, J. (20??). Using waste bricks for recultivation: no negative effects of brick-augmented substrates with varying acid pre-treatment, soil type and moisture on contrasting seed mixtures. ???, ??-???. https://doi.org/10.xxx
+> Bauer M, Krause M, Heizinger V and Kollmann J (submitted). Using waste bricks for recultivation: no negative effects of brick-augmented substrates with varying acid pre-treatment, soil type and moisture on contrasting seed mixtures. https://doi.org/10.xxx
 
 ***
 
