@@ -1,4 +1,12 @@
-# Show Figure 4 ###
+# Brick-based substrates and designed seedmixtures
+# Show figure 3 ####
+# Markus Bauer
+# 2022-01-24
+# Citation: 
+## Bauer M, Krause M, Heizinger V, Kollmann J (submitted) 
+## Using waste bricks for recultivation: no negative effects of brick-augmented substrates with varying acid pre-treatment, soil type and moisture on contrasting seed mixtures
+## Unpublished data.
+
 
 
 
@@ -7,6 +15,7 @@
 #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 ### Packages ###
+library(here)
 library(tidyverse)
 library(ggbeeswarm)
 library(lme4)
@@ -15,24 +24,22 @@ library(ggeffects)
 
 ### Start ###
 rm(list = ls())
-setwd("Z:/Documents/0_Ziegelprojekt/3_Aufnahmen_und_Ergebnisse/2020_waste_bricks_for_restoration/data/processed")
+setwd(here("data/processed"))
 
 ### Load data ###
-environment <- read_table2("data_processed_experiment_1_environment.txt", col_names = T, na = "na", col_types = 
+environment <- read_table("data_processed_experiment_1_environment.txt", col_names = T, na = "na", col_types = 
                              cols(
-                               .default = col_double(),
-                               plot = col_factor(),
-                               block = col_factor(),
-                               position = col_factor(),
+                               .default = "d",
+                               plot = "f",
+                               block = "f",
+                               position = "f",
                                brickType = col_factor(levels = c("Clean","Demolition")),
                                seedmix = col_factor(levels = c("Standard","Robust","Intermediate","Vigorous")),
                                brickRatio = col_factor(levels = c("5","30")),
                                acid = col_factor(levels = c("Control","Acid")),
                                f.watering = col_factor(levels = c("Dry", "Medium_dry", "Medium_moist","Moist"))
-                             )        
-)
-environment$f.watering <- dplyr::recode(environment$f.watering,
-                                        "Medium_dry" = "Medium dry", "Medium_moist" = "Medium moist")
+                             )) %>%
+  mutate(f.watering = dplyr::recode(f.watering, "Medium_dry" = "Medium dry", "Medium_moist" = "Medium moist"))
 
 #### Chosen model ###
 m5 <- lmer(log(biomass) ~ (brickRatio + acid + f.watering + seedmix) +  
@@ -83,4 +90,4 @@ ggplot(pdata, aes(brickRatio, biomass, shape = brickRatio, ymin = conf.low, ymax
   guides(shape = F)+
   themeMB()
 #ggsave("figure_3_(800dpi_10x5cm).tiff",
-#       dpi = 800, width = 10, height = 5, units = "cm", path = "Z:/Documents/0_Ziegelprojekt/3_Aufnahmen_und_Ergebnisse/2020_waste_bricks_for_restoration/outputs/figures")
+#       dpi = 800, width = 10, height = 5, units = "cm", path = here("outputs/figures"))

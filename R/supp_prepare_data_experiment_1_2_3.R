@@ -1,23 +1,29 @@
-### Script to prepare data of experiment 1 and 2 grain size distribution ###
+# Brick-based substrates and designed seedmixtures
+### Script to prepare data of experiment 1 and 2 grain size distribution ####
+# Markus Bauer
+# 2022-01-24
+# Citation: 
+## Bauer M, Krause M, Heizinger V, Kollmann J (submitted) 
+## Using waste bricks for recultivation: no negative effects of brick-augmented substrates with varying acid pre-treatment, soil type and moisture on contrasting seed mixtures
+## Unpublished data.
+
 
 
 
 ### Packages ###
+library(here)
 library(tidyverse)
 
 ### Start ###
 rm(list = ls())
-setwd("Z:/Documents/0_Ziegelprojekt/3_Aufnahmen_und_Ergebnisse/2020_waste_bricks_for_restoration/data/raw")
+setwd(here("data/processed"))
 
 ### Load data ###
 edata <- read_table2("supp_data_raw_experiment_1_2_3.txt", col_names = T, na = "na", col_types = 
                        cols(
-                         .default = col_double()
-                       )        
-)
-
-edata <- gather(edata, "substrate", "ratio", 2:13)
-edata <- edata %>%
+                         .default = "d"
+                       )) %>%
+  gather("substrate", "ratio", 2:13) %>%
   group_by(substrate) %>%
   mutate(grainSizeCum = cumsum(ratio))
 
@@ -51,6 +57,6 @@ edata3$substrateAbb <- dplyr::recode(edata3$substrate,
                                     )
 
 ### Save processed data ###
-write.table(edata1, "Z:/Documents/0_Ziegelprojekt/3_Aufnahmen_und_Ergebnisse/2020_waste_bricks_for_restoration/data/processed/supp_data_processed_experiment_1.txt", sep = "\t", row.names = F)
-write.table(edata2, "Z:/Documents/0_Ziegelprojekt/3_Aufnahmen_und_Ergebnisse/2020_waste_bricks_for_restoration/data/processed/supp_data_processed_experiment_2.txt", sep = "\t", row.names = F)
-write.table(edata3, "Z:/Documents/0_Ziegelprojekt/3_Aufnahmen_und_Ergebnisse/2020_waste_bricks_for_restoration/data/processed/supp_data_processed_experiment_3.txt", sep = "\t", row.names = F)
+write.table(edata1, here("data/processed/supp_data_processed_experiment_1.txt"), sep = "\t", row.names = F)
+write.table(edata2, here("data/processed/supp_data_processed_experiment_2.txt"), sep = "\t", row.names = F)
+write.table(edata3, here("data/processed/supp_data_processed_experiment_3.txt"), sep = "\t", row.names = F)

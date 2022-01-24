@@ -1,4 +1,12 @@
-# Model for experiment 3 ###
+# Brick-based substrates and designed seedmixtures
+# Model for Experiment 3 (biomass) ####
+# Markus Bauer
+# 2022-01-24
+# Citation: 
+## Bauer M, Krause M, Heizinger V, Kollmann J (submitted) 
+## Using waste bricks for recultivation: no negative effects of brick-augmented substrates with varying acid pre-treatment, soil type and moisture on contrasting seed mixtures
+## Unpublished data.
+
 
 
 
@@ -7,6 +15,7 @@
 #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 ### Packages ###
+library(here)
 library(tidyverse)
 library(ggbeeswarm)
 library(lmerTest)
@@ -15,20 +24,20 @@ library(emmeans)
 
 ### Start ###
 rm(list = ls())
-setwd("Z:/Documents/0_Ziegelprojekt/3_Aufnahmen_und_Ergebnisse/2020_waste_bricks_for_restoration/data/processed")
+setwd(here("data/processed"))
 
 ### Load data ###
-environment <- read_table2("data_processed_experiment_3_environment.txt", col_names = T, na="na", col_types =
+environment <- read_table("data_processed_experiment_3_environment.txt", col_names = T, na = "na", locale = locale(decimal_mark = "."),
+                          col_types =
                        cols(
-                         plot = col_factor(),
+                         plot = "f",
                          brickRatio = col_factor(levels = c("5","30")),
                          texture = col_factor(levels=c("Loam","Medium","Sand")),
                          compaction = col_factor(levels=c("Control","Compaction")),
                          coal = col_factor(levels=c("Control","Coal")),
-                         biomass = col_double(),
-                         estRate = col_double()
-                       )
-)
+                         biomass = "d",
+                         estRate = "d"
+                       )) 
 
 
 
@@ -110,7 +119,8 @@ plotResiduals(main = "block", simulationOutput$scaledResiduals, environment$bloc
 
 ### Model output ---------------------------------------------------------------------------------------------
 summary(m2)
-car::Anova(m2, type = 3)
+(table <- car::Anova(m2, type = 3))
+tidytable <- broom::tidy(table)
 
 ### Effect sizes -----------------------------------------------------------------------------------------
 (emm <- emmeans(m2, revpairwise ~ brickRatio | texture, type = "response"))
@@ -119,3 +129,6 @@ plot(emm, comparisons = T)
 plot(emm, comparisons = T)
 emm3way <- emmeans(m2, ~ brickRatio * texture * compaction)
 pwpp((emm3way), by = "texture", type = "response")
+
+### Save ###
+write.csv(tidytable, here("outputs/statistics/table_anova_experiment_3_biomass.csv"))

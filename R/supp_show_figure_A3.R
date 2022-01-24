@@ -1,4 +1,12 @@
-# Show figure A3 grain size distribution ###
+# Brick-based substrates and designed seedmixtures
+# Show figure A3 grain size distribution ####
+# Markus Bauer
+# 2022-01-24
+# Citation: 
+## Bauer M, Krause M, Heizinger V, Kollmann J (submitted) 
+## Using waste bricks for recultivation: no negative effects of brick-augmented substrates with varying acid pre-treatment, soil type and moisture on contrasting seed mixtures
+## Unpublished data.
+
 
 
 
@@ -7,18 +15,19 @@
 #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 ### Packages ###
+library(here)
 library(tidyverse)
 
 ### Start ###
 rm(list = ls())
-setwd("Z:/Documents/0_ZIM/3_Aufnahmen_und_Ergebnisse/2020_waste_bricks_for_restoration/data/processed")
+setwd(here("data/processed"))
 
 ### Load data ###
 data <- read_table2("supp_data_processed_experiment_3.txt", col_names = T, na = "na", col_types = 
                        cols(
-                         .default = col_double(),
-                         substrate = col_factor(),
-                         substrateAbb = col_factor()
+                         .default = "d",
+                         substrate = "f",
+                         substrateAbb = "f"
                        )        
 )
 
@@ -51,4 +60,4 @@ ggplot(data, aes(x = grainSize, y = grainSizeCum, color = substrateAbb, linetype
   labs(x = "Grain size [mm]", y = "Cumulative ratio [wt%]", linetype = "", color = "") +
   themeMB()
 ggsave("figure_A3_(800dpi_16x10cm).tiff",
-      dpi = 800, width = 16, height = 10, units = "cm", path = "Z:/Documents/0_Ziegelprojekt/3_Aufnahmen_und_Ergebnisse/2020_waste_bricks_for_restoration/outputs/figures/supp")
+      dpi = 800, width = 16, height = 10, units = "cm", path = here("outputs/figures/supp"))

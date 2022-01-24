@@ -1,25 +1,37 @@
-### Seed mixtures with Laughlin function for Experiment 3 ###
+# Brick-based substrates and designed seedmixtures
+# Seed mixtures with Laughlin function for Experiment 3 ####
+# Markus Bauer
+# 2022-01-24
+# Citation: 
+## Bauer M, Krause M, Heizinger V, Kollmann J (submitted) 
+## Using waste bricks for recultivation: no negative effects of brick-augmented substrates with varying acid pre-treatment, soil type and moisture on contrasting seed mixtures
+## Unpublished data.
+
+
 
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 # A Preparation ################################################################################################################
 #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 ### Packages ###
+library(here)
+library(tidyverse)
 library(Select)
 library(FD)
 library(data.table)
-library(tidyverse)
 
 ### Start ###
 rm(list = ls())
-setwd("Z:/Documents/0_Ziegelprojekt/3_Aufnahmen_und_Ergebnisse/2020_waste_bricks_for_restoration/data/processed")
+setwd(here("data/processed"))
 #library(installr);updateR(browse_news=F, install_R=T, copy_packages = T,copy_Rprofile.site = T,keep_old_packages = T, update_packages = T)
 
 ### Load data ###
-vdata <- read_table2("speciespool.txt", col_names = T, na = "na")
-vdata$name <- sub("Rhinanthus_glacialis/minor","Rhinanthus_minor",vdata$name)
-vdata <- mutate(vdata, grass = if_else(family == "Poaceae", 1, 0))
-vdata <- mutate(vdata, legume = if_else(family == "Fabaceae", 1, 0))
+vdata <- read_table("speciespool.txt", col_names = T, na = "na")
+vdata$name <- sub("Rhinanthus_glacialis/minor", "Rhinanthus_minor", vdata$name)
+vdata <- vdata %>%
+  mutate(grass = if_else(family == "Poaceae", 1, 0),
+         legume = if_else(family == "Fabaceae", 1, 0)
+         )
 
 ## 1. TRY data ######################################################################################################################
 
@@ -27,8 +39,8 @@ vdata <- mutate(vdata, legume = if_else(family == "Fabaceae", 1, 0))
 tryData1 <- fread("try_sla-height-seedmass.txt", header = T, sep = "\t", dec = ".", quote = "", data.table = T)
 tryData1 <- tryData1 %>%
   filter(TraitID,c(26,125,3106)) %>%
-  select(AccSpeciesName,ObservationID,TraitID,TraitName,StdValue,UnitName) %>%
-  group_by(TraitName,AccSpeciesName) %>%
+  select(AccSpeciesName, ObservationID,TraitID, TraitName, StdValue, UnitName) %>%
+  group_by(TraitName, AccSpeciesName) %>%
   summarise(value = median(StdValue)) %>%
   filter(!is.na(value)) %>%
   rename(name = AccSpeciesName) %>%
@@ -92,9 +104,9 @@ heightData <- tryData1 %>%
   filter(TraitName == "Plant height vegetative")%>%
   select(name, value)
 86/90#vdata$name[which(!(vdata$name %in% heightData$name))];length(which(!(vdata$name %in% heightData$name)))
-vdata <- left_join(vdata,heightData,by="name")
 ####Finalise
-vdata <- rename(vdata,slaTry = value.x, seedmassTry = value.y, heightTry = value.x.x, rootdepthTry = value.y.y, srlTry = value.x.x.x, sfrlTry = value.y.y.y, mycTry = value)
+vdata <- left_join(vdata,heightData,by="name") %>%
+  rename(slaTry = value.x, seedmassTry = value.y, heightTry = value.x.x, rootdepthTry = value.y.y, srlTry = value.x.x.x, sfrlTry = value.y.y.y, mycTry = value)
 rm(tryData1,tryData2,rootdepthData,tryData3,mycorrhizaData,srlData,sfrlData,tryData4)
 
 ## 2. LEDA data ######################################################################################################################
@@ -110,20 +122,22 @@ seedmassData <- read.table("leda_seedmass.txt",header=T, na.strings="na", dec ="
 seedmassData <- seedmassData %>%
   group_by(name) %>%
   summarise(valueLEDA = median(value))
-vdata <- left_join(vdata,seedmassData,by="name")
+vdata <- left_join(vdata, seedmassData,by="name")
 ####Height data
 heightData <- read.table("leda_height.txt",header=T, na.strings="na", dec =".")
 heightData <- heightData %>%
   group_by(name) %>%
   summarise(valueLEDA = median(value))
-vdata <- left_join(vdata,heightData,by="name")
-vdata <- rename(vdata,slaLeda = valueLEDA.x, seedmassLeda = valueLEDA.y, heightLeda = valueLEDA)
+vdata <- left_join(vdata, heightData,by="name") %>%
+  rename(slaLeda = valueLEDA.x, seedmassLeda = valueLEDA.y, heightLeda = valueLEDA)
 rm(slaData,seedmassData,heightData)
 
 ## 3. Merge data ###########################################################################################
-vdata <- mutate(vdata, sla = coalesce(slaLeda, slaTry))
-vdata <- mutate(vdata, seedmass = coalesce(seedmassLeda, seedmassTry))
-vdata <- mutate(vdata, height = coalesce(heightLeda, heightTry))
+vdata <- mutate(vdata, 
+                sla = coalesce(slaLeda, slaTry),
+                seedmass = coalesce(seedmassLeda, seedmassTry),
+                height = coalesce(heightLeda, heightTry)
+                )
 #table(is.na(vdata$sla));88/90; table(is.na(vdata$seedmass));89/90; table(is.na(vdata$height));89/90; table(is.na(vdata$srl));67/90; table(is.na(vdata$sfrl));32/90
 
 ## 4. Calculate CWM of seedmixes and Oberdorfer --> Results in Excel ######################################################################################################################
@@ -525,4 +539,4 @@ plotWeights <- compData %>%
   group_by(comp) %>% 
   summarise(sum = sum(weight))
 table(plotWeights$sum)
-write.table(compData,"composition.txt", sep="\t", row.names = F, quote = F)
+#write.table(compData, here("composition.txt"), sep="\t", row.names = F, quote = F)

@@ -1,4 +1,13 @@
-# Model for Experiment 3 for establishment ####
+# Brick-based substrates and designed seedmixtures
+# Establishment of species of experiment 3 ####
+# Markus Bauer
+# 2022-01-24
+# Citation: 
+## Bauer M, Krause M, Heizinger V, Kollmann J (submitted) 
+## Using waste bricks for recultivation: no negative effects of brick-augmented substrates with varying acid pre-treatment, soil type and moisture on contrasting seed mixtures
+## Unpublished data.
+
+
 
 
 
@@ -7,30 +16,29 @@
 #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 ### Packages ###
+library(here)
 library(tidyverse)
 
 ### Start ###
 rm(list = ls())
-setwd("Z:/Documents/0_Ziegelprojekt/3_Aufnahmen_und_Ergebnisse/2020_waste_bricks_for_restoration/data/processed")
+setwd(here("data/processed"))
 
 ### Load data ###
-establishment <- read_table2("data_processed_experiment_3_establishment.txt", col_names = T, na="na", col_types =
+establishment <- read_table("data_processed_experiment_3_establishment.txt", col_names = T, na = "na", col_types =
                                cols(
-                                 .default = col_double(),
-                                 name = col_factor()
-                               )
-)
-environment <- read_table2("data_processed_experiment_3_environment.txt", col_names = T, na = "na", col_types = 
+                                 .default = "d",
+                                 name = "f"
+                               ))
+environment <- read_table("data_processed_experiment_3_environment.txt", col_names = T, na = "na", col_types = 
                        cols(
-                         .default = col_double(),
-                         plot = col_factor(),
+                         .default = "d",
+                         plot = "f",
                          date = col_date(),
-                         brickRatio = col_factor(),
-                         texture = col_factor(),
-                         compaction = col_factor(),
-                         coal = col_factor()
-                         )        
-)
+                         brickRatio = "f",
+                         texture = "f",
+                         compaction = "f",
+                         coal = "f"
+                         ))
 
 
 #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

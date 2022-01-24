@@ -1,4 +1,12 @@
-# Model for experiment 1 ###
+# Brick-based substrates and designed seedmixtures
+# Model for Experiment 1 (biomass) ####
+# Markus Bauer
+# 2022-01-24
+# Citation: 
+## Bauer M, Krause M, Heizinger V, Kollmann J (submitted) 
+## Using waste bricks for recultivation: no negative effects of brick-augmented substrates with varying acid pre-treatment, soil type and moisture on contrasting seed mixtures
+## Unpublished data.
+
 
 
 
@@ -7,6 +15,7 @@
 #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 ### Packages ###
+library(here)
 library(tidyverse)
 library(ggbeeswarm)
 library(lmerTest)
@@ -15,25 +24,23 @@ library(emmeans)
 
 ### Start ###
 rm(list = ls())
-setwd("Z:/Documents/0_Ziegelprojekt/3_Aufnahmen_und_Ergebnisse/2020_waste_bricks_for_restoration/data/processed")
+setwd(here("data/processed"))
 
 ### Load data ###
-environment <- read_table2("data_processed_experiment_1_environment.txt", col_names = T, na = "na", col_types = 
+environment <- read_table("data_processed_experiment_1_environment.txt", col_names = T, na = "na", locale = locale(decimal_mark = "."),
+                          col_types = 
                        cols(
-                         .default = col_double(),
-                         plot = col_factor(),
-                         block = col_factor(),
-                         position = col_factor(),
+                         .default = "d",
+                         plot = "f",
+                         block = "f",
+                         position = "f",
                          brickType = col_factor(levels = c("Clean","Demolition")),
                          seedmix = col_factor(levels = c("Standard","Robust","Intermediate","Vigorous")),
                          brickRatio = col_factor(levels = c("5","30")),
                          acid = col_factor(levels = c("Control","Acid")),
                          f.watering = col_factor(levels = c("Dry", "Medium_dry", "Medium_moist","Moist"))
-                       )        
-)
-
-environment$f.watering <- dplyr::recode(environment$f.watering,
-                                  "Medium_dry" = "Medium dry", "Medium_moist" = "Medium moist")
+                       )) %>%
+  mutate(f.watering = dplyr::recode(f.watering, "Medium_dry" = "Medium dry", "Medium_moist" = "Medium moist"))
 
 
 
@@ -162,8 +169,9 @@ plotResiduals(main = "block", simulationOutput$scaledResiduals, environment$bloc
 MuMIn::r.squaredGLMM(m5)
 VarCorr(m5)
 sjPlot::plot_model(m5, type = "re", show.values = T)
-car::Anova(m5, type = 3)
 summary(m5)
+(table <- car::Anova(m5, type = 3))
+tidytable <- broom::tidy(table)
 
 ### Effect sizes -----------------------------------------------------------------------------------------
 (emm <- emmeans(m5, revpairwise ~ seedmix | f.watering, type = "response"))
@@ -173,3 +181,6 @@ contrast(emmeans(m5, ~ seedmix * f.watering, type = "response"), "trt.vs.ctrl", 
 plot(emm, comparison = T)
 (emm <- emmeans(m5, revpairwise ~ brickRatio | f.watering, type = "response"))
 plot(emm, comparison = T)
+
+### Save ###
+write.csv(tidytable, here("outputs/statistics/table_anova_experiment_1_biomass.csv"))
