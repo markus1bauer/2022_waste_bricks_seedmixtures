@@ -1,8 +1,15 @@
-# Prepare Metadata ####
+# Brick-based substrates and designed seedmixtures
+# Prepare metadata ####
 # Markus Bauer
+# 2022-01-24
+# Citation: 
+## Bauer M, Krause M, Heizinger V, Kollmann J (submitted) 
+## Using waste bricks for recultivation: no negative effects of brick-augmented substrates with varying acid pre-treatment, soil type and moisture on contrasting seed mixtures
+## Unpublished data.
 
 
 ### Packages ###
+library(here)
 library(EML)
 
 ### Start ###
@@ -96,6 +103,5 @@ eml <- list(
   dataset = dataset
   )
 
-setwd("Z:/Documents/0_Uni/2021_ZIM_Ziegelprojekt/3_Aufnahmen_und_Ergebnisse/2020_waste_bricks_for_restoration")
-write_eml(eml, "METADATA.xml")
-eml_validate("METADATA.xml")
+write_eml(eml, here("METADATA.xml"))
+eml_validate(here("METADATA.xml"))
