@@ -54,6 +54,3 @@ __Dataset DOI__
 
 [![DOI](https://zenodo.org/???)](https://doi.org/????/zenodo.???) following via Zenodo
 
-__Open Science Framework__
-
-See the manuscript [OSF Project](https://osf.io/????) for supporting information.
