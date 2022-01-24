@@ -13,13 +13,13 @@ _Markus Bauer <a href="https://orcid.org/0000-0001-5372-4174"><img src="https://
 ## Content of the repository
 
 1. __Data__: the folder `data` contains  
-    * The raw and processed data files of the first and second experiment (.txt) 
-    * The raw and processed data files of the third experiment (.txt) 
-    * Photos of different substrates
+    * The `raw` and `processed` data files of the first and second experiment (.txt) 
+    * The `raw` and `processed` data files of the third experiment (.txt) 
+    * `photos` of different substrates (.jpg)
     
 3. __Outputs__: the folder `outputs` contains  
-    * The figures (.tiff) generated
-    * The ANOVA tables of the models (.csv)
+    * The `figures` (.tiff) generated
+    * The `statistics` tables of the models (.csv)
     
 4. __R__: the folder `R` contains  
     * Scripts (.R) to generate all figures used in the manuscript and in the supporting information
