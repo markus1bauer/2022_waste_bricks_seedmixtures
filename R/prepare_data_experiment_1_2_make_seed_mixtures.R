@@ -24,13 +24,13 @@ setwd(here("data/processed"))
 #library(installr);updateR(browse_news=F, install_R=T, copy_packages = T,copy_Rprofile.site = T,keep_old_packages = T, update_packages = T)
 
 ### Load species list ###
-traits <- read_table("data_processed_experiment_1_2_3_traits.txt", col_names = T, na = "na", col_types =
+traits <- read_csv("data_processed_experiment_1_2_3_traits.txt", col_names = T, na = "na", col_types =
                        cols(
-                         .default = col_double(),
-                         name = col_factor(),
-                         family = col_factor(),
-                         poolD = col_factor(),
-                         poolS = col_factor()
+                         .default = "d",
+                         name = "f",
+                         family = "f",
+                         poolD = "f",
+                         poolS = "f"
                          )        
 )
 traits <- traits %>%

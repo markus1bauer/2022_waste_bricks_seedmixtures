@@ -9,22 +9,23 @@
 
 
 ### Packages ###
+library(here)
 library(tidyverse)
 library(data.table)
 
 ### Start ###
 rm(list = ls())
-setwd("Z:/Documents/0_Ziegelprojekt/3_Aufnahmen_und_Ergebnisse/2020_waste_bricks_for_restoration/data/raw")
+setwd(here("data/raw"))
 #library(installr);updateR(browse_news=F, install_R=T, copy_packages = T,copy_Rprofile.site = T,keep_old_packages = T, update_packages = T)
 
 ### 1 Load species list #####################################################################################
 
-traits <- read_table2("data_raw_experiment_1_2_3_traits.txt", col_names = T, na = "na", col_types =
+traits <- read_csv("data_raw_experiment_1_2_3_traits.csv", col_names = T, na = "na", col_types =
                         cols(
-                          name = col_factor(),
-                          family = col_factor(),
-                          poolD = col_factor(),
-                          poolS = col_factor()
+                          name = "f",
+                          family = "f",
+                          poolD = "f",
+                          poolS = "f"
                           )        
 )
 

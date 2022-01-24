@@ -1,0 +1,13 @@
+attributeName,attributeDefinition,formatString,definition,unit,numberType,type,factor
+name,botanical species name,NA,botanical species name,NA,NA,character,NA
+nomenclature,nomenclature of species names from worldfloraonline.org,NA,nomenclature of species names from worldfloraonline.org,NA,NA,character,NA
+family,family of plant species from worldfloraonline.org,NA,family of plant species from worldfloraonline.org,NA,NA,character,NA
+abb,abbreviation of name - first four letters of genus and of species,NA,abbreviation of name - first four letters of genus and of species,NA,NA,character,NA
+n,Ellenberg N value from Ellenberg et al. 2001 in floraweb.de,NA,NA,dimensionless,integer,numeric,NA
+f,Ellenberg F value from Ellenberg et al. 2001 in floraweb.de,NA,NA,dimensionless,integer,numeric,NA
+r,Ellenberg R value from Ellenberg et al. 2001 in floraweb.de,NA,NA,dimensionless,integer,numeric,NA
+sla,Specific leaf area LEDA traitbase,NA,NA,millimeterSquaredPerGram,real,numeric,NA
+height,Canopy height LEDA traitbase,NA,NA,meter,real,numeric,NA
+seedmass,Seed mass from LEDA traitbase,NA,NA,milligram,real,numeric,NA
+poolD,species pool for the design of new seed mixtures,NA,NA,NA,NA,factor,1/0
+poolS,species which are included in the commercial standard seed mixture,NA,NA,NA,NA,factor,1/0
