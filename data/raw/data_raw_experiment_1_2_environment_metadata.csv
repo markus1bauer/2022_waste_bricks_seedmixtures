@@ -1,0 +1,25 @@
+attributeName,attributeDefinition,formatString,definition,unit,numberType,type,factor
+no,continous number of plots,NA,NA,dimensionless,integer,numeric,NA
+plot,individual plot ID,NA,individual plot ID,NA,NA,character,NA
+date,date of biomass harvest,YYYY-mm-dd,NA,NA,NA,date,NA
+block,table ID of the greenhouse as block factor,NA,NA,NA,NA,factor,A to H
+position,the semi-open greenhouse had walls of glass and of mesh,NA,NA,NA,NA,factor,o = next to the glass wall / c = next to the open mesh wall of the semiopen greenhouse 
+watering,times watered per day,NA,NA,NA,NA,factor,0.5 = every second day / 1 = every day / 2 = two times per day / 3 = three times per day
+seedmix,was it the commercial seed mixture or one of the designed seed mixtures,NA,NA,NA,NA,factor,Standard = standard commercial mixture / Vigorous / Robust / Intermediate = all are designed seed mixtures
+seedDensity,weight of seeds per square meter,NA,NA,gramPerMeterSquared,integer,numeric,NA
+substrate,ID of substrate mixture which includes brickType and brickRatio and acid,NA,NA,NA,NA,character,NA
+brickType,were the crushed bricks clean or from demolitions with adjacend mortar and render,NA,NA,NA,NA,factor,Clean = clean bricks from the factory / Demolition = bricks from demolitions
+brickRatio,ratio of bricks within the total substrate,NA,NA,percent,integer,numeric,NA
+acid,were the crushed bricks treated with phosphoric acid?,NA,NA,NA,NA,factor,Acid = treatment with acid / Control = no treatment
+grassMass,biomass of grass species,NA,NA,gram,real,numeric,NA
+forbMass,biomass of forb species,NA,NA,gram,real,numeric,NA
+vegCov4,calculated vegetation cover with imageJ 4 weeks after seeding,NA,NA,percent,real,numeric,NA
+vegCov6,calculated vegetation cover with imageJ 6 weeks after seeding,NA,NA,percent,real,numeric,NA
+vegCov8,calculated vegetation cover with imageJ 8 weeks after seeding,NA,NA,percent,real,numeric,NA
+vegCov10,calculated vegetation cover with imageJ 10 weeks after seeding,NA,NA,percent,real,numeric,NA
+vegCov11,calculated vegetation cover with imageJ 11 weeks after seeding,NA,NA,percent,real,numeric,NA
+vegCov13,calculated vegetation cover with imageJ 13 weeks after seeding,NA,NA,percent,real,numeric,NA
+extraspecNo,number of species which were not in the seed mixture,NA,NA,dimensionless,integer,numeric,NA
+specPres,number of species which were sown and germinated,NA,NA,dimensionless,integer,numeric,NA
+specAbs,number of species which were sown but did not germinate,NA,NA,dimensionless,integer,numeric,NA
+estRate,specPres / (specPres + specAbs),NA,NA,percent,real,numeric,NA
