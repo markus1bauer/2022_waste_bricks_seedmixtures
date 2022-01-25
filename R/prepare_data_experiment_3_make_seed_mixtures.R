@@ -257,7 +257,7 @@ plotRatio <- compData %>%
   summarise(sum = sum(ratio))
 table(round(plotRatio$sum,2))
 plotRatio[which(plotRatio$sum < 0.99 | plotRatio$sum >1.01),]
-####correct unsolvable taxonomic composition
+#### a Correct unsolvable taxonomic composition #####
 compData[compData$comp==7,"name"] <- as.character(comp <- c(sample(herbs$name,12),sample(grass$name,5),sample(legume$name,3)))
 compData[compData$comp==25,"name"] <- as.character(comp <- c(sample(herbs$name,12),sample(grass$name,5),sample(legume$name,3)))
 compData[compData$comp==71,"name"] <- as.character(comp <- c(sample(herbs$name,12),sample(grass$name,5),sample(legume$name,3)))
@@ -278,7 +278,7 @@ compData[c(which(is.na(compData$sla))),"sla"] <- 3.068053
 compData[c(which(is.na(compData$seedmass))),"seedmass"] <- 0
 compData[c(which(is.na(compData$r))),"r"] <- 6.5
 compData <- select(compData, name, comp, sla, seedmass, r, grass, legume)
-####Correct wrong mixture ratios
+####b Correct wrong mixture ratios ####
 plotcompData <- compData[which(compData$comp==128),]
 row.names(plotcompData) <- plotcompData[,"name"]
 plotcompData <- plotcompData[,-(1:2)]
@@ -292,7 +292,7 @@ mix <- selectSpecies(as.matrix(plotcompData),
                      obj = "QH",
                      capd = T)
 X128 <- mix$prob;
-###implement new ratios to compData
+#### c Implement new ratios to compData ####
 compData <- arrange(compData,comp);compData$ratio <- ratioResults
 compData[compData$comp==7,"ratio"] <- X7
 compData[compData$comp==25,"ratio"] <- X25
@@ -316,7 +316,7 @@ plotRatio <- compData %>%
   summarise(sum = sum(ratio))
 table(round(plotRatio$sum,2))
 plotRatio[which(plotRatio$sum < 0.995 | plotRatio$sum >1.005),]
-####correct unsolvable taxonomic composition
+#### a Correct unsolvable taxonomic composition ####
 compData[compData$comp==48,"name"] <- as.character(comp <- c(sample(herbs$name,12),sample(grass$name,5),sample(legume$name,3)))
 compData[compData$comp==82,"name"] <- as.character(comp <- c(sample(herbs$name,12),sample(grass$name,5),sample(legume$name,3)))
 compData[compData$comp==83,"name"] <- as.character(comp <- c(sample(herbs$name,12),sample(grass$name,5),sample(legume$name,3)))
@@ -327,7 +327,7 @@ compData[c(which(is.na(compData$sla))),"sla"] <- 3.068053
 compData[c(which(is.na(compData$seedmass))),"seedmass"] <- 0
 compData[c(which(is.na(compData$r))),"r"] <- 6.5
 compData <- select(compData, name, comp, sla, seedmass, r, grass, legume)
-####Correct wrong mixture ratios
+#### b Correct wrong mixture ratios ####
 plotcompData <- compData[which(compData$comp==48),]
 row.names(plotcompData) <- plotcompData[,"name"]
 plotcompData <- plotcompData[,-(1:2)]
@@ -341,7 +341,7 @@ mix <- selectSpecies(as.matrix(plotcompData),
                      obj="QH",
                      capd=T)
 X48 <- mix$prob;
-####implement new ratios to compData
+#### Implement new ratios to compData ####
 compData <- arrange(compData,comp)
 compData$ratio <- ratioResults
 compData[compData$comp==82,"ratio"] <- X82
@@ -358,7 +358,7 @@ plotRatio <- compData %>%
   summarise(sum = sum(ratio))
 table(round(plotRatio$sum,2))
 plotRatio[which(plotRatio$sum < 0.995 | plotRatio$sum >1.005),]
-####correct unsolvable taxonomic composition
+#### a Correct unsolvable taxonomic composition ####
 compData[compData$comp==48,"name"] <- as.character(comp <- c(sample(herbs$name,12),sample(grass$name,5),sample(legume$name,3)))
 names <- select(compData, name,comp)
 compData <- inner_join(vdata,names, by = "name")
@@ -366,7 +366,7 @@ compData[c(which(is.na(compData$sla))),"sla"] <- 3.068053
 compData[c(which(is.na(compData$seedmass))),"seedmass"] <- 0
 compData[c(which(is.na(compData$r))),"r"] <- 6.5
 compData <- select(compData, name, comp, sla, seedmass, r, grass, legume)
-####Correct wrong mixture ratios
+#### b Correct wrong mixture ratios ####
 plotcompData <- compData[which(compData$comp==48),]
 row.names(plotcompData) <- plotcompData[,"name"]
 plotcompData <- plotcompData[,-(1:2)]
@@ -380,7 +380,7 @@ mix <- selectSpecies(as.matrix(plotcompData),
                      obj="QH",
                      capd=T)
 X48 <- mix$prob;
-####implement new ratios to compData
+#### c Implement new ratios to compData ####
 compData <- arrange(compData,comp)
 compData$ratio <- ratioResults
 compData[compData$comp==48,"ratio"] <- X48
