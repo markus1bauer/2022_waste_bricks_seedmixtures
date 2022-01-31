@@ -22,4 +22,3 @@ vegCov13,calculated vegetation cover with imageJ 13 weeks after seeding,NA,NA,pe
 extraspecNo,number of species which were not in the seed mixture,NA,NA,dimensionless,integer,numeric,NA
 specPres,number of species which were sown and germinated,NA,NA,dimensionless,integer,numeric,NA
 specAbs,number of species which were sown but did not germinate,NA,NA,dimensionless,integer,numeric,NA
-estRate,specPres / (specPres + specAbs),NA,NA,percent,real,numeric,NA

@@ -66,7 +66,7 @@ establishment %>%
 ###Calculate SE
 0.309 / sqrt(39)
 
-###Eestablishment per species of standarad seed mixture ###
+### Establishment per species of standarad seed mixture ###
 establishment %>% 
   group_by(poolS) %>% 
   summarise(mean.estRate = mean(estRate1S, na.rm = T), sd.estRate = sd(estRate1S, na.rm = T))

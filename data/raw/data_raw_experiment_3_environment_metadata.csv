@@ -1,0 +1,11 @@
+attributeName,attributeDefinition,formatString,definition,unit,numberType,type,factor
+plot,individual plot ID,NA,individual plot ID,NA,NA,character,NA
+date,date of biomass harvest,YYYY-mm-dd,NA,NA,NA,date,NA
+substrate,ID of substrate mixture which includes brickType and brickRatio and acid,NA,NA,NA,NA,character,NA
+brickRatio,ratio of bricks within the total substrate,NA,NA,percent,integer,numeric,NA
+texture,Which texture had the substrate,NA,NA,NA,NA,factor,Sand/Medium/Loam
+compaction,Is the soil compacted?,NA,NA,NA,NA,factor,Control/Compaction
+coal,Is activated charcoal added?,NA,NA,NA,NA,factor,Control/Coal
+biomass,harvested biomass of at the end of the experiment,NA,NA,gram,real,numeric,NA
+specPres,number of species which were sown and germinated,NA,NA,dimensionless,integer,numeric,NA
+specAbs,number of species which were sown but did not germinate,NA,NA,dimensionless,integer,numeric,NA

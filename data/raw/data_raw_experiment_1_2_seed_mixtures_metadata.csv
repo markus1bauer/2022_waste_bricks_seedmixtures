@@ -1,0 +1,6 @@
+attributeName,attributeDefinition,formatString,definition,unit,numberType,type,factor
+name,species name according to WFO (see data_raw_traits),NA,species name according to WFO (see data_raw_traits),NA,NA,character,NA
+plot,plot ID,NA,plot ID,NA,NA,character,NA
+weight,weight of seeds of species for a plot,NA,NA,gram,real,numeric,NA
+weightRatio,Ratio of the weight of this species compared to the total plot,NA,NA,dimensionless,real,numeric,NA
+presence,Is the species seeded?,NA,NA,NA,NA,factor,1 = yes / 0 = no
