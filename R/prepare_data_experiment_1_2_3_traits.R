@@ -19,14 +19,16 @@ setwd(here("data/raw"))
 #library(installr);updateR(browse_news=F, install_R=T, copy_packages = T,copy_Rprofile.site = T,keep_old_packages = T, update_packages = T)
 
 
+
 #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 # A Preparation ################################################################################################################
 #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-seedmixtures <- read_csv("data_raw_experiment_1_2_seed_mixtures.csv", col_names = T, na = c("na", "NA", ""), col_types = 
+
+seedmixtures12 <- read_csv("data_raw_experiment_1_2_seed_mixtures.csv", col_names = T, na = c("na", "NA", ""), col_types = 
                            cols(.default = "?")) %>%
   filter(name != "Ranunculus_bulbosus" & name != "Ranunculus_acris")
-seedmixtures <- read_csv("data_raw_experiment_3_seed_mixtures.csv", col_names = T, na = c("na", "NA", ""), col_types = 
+seedmixtures3 <- read_csv("data_raw_experiment_3_seed_mixtures.csv", col_names = T, na = c("na", "NA", ""), col_types = 
                            cols(.default = "?")) %>%
   filter(name != "Ranunculus_bulbosus" & name != "Ranunculus_acris")
 
@@ -44,15 +46,16 @@ traits <- read_csv("data_raw_experiment_1_2_3_traits.csv", col_names = T, na = c
                           ))
 
 #### Separate data sets ####
-environment1 <- environment %>%
+environment1 <- environment12 %>%
   filter(brickType == "Clean")
-environment2 <- environment %>%
-  filter(acid == "Acid" & seedmix == "Robust" | seedmix == "Vigorous" & acid == "Acid") %>%
-  mutate(seedmix = factor(seedmix))
+environment2 <- environment12 %>%
+  filter(acid == "Acid" & seedmix == "Robust" | seedmix == "Vigorous" & acid == "Acid")
 seedmixtures1 <- environment1 %>%
-  left_join(seedmixtures, by = "plot")
+  select(plot, seedmix) %>%
+  left_join(seedmixtures12, by = "plot")
 seedmixtures2 <- environment2 %>%
-  left_join(seedmixtures, by = "plot")
+  select(plot) %>%
+  left_join(seedmixtures12, by = "plot")
 
 
 
@@ -63,9 +66,7 @@ seedmixtures2 <- environment2 %>%
 
 ## 2 Include traits #########################################################################################
 
-
 ### a Specific leaf area --------------------------------------------------------------------------------------
-
 slaData <- fread("data_raw_traitbase_try_20190411_6084_sla.txt", 
                  header = T, sep = "\t", dec = ".", quote = "", data.table = T) %>%
   rename(name = AccSpeciesName) %>%
@@ -81,9 +82,7 @@ traits <- traits %>%
   left_join(slaData, by = "name") %>%
   rename(slaTry = value)
 
-
 ### b Canopy height at maturity -----------------------------------------------------------------------------------
-
 heightData <- fread("data_raw_traitbase_try_20190220_5762_height-seedmass.txt", 
                  header = T, sep = "\t", dec = ".", quote = "", data.table = T) %>%
   rename(name = AccSpeciesName) %>%
@@ -107,7 +106,6 @@ traits <- traits %>%
   rename(heightTry = value)
 
 ### c Seed mass -------------------------------------------------------------------------------------------------
-
 seedmassData <- fread("data_raw_traitbase_try_20190220_5762_height-seedmass.txt", 
                     header = T, sep = "\t", dec = ".", quote = "", data.table = T) %>%
   rename(name = AccSpeciesName) %>%
@@ -130,109 +128,75 @@ traits <- traits %>%
   left_join(seedmassData, by = "name") %>%
   rename(seedmassTry = value)
 
-
 ### d Check completeness of traits -------------------------------------------------------------------------------------------
-
 test <- traits %>%
   filter(poolDesign == 1) %>%
   filter(name != "Ranunculus_spec")
 test$name[which(!(test$name %in% slaData$name))]
-(41-length(which(!(test$name %in% slaData$name))))/41 #100%
+(41-length(which(!(test$name %in% slaData$name))))/41 #98%
 test$name[which(!(test$name %in% heightData$name))]
-(41-length(which(!(test$name %in% heightData$name))))/41 #95%
+(41-length(which(!(test$name %in% heightData$name))))/41 #98%
 test$name[which(!(test$name %in% seedmassData$name))]
-(41-length(which(!(test$name %in% seedmassData$name))))/41 #93%
+(41-length(which(!(test$name %in% seedmassData$name))))/41 #95%
 rm(tryData, slaData, seedmassData, heightData, test)
-select(traits, name, sla, slaTry)
-select(traits, name, height, heightTry)
-select(traits, name, seedmass, seedmassTry)
 
 
-## 3 Establishment rate per plot ########################################################################
-
-### a Experiment 1 ---------------------------------------------------------------------------------------------------
-temporary <- seedmixtures1 %>% 
-  group_by(plot) %>% 
-  summarise(specRich = sum(presence))
-environment1 <- environment1 %>%
-  left_join(temporary) %>%
-  mutate(seeded = rep(rep(c(16,20), c(4,12)), 8),
-         estRate = specRich / seeded
-  )
-
-### b Experiment 2 ---------------------------------------------------------------------------------------------------
-temporary <- seedmixtures2 %>% 
-  group_by(plot) %>% 
-  summarise(specRich = sum(presence))
-environment2 <- environment2 %>%
-  left_join(temporary) %>%
-  mutate(seeded = rep(20, 64),
-         estRate = specRich / seeded
-  )
-
-### c Experiment 3 ---------------------------------------------------------------------------------------------------
-data <- seedmixtures %>% 
-  group_by(plot) %>% 
-  summarise(specRich = sum(presence))
-environment <- left_join(environment, data) %>%
-  mutate(estRate = specRich / 20)
-
-
-## 4 Establishment rate of species #############################################################################
+## 3 Establishment rate of species #############################################################################
 
 ### a Designed seed mixes of experiment 1 ---------------------------------------------------------------------------------------------------
-establishment1 <- seedmixtures1 %>% 
+data <- seedmixtures1 %>% 
   filter(seedmix != "Standard") %>%
   count(name, presence) %>%
   mutate(presence = factor(presence),
-         presence <- fct_recode(presence, pres1D = "1", abs1D = "0")
-  ) %>% 
+         presence = fct_recode(presence, pres1Design = "1", abs1Design = "0")
+         ) %>% 
   tidyr::spread(presence, n) %>%
-  mutate(abs1D = replace(abs1D, is.na(abs1D), 0),
-         estRate1D =  pres1D / (abs1D + pres1D),
-         rounded1D = round(estRate1D, 2)) %>%
-  arrange(estRate1D) %>%
-  left_join(traits, by = "name")
+  mutate(abs1Design = replace(abs1Design, is.na(abs1Design), 0),
+         estRate1Design =  pres1Design / (abs1Design + pres1Design),
+         estRate1Design = round(estRate1Design, 2))
+traits <- traits %>%
+  left_join(data, by = "name")
 
 ### b Standard seed mixes of experiment 1 ---------------------------------------------------------------------------------------------------
-temporary <- seedmixtures1 %>% 
+data <- seedmixtures1 %>% 
   filter(seedmix == "Standard") %>%
   count(name, presence) %>%
   mutate(presence = factor(presence),
-         presence = fct_recode(presence, pres1S = "1", abs1S = "0")) %>%
+         presence = fct_recode(presence, pres1Standard = "1", abs1Standard = "0")) %>%
   tidyr::spread(presence, n) %>%
-  mutate(abs1S = replace(abs1S, is.na(abs1S), 0),
-         estRate1S =  pres1S / (abs1S + pres1S),
-         rounded1S = round(estRate1S, 2)
-  ) %>%
-  arrange(estRate1S)
-(establishment1 <- left_join(establishment1, temporary))
+  mutate(abs1Standard = replace(abs1Standard, is.na(abs1Standard), 0),
+         estRate1Standard =  pres1Standard / (abs1Standard + pres1Standard),
+         estRate1Standard = round(estRate1Standard, 2)
+         )
+traits <- traits %>%
+  left_join(data, by = "name")
 
-### c Designed seed mixes of experiment 2 ---------------------------------------------------------------------------------------------------
-establishment2 <- seedmixtures2 %>% 
+### c Experiment 2 ---------------------------------------------------------------------------------------------------
+data <- seedmixtures2 %>% 
   count(name, presence) %>%
   mutate(presence = factor(presence),
-         presence <- fct_recode(presence, pres2D = "1", abs2D = "0")
-  ) %>%
+         presence = fct_recode(presence, pres2 = "1", abs2 = "0")
+         ) %>%
   tidyr::spread(presence, n) %>%
-  mutate(abs2D = replace(abs2D, is.na(abs2D), 0),
-         estRate2D =  pres2D / (abs2D + pres2D),
-         rounded2D = round(estRate2D, 2)
-  ) %>%
-  arrange(estRate2D) %>%
-  left_join(traits, by = "name")
+  mutate(abs2 = replace(abs2, is.na(abs2), 0),
+         estRate2 =  pres2 / (abs2 + pres2),
+         estRate2 = round(estRate2, 2)
+         )
+traits <- traits %>%
+  left_join(data, by = "name")
 
-### d Designed seed mixes of experiment 3 ---------------------------------------------------------------------------------------------------
-establishment <- seedmixtures %>% 
+### d Experiment 3 ---------------------------------------------------------------------------------------------------
+data <- seedmixtures3 %>% 
   count(name, presence) %>%
   mutate(presence = factor(presence),
-         presence = fct_recode(presence, pres = "1", abs = "0")) %>%
+         presence = fct_recode(presence, pres3 = "1", abs3 = "0")) %>%
   tidyr::spread(presence, n) %>%
-  mutate(pres = replace(pres, is.na(pres), 0),
-         abs = replace(abs, is.na(abs), 0),
-         estRatio =  pres / (abs + pres),
-         rounded = round(estRatio,2)) %>%
-  arrange(estRatio)
+  mutate(pres3 = replace(pres3, is.na(pres3), 0),
+         abs3 = replace(abs3, is.na(abs3), 0),
+         estRate3 =  pres3 / (abs3 + pres3),
+         estRate3 = round(estRate3, 2))
+traits <- traits %>%
+  left_join(data, by = "name")
 
 
 

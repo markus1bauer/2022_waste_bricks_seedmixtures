@@ -6,5 +6,5 @@ abb,abbreviation of name - first four letters of genus and of species,NA,abbrevi
 n,Ellenberg N value from Ellenberg et al. 2001 in floraweb.de,NA,NA,dimensionless,integer,numeric,NA
 f,Ellenberg F value from Ellenberg et al. 2001 in floraweb.de,NA,NA,dimensionless,integer,numeric,NA
 r,Ellenberg R value from Ellenberg et al. 2001 in floraweb.de,NA,NA,dimensionless,integer,numeric,NA
-poolDesign,species pool for the design of new seed mixtures,NA,NA,NA,NA,factor,1/0
-poolStandard,species which are included in the commercial standard seed mixture,NA,NA,NA,NA,factor,1/0
+poolDesign,species pool for the design of new seed mixtures,NA,NA,NA,NA,factor,1 = yes / 0 = no
+poolStandard,species which are included in the commercial standard seed mixture,NA,NA,NA,NA,factor,1 = yes / 0 = no

@@ -1,9 +1,9 @@
-﻿grainSize,substrate,ratio,grainSizeCum,substrateAbb
+grainSize,substrate,ratio,grainSizeCum,substrateAbb
 0.002,substrate_13,1.8,1.8,Sand_30%_bricks
 0.063,substrate_13,4.4,6.2,Sand_30%_bricks
 0.2,substrate_13,11.8,18,Sand_30%_bricks
 0.63,substrate_13,41.7,59.7,Sand_30%_bricks
-2,substrate_13,8.4,68.1,Sand_30%_bricks
+2,substrate_13,8.4,68.10000000000001,Sand_30%_bricks
 4,substrate_13,8.9,77,Sand_30%_bricks
 8,substrate_13,6,83,Sand_30%_bricks
 16,substrate_13,15.2,98.2,Sand_30%_bricks
@@ -50,7 +50,7 @@
 25,substrate_17,5.5,100,Loam_30%_bricks
 31.5,substrate_17,0,100,Loam_30%_bricks
 0.002,substrate_18,10.6,10.6,Loam_5%_bricks
-0.063,substrate_18,19.6,30.2,Loam_5%_bricks
+0.063,substrate_18,19.6,30.200000000000003,Loam_5%_bricks
 0.2,substrate_18,11.4,41.6,Loam_5%_bricks
 0.63,substrate_18,26.1,67.7,Loam_5%_bricks
 2,substrate_18,7.7,75.4,Loam_5%_bricks

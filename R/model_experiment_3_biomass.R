@@ -27,7 +27,7 @@ rm(list = ls())
 setwd(here("data/processed"))
 
 ### Load data ###
-environment <- read_table("data_processed_experiment_3_environment.txt", col_names = T, na = "na", locale = locale(decimal_mark = "."),
+environment <- read_csv("data_processed_experiment_3_environment.csv", col_names = T, na = "na", locale = locale(decimal_mark = "."),
                           col_types =
                        cols(
                          plot = "f",

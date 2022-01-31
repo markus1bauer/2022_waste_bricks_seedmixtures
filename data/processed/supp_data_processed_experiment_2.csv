@@ -1,4 +1,4 @@
-﻿grainSize,substrate,ratio,grainSizeCum,substrateAbb
+grainSize,substrate,ratio,grainSizeCum,substrateAbb
 0.002,substrate_7,9.2,9.2,Clean_bricks_30%
 0.063,substrate_7,24.7,33.9,Clean_bricks_30%
 0.2,substrate_7,6.9,40.8,Clean_bricks_30%
@@ -10,12 +10,12 @@
 25,substrate_7,4.8,100,Clean_bricks_30%
 31.5,substrate_7,0,100,Clean_bricks_30%
 0.002,substrate_8,14.4,14.4,Clean_bricks_5%
-0.063,substrate_8,39.3,53.7,Clean_bricks_5%
+0.063,substrate_8,39.3,53.699999999999996,Clean_bricks_5%
 0.2,substrate_8,9.1,62.8,Clean_bricks_5%
-0.63,substrate_8,17.4,80.2,Clean_bricks_5%
+0.63,substrate_8,17.4,80.19999999999999,Clean_bricks_5%
 2,substrate_8,5.8,86,Clean_bricks_5%
 4,substrate_8,5.3,91.3,Clean_bricks_5%
-8,substrate_8,1.9,93.2,Clean_bricks_5%
+8,substrate_8,1.9,93.19999999999999,Clean_bricks_5%
 16,substrate_8,5.3,98.5,Clean_bricks_5%
 25,substrate_8,1.5,100,Clean_bricks_5%
 31.5,substrate_8,0,100,Clean_bricks_5%
@@ -34,7 +34,7 @@
 0.2,substrate_12,11.5,56.3,Demolition_bricks_5%
 0.63,substrate_12,27.2,83.5,Demolition_bricks_5%
 2,substrate_12,4.1,87.6,Demolition_bricks_5%
-4,substrate_12,5.8,93.4,Demolition_bricks_5%
+4,substrate_12,5.8,93.39999999999999,Demolition_bricks_5%
 8,substrate_12,3.7,97.1,Demolition_bricks_5%
 16,substrate_12,2.9,100,Demolition_bricks_5%
 25,substrate_12,0,100,Demolition_bricks_5%

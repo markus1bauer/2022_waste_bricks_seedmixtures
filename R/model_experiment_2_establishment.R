@@ -23,25 +23,16 @@ rm(list = ls())
 setwd(here("data/processed"))
 
 ### Load data ###
-establishment <- read_table("data_processed_experiment_2_establishment.txt", col_names = T, na="na", col_types =
+establishment <- read_csv("data_processed_experiment_1_2_3_traits.csv", col_names = T, na="na", col_types =
                                cols(
                                  .default = "d",
                                  name = "f"
-                               )
-)
-environment <- read_table("data_processed_experiment_2_environment.txt", col_names = T, na = "na", col_types = 
+                               )) %>%
+  select(name, estRate2)
+environment <- read_csv("data_processed_experiment_2_environment.csv", col_names = T, na = "na", col_types = 
                              cols(
-                               .default = "d",
-                               plot = "f",
-                               block = "f",
-                               position = "f",
-                               f.watering = col_factor(levels = c("Dry", "Medium_dry", "Medium_moist","Moist")),
-                               seedmix = col_factor(levels = c("Standard","Robust","Intermediate","Vigorous")),
-                               brickType = col_factor(levels = c("Demolition","Clean")),
-                               brickRatio = col_factor(levels = c("30","5")),
-                               acid = col_factor(levels = c("Acid","Control"))
-                             )) %>%
-  mutate(f.watering = dplyr::recode(f.watering, "Medium_dry" = "Medium dry", "Medium_moist" = "Medium moist"))
+                               .default = "?"
+                               ))
 
 
 #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -58,7 +49,6 @@ environment %>%
 
 ### Establishment per species of designed seed mixtures ###
 establishment %>% 
-  group_by(poolD) %>% 
-  summarise(mean.estRate = mean(estRate2D, na.rm = T), sd.estRate = sd(estRate2D, na.rm = T))
+  summarise(mean.estRate = mean(estRate2, na.rm = T), sd.estRate = sd(estRate2, na.rm = T))
 ###Calculate SE
 0.305 / sqrt(39)

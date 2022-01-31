@@ -24,30 +24,22 @@ rm(list = ls())
 setwd(here("data/processed"))
 
 ### Load data ###
-establishment <- read_table2("data_processed_experiment_1_establishment.txt", col_names = T, na = "na", col_types =
+establishment <- read_csv("data_processed_experiment_1_2_3_traits.csv", col_names = T, na = "na", col_types =
                        cols(
                          .default = "d",
                          name = "f"
-                       ))
-environment <- read_table2("data_processed_experiment_1_environment.txt", col_names = T, na = "na", col_types = 
+                       )) %>%
+  select(name, estRate1Design, estRate1Standard)
+environment <- read_csv("data_processed_experiment_1_environment.csv", col_names = T, na = "na", col_types = 
                              cols(
-                               .default = "d",
-                               plot = "f",
-                               block = "f",
-                               position = "f",
-                               brickType = col_factor(levels = c("Clean","Demolition")),
-                               seedmix = col_factor(levels = c("Standard","Robust","Intermediate","Vigorous")),
-                               brickRatio = col_factor(levels = c("5","30")),
-                               acid = col_factor(levels = c("Control","Acid")),
-                               f.watering = col_factor(levels = c("Dry", "Medium_dry", "Medium_moist","Moist"))
-                             )) %>%
-  mutate(f.watering = dplyr::recode(f.watering, "Medium_dry" = "Medium dry", "Medium_moist" = "Medium moist"))
+                               .default = "?"))
 
 
 
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 # B Statistics ################################################################################################################
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 
 ### Establishment per plot ###
 environment %>% 
@@ -61,14 +53,12 @@ environment %>%
 
 ### Establishment per species of designed seed mixtures ###
 establishment %>% 
-  group_by(poolD) %>% 
-  summarise(mean.estRate = mean(estRate1D, na.rm = T), sd.estRate = sd(estRate1D, na.rm = T))
+  summarise(mean.estRate = mean(estRate1Design, na.rm = T), sd.estRate = sd(estRate1Design, na.rm = T))
 ###Calculate SE
 0.309 / sqrt(39)
 
 ### Establishment per species of standarad seed mixture ###
 establishment %>% 
-  group_by(poolS) %>% 
-  summarise(mean.estRate = mean(estRate1S, na.rm = T), sd.estRate = sd(estRate1S, na.rm = T))
+  summarise(mean.estRate = mean(estRate1Standard, na.rm = T), sd.estRate = sd(estRate1Standard, na.rm = T))
 ###Calculate SE
 0.361 / sqrt(16)

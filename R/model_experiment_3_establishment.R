@@ -24,20 +24,15 @@ rm(list = ls())
 setwd(here("data/processed"))
 
 ### Load data ###
-establishment <- read_table("data_processed_experiment_3_establishment.txt", col_names = T, na = "na", col_types =
+establishment <- read_csv("data_processed_experiment_1_2_3_traits.csv", col_names = T, na = "na", col_types =
                                cols(
                                  .default = "d",
                                  name = "f"
-                               ))
-environment <- read_table("data_processed_experiment_3_environment.txt", col_names = T, na = "na", col_types = 
+                               )) %>%
+  select(name, estRate3)
+environment <- read_csv("data_processed_experiment_3_environment.csv", col_names = T, na = "na", col_types = 
                        cols(
-                         .default = "d",
-                         plot = "f",
-                         date = col_date(),
-                         brickRatio = "f",
-                         texture = "f",
-                         compaction = "f",
-                         coal = "f"
+                         .default = "?"
                          ))
 
 
@@ -52,5 +47,5 @@ summarise(environment, mean.estRate = mean(estRate), sd.estRate = sd(estRate))
 0.114 / sqrt(72)
 
 ### Establishment per species ###
-summarise(establishment, mean.estRate = mean(estRatio, na.rm = T), sd.estRate = sd(estRatio, na.rm = T))
+summarise(establishment, mean.estRate = mean(estRate3, na.rm = T), sd.estRate = sd(estRate3, na.rm = T))
 0.292 / sqrt(39)

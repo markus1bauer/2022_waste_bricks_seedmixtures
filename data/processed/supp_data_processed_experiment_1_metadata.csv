@@ -1,0 +1,6 @@
+attributeName,attributeDefinition,formatString,definition,unit,numberType,type,factor
+grainSize,Size of fraction of soil texture,NA,NA,millimeter,real,numeric,NA
+substrate,substrate ID,NA,substrate ID,NA,NA,character,NA
+ratio,weight proportion of grainSize class of total soil sample,NA,NA,percent,real,numeric,NA
+grainSizeCum,cumulated grainSize weight proportions,NA,NA,percent,real,numeric,NA
+substrateAbb,explanation of substrate ID,NA,explanation of substrate ID,NA,NA,character,NA

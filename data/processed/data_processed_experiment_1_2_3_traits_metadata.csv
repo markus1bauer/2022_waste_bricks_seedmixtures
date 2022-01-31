@@ -6,8 +6,20 @@ abb,abbreviation of name - first four letters of genus and of species,NA,abbrevi
 n,Ellenberg N value from Ellenberg et al. 2001 in floraweb.de,NA,NA,dimensionless,integer,numeric,NA
 f,Ellenberg F value from Ellenberg et al. 2001 in floraweb.de,NA,NA,dimensionless,integer,numeric,NA
 r,Ellenberg R value from Ellenberg et al. 2001 in floraweb.de,NA,NA,dimensionless,integer,numeric,NA
-sla,Specific leaf area LEDA traitbase,NA,NA,millimeterSquaredPerGram,real,numeric,NA
-height,Canopy height LEDA traitbase,NA,NA,meter,real,numeric,NA
-seedmass,Seed mass from LEDA traitbase,NA,NA,milligram,real,numeric,NA
-poolD,species pool for the design of new seed mixtures,NA,NA,NA,NA,factor,1/0
-poolS,species which are included in the commercial standard seed mixture,NA,NA,NA,NA,factor,1/0
+poolDesign,species pool for the design of new seed mixtures,NA,NA,NA,NA,factor,1 = yes / 0 = no
+poolStandard,species which are included in the commercial standard seed mixture,NA,NA,NA,NA,factor,1 = yes / 0 = no
+slaTry,Specific leaf area LEDA traitbase,NA,NA,millimeterSquaredPerGram,real,numeric,NA
+heightTry,Canopy height LEDA traitbase,NA,NA,meter,real,numeric,NA
+seedmassTry,Seed mass from LEDA traitbase,NA,NA,milligram,real,numeric,NA
+abs1Design,In how many plots in experiment 1 absent even though seeded with a designed seed mixture?,NA,NA,dimensionless,integer,numeric,NA
+pres1Design,In how many plots in experiment 1 present even though seeded with a designed seed mixture?,NA,NA,dimensionless,integer,numeric,NA
+estRate1Design,pres1Design / (pres1Design + abs1Design),NA,NA,dimensionless,real,numeric,NA
+abs1Standard,In how many plots in epxeriment 1 absent even though seeded with a standard seed mixture?,NA,NA,dimensionless,integer,numeric,NA
+pres1Standard,In how many plots in epxeriment 1 present even though seeded with a standard seed mixture?,NA,NA,dimensionless,integer,numeric,NA
+estRate1Standard,pres1Standard / (pres1Standard + abs1Standard),NA,NA,dimensionless,real,numeric,NA
+abs2,In how many plots in experiment 2 absent even though seeded?,NA,NA,dimensionless,integer,numeric,NA
+pres2,In how many plots in experiment 2 present even though seeded?,NA,NA,dimensionless,integer,numeric,NA
+estRate2,pres2 / (pres2 + abs2),NA,NA,dimensionless,real,numeric,NA
+abs3,In how many plots in experiment 3 absent even though seeded?,NA,NA,dimensionless,integer,numeric,NA
+pres3,In how many plots in experiment 3 present even though seeded?,NA,NA,dimensionless,integer,numeric,NA
+estRate3,pres3 / (pres3 + abs3),NA,NA,dimensionless,real,numeric,NA
