@@ -1,34 +1,84 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<eml:eml xmlns:eml="https://eml.ecoinformatics.org/eml-2.2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:stmml="http://www.xml-cml.org/schema/stmml-1.2" packageId="a6b1049a-ce73-4221-872d-859b68dbb602" system="uuid" xsi:schemaLocation="https://eml.ecoinformatics.org/eml-2.2.0 https://eml.ecoinformatics.org/eml-2.2.0/eml.xsd">
+<eml:eml xmlns:eml="https://eml.ecoinformatics.org/eml-2.2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:stmml="http://www.xml-cml.org/schema/stmml-1.2" packageId="0df446ea-f6c7-4485-bc8f-5fefe0d45076" system="uuid" xsi:schemaLocation="https://eml.ecoinformatics.org/eml-2.2.0 https://eml.ecoinformatics.org/eml-2.2.0/eml.xsd">
   <dataset>
-    <title>Coming up</title>
-    <creator>
+    <title>Data of 'Using crushed waste bricks for urban greening: no negative effects of brick-augmented substrates with varying acid pre-treatment, soil type and moisture on contrasting seed mixtures' by Bauer, Kruse, Heizinger and Kollmann</title>
+    <creator id="https://orcid.org/0000-0001-5372-4174">
       <individualName>
         <givenName>Markus</givenName>
         <surName>Bauer</surName>
       </individualName>
+      <organizationName>Technical University of Munich</organizationName>
+      <positionName>PhD student</positionName>
+      <address>
+        <deliveryPoint>Emil-Ramann-Strasse 6</deliveryPoint>
+        <city>Freising</city>
+        <administrativeArea>Bayern</administrativeArea>
+        <postalCode>85354</postalCode>
+        <country>Germany</country>
+      </address>
+      <phone>0049-152-56391781</phone>
       <electronicMailAddress>markusbauer@mailbox.org</electronicMailAddress>
     </creator>
-    <pubDate>2021</pubDate>
-    <language>English</language>
-    <abstract>Coming up</abstract>
+    <associatedParty>
+      <individualName>
+        <givenName>Martin</givenName>
+        <surName>Krause</surName>
+      </individualName>
+      <electronicMailAddress>mek187@hotmail.de</electronicMailAddress>
+      <role>Researcher</role>
+    </associatedParty>
+    <associatedParty>
+      <individualName>
+        <givenName>Valentin</givenName>
+        <surName>Heizinger</surName>
+      </individualName>
+      <electronicMailAddress>valentin.heizinger@leipfinger-bader.de</electronicMailAddress>
+      <role>Researcher</role>
+    </associatedParty>
+    <associatedParty id="https://orcid.org/0000-0002-4990-3636">
+      <individualName>
+        <givenName>Johannes</givenName>
+        <surName>Kollmann</surName>
+      </individualName>
+      <organizationName>Technical University of Munich</organizationName>
+      <address>
+        <deliveryPoint>Emil-Ramann-Strasse 6</deliveryPoint>
+        <city>Freising</city>
+        <administrativeArea>Bayern</administrativeArea>
+        <postalCode>85354</postalCode>
+        <country>Germany</country>
+      </address>
+      <phone>0049-8161-714144</phone>
+      <electronicMailAddress>johannes.kollmann@tum.de</electronicMailAddress>
+      <role>Professor</role>
+    </associatedParty>
+    <pubDate>2022</pubDate>
+    <abstract>This dataset contains data from greenhouse experiments testing the effects of brick quantity and quality, acid pre-treatment, soil type and soil moisture on the biomass of designed seed mixtures. The substrates consisted of different brick ratios (5% vs. 30%), brick types (clean production waste vs. demolition material), and brick treatments (acid vs. control) and were tested with three trait-based mixtures and one non-regional standard mixture. The trait-based mixtures were developed based on native species pool and the functional plant traits specific leaf area, seed mass and grass-to-legume ratio.</abstract>
     <keywordSet>
+      <keyword>droughts</keyword>
+      <keyword>grasslands</keyword>
+      <keyword>restoration</keyword>
       <keyword>substrates</keyword>
-      <keyword>tree growth</keyword>
       <keywordThesaurus>LTER controlled vocabulary</keywordThesaurus>
     </keywordSet>
-    <intellectualRights>CC BY 4.0</intellectualRights>
+    <keywordSet>
+      <keyword>functional traits</keyword>
+      <keyword>recycled aggregates</keyword>
+      <keyword>seed mixtures</keyword>
+      <keywordThesaurus>own vocabulary</keywordThesaurus>
+    </keywordSet>
+    <intellectualRights>CC-BY-4.0: https://creativecommons.org/licenses/by/4.0/deed.en</intellectualRights>
     <coverage>
       <geographicCoverage>
-        <geographicDescription>Greenhouse in Dürnast near Freising</geographicDescription>
+        <geographicDescription>Greenhouse in Duernast near Freising</geographicDescription>
         <boundingCoordinates>
-          <westBoundingCoordinate>11.6892</westBoundingCoordinate>
-          <eastBoundingCoordinate>11.6892</eastBoundingCoordinate>
-          <northBoundingCoordinate>48.4052</northBoundingCoordinate>
-          <southBoundingCoordinate>48.4052</southBoundingCoordinate>
+          <westBoundingCoordinate>11.6911</westBoundingCoordinate>
+          <eastBoundingCoordinate>11.6911</eastBoundingCoordinate>
+          <northBoundingCoordinate>48.4058</northBoundingCoordinate>
+          <southBoundingCoordinate>48.4058</southBoundingCoordinate>
           <boundingAltitudes>
-            <altitudeMinimum>484</altitudeMinimum>
-            <altitudeMaximum>484</altitudeMaximum>
+            <altitudeMinimum>481</altitudeMinimum>
+            <altitudeMaximum>481</altitudeMaximum>
             <altitudeUnits>meter</altitudeUnits>
           </boundingAltitudes>
         </boundingCoordinates>
@@ -45,42 +95,14 @@
       </temporalCoverage>
       <taxonomicCoverage>
         <taxonomicClassification>
-          <taxonRankName>Subdivision</taxonRankName>
-          <taxonRankValue>Spermatophytina</taxonRankValue>
+          <taxonRankName>Kingdom</taxonRankName>
+          <taxonRankValue>Plantae</taxonRankValue>
           <taxonomicClassification>
-            <taxonRankName>Order</taxonRankName>
-            <taxonRankValue>Malvales</taxonRankValue>
+            <taxonRankName>Division</taxonRankName>
+            <taxonRankValue>Tracheophyta</taxonRankValue>
             <taxonomicClassification>
-              <taxonRankName>Family</taxonRankName>
-              <taxonRankValue>Malvaceae</taxonRankValue>
-              <taxonomicClassification>
-                <taxonRankName>Genus</taxonRankName>
-                <taxonRankValue>Tilia</taxonRankValue>
-                <taxonomicClassification>
-                  <taxonRankName>Species</taxonRankName>
-                  <taxonRankValue>cordata</taxonRankValue>
-                </taxonomicClassification>
-              </taxonomicClassification>
-            </taxonomicClassification>
-          </taxonomicClassification>
-        </taxonomicClassification>
-        <taxonomicClassification>
-          <taxonRankName>Subdivision</taxonRankName>
-          <taxonRankValue>Spermatophytina</taxonRankValue>
-          <taxonomicClassification>
-            <taxonRankName>Order</taxonRankName>
-            <taxonRankValue>Malvales</taxonRankValue>
-            <taxonomicClassification>
-              <taxonRankName>Family</taxonRankName>
-              <taxonRankValue>Malvaceae</taxonRankValue>
-              <taxonomicClassification>
-                <taxonRankName>Genus</taxonRankName>
-                <taxonRankValue>Acer</taxonRankValue>
-                <taxonomicClassification>
-                  <taxonRankName>Species</taxonRankName>
-                  <taxonRankValue>platanoides</taxonRankValue>
-                </taxonomicClassification>
-              </taxonomicClassification>
+              <taxonRankName>Subdivision</taxonRankName>
+              <taxonRankValue>Spermatophytina</taxonRankValue>
             </taxonomicClassification>
           </taxonomicClassification>
         </taxonomicClassification>
@@ -99,8 +121,8 @@
         <postalCode>85354</postalCode>
         <country>Germany</country>
       </address>
-      <phone>0049-152-56391781</phone>
       <electronicMailAddress>markusbauer@mailbox.org</electronicMailAddress>
+      <onlineUrl>DOI address to the database</onlineUrl>
     </contact>
   </dataset>
 </eml:eml>
