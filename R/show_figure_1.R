@@ -2,17 +2,12 @@
 # Show figure 1 ####
 # Markus Bauer
 # 2022-01-24
-# Citation: 
-## Bauer M, Krause M, Heizinger V, Kollmann J (submitted) 
-## Using waste bricks for recultivation: no negative effects of brick-augmented substrates with varying acid pre-treatment, soil type and moisture on contrasting seed mixtures
-## Unpublished data.
 
 
 
-
-#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-# A Preparation ################################################################################################################
-#++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+# A Preparation ################################################################################
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 ### Packages ###
 library(here)
@@ -50,9 +45,11 @@ m5 <- lmer(log(biomass) ~ (brickRatio + acid + f.watering + seedmix) +
 
 
 
-#++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-# B Plotten ################################################################################################################
-#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+#++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+# B Plotten #####################################################################################
+#++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
 themeMB <- function(){
   theme(
     panel.background = element_rect(fill = "white"),
@@ -72,28 +69,6 @@ pdata <- ggemmeans(m5, terms = c("brickRatio", "acid", "seedmix"), type = "fe")
 pdata <- rename(pdata, biomass = predicted, brickRatio = x, acid = group, seedmix = facet)
 meandata <- filter(pdata, acid == "Control" & brickRatio == "5")
 pd <- position_dodge(.6)
-ggplot(pdata, aes(brickRatio, biomass, shape = brickRatio, color = acid, ymin = conf.low, ymax = conf.high))+
-  geom_quasirandom(data = environment, aes(brickRatio, biomass, shape = brickRatio, color = acid), 
-                   color = "grey70", dodge.width = .6, size = .7)+
-  geom_hline(aes(yintercept = biomass), meandata, 
-             color = "grey70", size = .25) +
-  geom_hline(aes(yintercept = conf.low), meandata, 
-             color = "grey70", linetype = "dashed", size = .25) +
-  geom_hline(aes(yintercept = conf.high), meandata, 
-             color = "grey70", linetype = "dashed", size = .25) +
-  geom_errorbar(position = pd, width = .0, size = .4)+
-  geom_point(position = pd, size = 2.5)+
-  facet_grid(.~ seedmix)+
-  scale_y_continuous(limits = c(0, 33), breaks = seq(-100, 100, 5)) +
-  scale_colour_manual(values = c("grey50", "black")) +
-  scale_shape_manual(values = c(1, 16)) +
-  labs(x = "Brick ratio [vol%]", y = expression(paste("Biomass [g]")), shape = "", color = "") +
-  guides(shape = F)+
-  themeMB()
-#ggsave("figure_1_(800dpi_16x5cm).tiff",
-#       dpi = 800, width = 16, height = 5, units = "cm", path = "Z:/Documents/0_Ziegelprojekt/3_Aufnahmen_und_Ergebnisse/2020_waste_bricks_for_restoration/outputs/figures")
-
-### For the SER conference (status: 2021-01-21)###
 ggplot(pdata, aes(x = brickRatio, y = biomass, color = acid, ymin = conf.low, ymax = conf.high)) +
   geom_quasirandom(data = environment, aes(brickRatio, biomass, color = acid), 
                    color = "grey70", dodge.width = .6, size = 0.7) +
@@ -112,5 +87,5 @@ ggplot(pdata, aes(x = brickRatio, y = biomass, color = acid, ymin = conf.low, ym
   guides(shape = F) +
   themeMB()
 
-ggsave("figure_1_SER_abstract_(300dpi_16x7cm).tiff",
-       dpi = 300, width = 16, height = 7, units = "cm", path = here("outputs/figures"))
+#ggsave("figure_1_SER_abstract_(300dpi_16x7cm).tiff",
+       #dpi = 300, width = 16, height = 7, units = "cm", path = here("outputs/figures"))

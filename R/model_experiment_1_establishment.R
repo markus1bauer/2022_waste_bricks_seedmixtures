@@ -2,17 +2,13 @@
 # Establishment of species of experiment 1 ####
 # Markus Bauer
 # 2022-01-24
-# Citation: 
-## Bauer M, Krause M, Heizinger V, Kollmann J (submitted) 
-## Using waste bricks for recultivation: no negative effects of brick-augmented substrates with varying acid pre-treatment, soil type and moisture on contrasting seed mixtures
-## Unpublished data.
-
 
 
 
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 # A Preparation ################################################################################################################
 #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 
 ### Packages ###
 library(here)
@@ -37,7 +33,7 @@ environment <- read_csv("data_processed_experiment_1_environment.csv", col_names
 
 
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-# B Statistics ################################################################################################################
+# B Statistics #############################################################################
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 

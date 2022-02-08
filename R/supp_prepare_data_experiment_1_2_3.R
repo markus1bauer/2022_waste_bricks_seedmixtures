@@ -1,12 +1,7 @@
 # Brick-based substrates and designed seedmixtures
-### Script to prepare data of experiment 1 and 2 grain size distribution ####
+# Script to prepare data of experiment 1 and 2 grain size distribution ####
 # Markus Bauer
 # 2022-01-24
-# Citation: 
-## Bauer M, Krause M, Heizinger V, Kollmann J (submitted) 
-## Using waste bricks for recultivation: no negative effects of brick-augmented substrates with varying acid pre-treatment, soil type and moisture on contrasting seed mixtures
-## Unpublished data.
-
 
 
 

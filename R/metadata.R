@@ -2,10 +2,6 @@
 # Prepare metadata ####
 # Markus Bauer
 # 2022-01-24
-# Citation: 
-## Bauer M, Krause M, Heizinger V, Kollmann J (submitted) 
-## Using waste bricks for recultivation: no negative effects of brick-augmented substrates with varying acid pre-treatment, soil type and moisture on contrasting seed mixtures
-## Unpublished data.
 
 
 
@@ -28,7 +24,7 @@ setwd(here())
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 
-### 1 Methods and units #####################################################################################
+### 1 Methods and units ###########################################################################
 
 #methods_file <- here("data/text/methods.odt")
 #methods <- set_methods(methods_file)
@@ -36,26 +32,26 @@ setwd(here())
 #EMLassemblyline::view_unit_dictionary() # List of standard units, which should be used in metadata file
 
 
-### 2 Raw data #####################################################################################
+### 2 Raw data ###################################################################################
 
-### a data_raw_species  -------------------------------------------------------------------------------------------
+### a data_raw_species  --------------------------------------------------------------------------
 attributes <- read_csv(here("data/raw/data_raw_species_metadata.csv"))
 physical_raw_species <- set_physical("data_raw_species.csv")
 
-### b data_raw_traits  -------------------------------------------------------------------------------------------
+### b data_raw_traits  ---------------------------------------------------------------------------
 attributes <- read_csv(here("data/raw/data_raw_traits_metadata.csv")) %>%
   select(-type, -factor)
 physical_raw_traits <- set_physical("data_raw_traits.csv")
 
-### c data_raw_sites  -------------------------------------------------------------------------------------------
+### c data_raw_sites  ----------------------------------------------------------------------------
 attributes <- read_csv(here("data/raw/data_raw_sites_metadata.csv")) %>%
   select(-type, -factor)
 physical_raw_sites <- set_physical("data_raw_sites.csv")
 
-### 3 Processed data #####################################################################################
+### 3 Processed data #############################################################################
 
 
-### 4 Put data table together #####################################################################################
+### 4 Put data table together ####################################################################
 
 dataTable <- list(
   list(
@@ -78,7 +74,7 @@ dataTable <- list(
   ))
 
 
-### 5 Contact #####################################################################################
+### 5 Contact ###################################################################################
 
 address <- list(
   deliveryPoint = "Emil-Ramann-Strasse 6",
@@ -163,7 +159,7 @@ coverage <- set_coverage(
 )
 
 
-### 7 Description #####################################################################################
+### 7 Description ##############################################################################
 
 pubDate = "2022"
 
@@ -191,9 +187,9 @@ intellectualRights <- "CC-BY-4.0: https://creativecommons.org/licenses/by/4.0/de
 
 
 
-#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-# B finalize EML ##############################################################################
-#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+# B finalize EML #############################################################################
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 
 dataset <- list(
@@ -220,5 +216,5 @@ eml <- list(
 write_eml(eml, here("METADATA.xml"))
 eml_validate(here("METADATA.xml"))
 
-emldown::render_eml(here("METADATA.xml"), open = T, outfile = here("METADATA.html"), publish_mode = F)
+#emldown::render_eml(here("METADATA.xml"), open = T, outfile = here("METADATA.html"), publish_mode = F)
 

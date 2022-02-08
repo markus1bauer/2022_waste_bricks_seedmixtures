@@ -2,18 +2,13 @@
 # Model for Experiment 2 (biomass) ####
 # Markus Bauer
 # 2022-01-24
-# Citation: 
-## Bauer M, Krause M, Heizinger V, Kollmann J (submitted) 
-## Using waste bricks for recultivation: no negative effects of brick-augmented substrates with varying acid pre-treatment, soil type and moisture on contrasting seed mixtures
-## Unpublished data.
-
 
 
 
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 # A Preparation ################################################################################################################
 #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-#library(installr);updateR(browse_news=F, install_R=T, copy_packages = T,copy_Rprofile.site = T,keep_old_packages = T, update_packages = T)
+
 
 ### Packages ###
 library(here)
@@ -46,13 +41,13 @@ environment <- read_csv("data_processed_experiment_2_environment.csv", col_names
 
 
 #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-# B Statistics ################################################################################################################
+# B Statistics ####################################################################################
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 
-### 1 Data exploration #####################################################################################
+### 1 Data exploration ############################################################################
 
-#### a Graphs ---------------------------------------------------------------------------------------------
+#### a Graphs --------------------------------------------------------------------------------------
 #simple effects:
 par(mfrow = c(2,2));
 plot(biomass ~ brickType, environment)
@@ -114,11 +109,11 @@ m5 <- lmer(log(biomass) ~ f.watering + seedmix + brickType + brickRatio +
 simulateResiduals(m5, plot=T)
 isSingular(m5)
 
-#### b comparison -----------------------------------------------------------------------------------------
+#### b comparison -------------------------------------------------------------------------------------
 anova(m2,m3,m4,m5) #--> m5
 rm(m1,m2,m3,m4)
 
-#### c model check -----------------------------------------------------------------------------------------
+#### c model check -------------------------------------------------------------------------------------
 simulationOutput <- simulateResiduals(m5, plot = T)
 par(mfrow=c(2,2));
 plotResiduals(main = "brickType", simulationOutput$scaledResiduals, environment$brickType)
@@ -131,7 +126,7 @@ plotResiduals(main = "block", simulationOutput$scaledResiduals, environment$bloc
 
 ## 3 Chosen model output ################################################################################
 
-### Model output ---------------------------------------------------------------------------------------------
+### Model output ----------------------------------------------------------------------------------------
 m5 <- lmer(log(biomass) ~ f.watering + seedmix + brickType + brickRatio +
              brickType:brickRatio +
              (1|block), environment, REML = F)

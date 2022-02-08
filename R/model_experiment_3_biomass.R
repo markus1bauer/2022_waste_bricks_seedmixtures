@@ -2,17 +2,13 @@
 # Model for Experiment 3 (biomass) ####
 # Markus Bauer
 # 2022-01-24
-# Citation: 
-## Bauer M, Krause M, Heizinger V, Kollmann J (submitted) 
-## Using waste bricks for recultivation: no negative effects of brick-augmented substrates with varying acid pre-treatment, soil type and moisture on contrasting seed mixtures
-## Unpublished data.
-
 
 
 
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-# A Preparation ################################################################################################################
-#++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+# A Preparation ##################################################################################
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 
 ### Packages ###
 library(here)
@@ -32,23 +28,23 @@ environment <- read_csv("data_processed_experiment_3_environment.csv", col_names
                        cols(
                          plot = "f",
                          brickRatio = col_factor(levels = c("5","30")),
-                         texture = col_factor(levels=c("Loam","Medium","Sand")),
-                         compaction = col_factor(levels=c("Control","Compaction")),
-                         coal = col_factor(levels=c("Control","Coal")),
+                         texture = col_factor(levels = c("Loam","Medium","Sand")),
+                         compaction = col_factor(levels = c("Control","Compaction")),
+                         coal = col_factor(levels = c("Control","Coal")),
                          biomass = "d",
                          estRate = "d"
                        )) 
 
 
 
-#++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-# B Statistics ################################################################################################################
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+# B Statistics ###################################################################################
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 
-### 1 Data exploration #####################################################################################
+### 1 Data exploration ###########################################################################
 
-#### a Graphs ---------------------------------------------------------------------------------------------
+#### a Graphs ------------------------------------------------------------------------------------
 #simple effects:
 par(mfrow = c(2,2))
 boxplot(biomass ~ brickRatio, environment)
@@ -67,7 +63,7 @@ ggplot(environment,aes(brickRatio, biomass, color=compaction)) + geom_boxplot()+
 #3way (brickRatio:texture:coal)
 ggplot(environment,aes(brickRatio, biomass, color=coal)) + geom_boxplot() + geom_quasirandom(data=environment,aes(brickRatio, biomass, color = coal),dodge.width = .7) + facet_grid(.~texture)
 
-##### b Outliers, zero-inflation, transformations? -----------------------------------------------------
+##### b Outliers, zero-inflation, transformations? --------------------------------------------------
 par(mfrow = c(2,2))
 dotchart((environment$biomass), groups = factor(environment$brickRatio), main = "Cleveland dotplot")
 dotchart((environment$biomass), groups = factor(environment$texture), main = "Cleveland dotplot")
@@ -83,7 +79,7 @@ ggplot(environment, aes(log(biomass))) + geom_density()
 
 ## 2 Model building ################################################################################
 
-#### a models ----------------------------------------------------------------------------------------
+#### a models --------------------------------------------------------------------------------------
 m1 <- lm(log(biomass) ~ (brickRatio + texture + compaction + coal)^2 +
             brickRatio:texture:compaction + brickRatio:texture:coal, environment)
 simulateResiduals(m1, plot = T)
@@ -100,11 +96,11 @@ m5 <- lm(log(biomass) ~ brickRatio + texture + compaction + coal +
             brickRatio:texture, environment)
 simulateResiduals(m5, plot = T)
 
-#### b comparison -----------------------------------------------------------------------------------------
+#### b comparison -----------------------------------------------------------------------------------
 anova(m1,m2,m3,m4,m5) #--> m2
 rm(m1,m3,m4,m5)
 
-#### c model check -----------------------------------------------------------------------------------------
+#### c model check ----------------------------------------------------------------------------------
 simulationOutput <- simulateResiduals(m2, plot = T)
 par(mfrow=c(2,2));
 plotResiduals(main = "brickType", simulationOutput$scaledResiduals, environment$brickType)
@@ -115,14 +111,14 @@ plotResiduals(main = "position", simulationOutput$scaledResiduals, environment$p
 plotResiduals(main = "block", simulationOutput$scaledResiduals, environment$block)
 
 
-## 3 Chosen model output ################################################################################
+## 3 Chosen model output #############################################################################
 
-### Model output ---------------------------------------------------------------------------------------------
+### Model output -------------------------------------------------------------------------------------
 summary(m2)
 (table <- car::Anova(m2, type = 3))
 tidytable <- broom::tidy(table)
 
-### Effect sizes -----------------------------------------------------------------------------------------
+### Effect sizes --------------------------------------------------------------------------------------
 (emm <- emmeans(m2, revpairwise ~ brickRatio | texture, type = "response"))
 plot(emm, comparisons = T)
 (emm <- emmeans(m2, revpairwise ~ brickRatio * compaction | texture, type = "response"))

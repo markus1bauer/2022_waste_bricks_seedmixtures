@@ -2,17 +2,13 @@
 # Model for Experiment 1 (biomass) ####
 # Markus Bauer
 # 2022-01-24
-# Citation: 
-## Bauer M, Krause M, Heizinger V, Kollmann J (submitted) 
-## Using waste bricks for recultivation: no negative effects of brick-augmented substrates with varying acid pre-treatment, soil type and moisture on contrasting seed mixtures
-## Unpublished data.
-
 
 
 
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 # A Preparation ################################################################################################################
 #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 
 ### Packages ###
 library(here)
@@ -105,7 +101,7 @@ ggplot(environment, aes(log(biomass))) + geom_density()
 
 ## 2 Model building ################################################################################
 
-#### a models ----------------------------------------------------------------------------------------
+#### a models --------------------------------------------------------------------------------------
 #random structure
 m1 <- lmer((biomass) ~ f.watering * seedmix + (1|block), environment, REML = F)
 VarCorr(m1)
@@ -148,13 +144,13 @@ m6 <- lmer(log(biomass) ~ (brickRatio + acid + f.watering + seedmix) +
 simulateResiduals(m6, plot = T)
 isSingular(m6)
 
-#### b comparison -----------------------------------------------------------------------------------------
+#### b comparison ------------------------------------------------------------------------------
 anova(m2,m3,m4,m5,m6) # --> m5
 rm(m1,m2,m3,m4,m6)
 
-#### c model check -----------------------------------------------------------------------------------------
+#### c model check ------------------------------------------------------------------------------
 simulationOutput <- simulateResiduals(m5, plot = T)
-par(mfrow=c(2,2));
+par(mfrow=c(2,2))
 plotResiduals(main = "brickRatio", simulationOutput$scaledResiduals, environment$brickRatio)
 plotResiduals(main = "acid", simulationOutput$scaledResiduals, environment$acid)
 plotResiduals(main = "f.watering", simulationOutput$scaledResiduals, environment$f.watering)
@@ -163,9 +159,9 @@ plotResiduals(main = "position", simulationOutput$scaledResiduals, environment$p
 plotResiduals(main = "block", simulationOutput$scaledResiduals, environment$block)
 
 
-## 3 Chosen model output ################################################################################
+## 3 Chosen model output ########################################################################
 
-### Model output ---------------------------------------------------------------------------------------------
+### Model output --------------------------------------------------------------------------------
 MuMIn::r.squaredGLMM(m5)
 VarCorr(m5)
 sjPlot::plot_model(m5, type = "re", show.values = T)
@@ -173,7 +169,7 @@ summary(m5)
 (table <- car::Anova(m5, type = 3))
 tidytable <- broom::tidy(table)
 
-### Effect sizes -----------------------------------------------------------------------------------------
+### Effect sizes --------------------------------------------------------------------------------
 (emm <- emmeans(m5, revpairwise ~ seedmix | f.watering, type = "response"))
 plot(emm, comparison = T)
 contrast(emmeans(m5, ~ seedmix * f.watering, type = "response"), "trt.vs.ctrl", ref = 1)

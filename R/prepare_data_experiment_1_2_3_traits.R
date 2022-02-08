@@ -2,10 +2,13 @@
 # Collect traits data ####
 # Markus Bauer
 # 2022-01-24
-# Citation: 
-## Bauer M, Krause M, Heizinger V, Kollmann J (submitted) 
-## Using waste bricks for recultivation: no negative effects of brick-augmented substrates with varying acid pre-treatment, soil type and moisture on contrasting seed mixtures
-## Unpublished data.
+
+
+
+#++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+# A Preparation #####################################################################################
+#++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+#library(installr);updateR(browse_news=F, install_R=T, copy_packages = T,copy_Rprofile.site = T,keep_old_packages = T, update_packages = T)
 
 
 ### Packages ###
@@ -16,24 +19,19 @@ library(data.table)
 ### Start ###
 rm(list = ls())
 setwd(here("data/raw"))
-#library(installr);updateR(browse_news=F, install_R=T, copy_packages = T,copy_Rprofile.site = T,keep_old_packages = T, update_packages = T)
 
-
-
-#++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-# A Preparation ################################################################################################################
-#++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
-
+### Load data ###
 seedmixtures12 <- read_csv("data_raw_experiment_1_2_seed_mixtures.csv", col_names = T, na = c("na", "NA", ""), col_types = 
                            cols(.default = "?")) %>%
   filter(name != "Ranunculus_bulbosus" & name != "Ranunculus_acris")
+
 seedmixtures3 <- read_csv("data_raw_experiment_3_seed_mixtures.csv", col_names = T, na = c("na", "NA", ""), col_types = 
                            cols(.default = "?")) %>%
   filter(name != "Ranunculus_bulbosus" & name != "Ranunculus_acris")
 
 environment12 <- read_csv("data_raw_experiment_1_2_environment.csv", col_names = T, na = c("na", "NA", ""), col_types = 
                           cols(.default = "?")) 
+
 environment3 <- read_csv("data_raw_experiment_3_environment.csv", col_names = T, na = c("na", "NA", ""), col_types = 
                           cols(.default = "?")) 
 
@@ -59,14 +57,14 @@ seedmixtures2 <- environment2 %>%
 
 
 
-#++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-# B Include new data ################################################################################################################
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+# B Include new data ###############################################################################
 #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 
-## 2 Include traits #########################################################################################
+## 2 Include traits ################################################################################
 
-### a Specific leaf area --------------------------------------------------------------------------------------
+### a Specific leaf area ---------------------------------------------------------------------------
 slaData <- fread("data_raw_traitbase_try_20190411_6084_sla.txt", 
                  header = T, sep = "\t", dec = ".", quote = "", data.table = T) %>%
   rename(name = AccSpeciesName) %>%
@@ -82,7 +80,7 @@ traits <- traits %>%
   left_join(slaData, by = "name") %>%
   rename(slaTry = value)
 
-### b Canopy height at maturity -----------------------------------------------------------------------------------
+### b Canopy height at maturity ---------------------------------------------------------------------
 heightData <- fread("data_raw_traitbase_try_20190220_5762_height-seedmass.txt", 
                  header = T, sep = "\t", dec = ".", quote = "", data.table = T) %>%
   rename(name = AccSpeciesName) %>%
@@ -105,7 +103,7 @@ traits <- traits %>%
   left_join(heightData, by = "name") %>%
   rename(heightTry = value)
 
-### c Seed mass -------------------------------------------------------------------------------------------------
+### c Seed mass ------------------------------------------------------------------------------------
 seedmassData <- fread("data_raw_traitbase_try_20190220_5762_height-seedmass.txt", 
                     header = T, sep = "\t", dec = ".", quote = "", data.table = T) %>%
   rename(name = AccSpeciesName) %>%
@@ -128,7 +126,7 @@ traits <- traits %>%
   left_join(seedmassData, by = "name") %>%
   rename(seedmassTry = value)
 
-### d Check completeness of traits -------------------------------------------------------------------------------------------
+### d Check completeness of traits --------------------------------------------------------------------
 test <- traits %>%
   filter(poolDesign == 1) %>%
   filter(name != "Ranunculus_spec")
@@ -141,9 +139,9 @@ test$name[which(!(test$name %in% seedmassData$name))]
 rm(tryData, slaData, seedmassData, heightData, test)
 
 
-## 3 Establishment rate of species #############################################################################
+## 3 Establishment rate of species ####################################################################
 
-### a Designed seed mixes of experiment 1 ---------------------------------------------------------------------------------------------------
+### a Designed seed mixes of experiment 1 -------------------------------------------------------------
 data <- seedmixtures1 %>% 
   filter(seedmix != "Standard") %>%
   count(name, presence) %>%
@@ -157,7 +155,7 @@ data <- seedmixtures1 %>%
 traits <- traits %>%
   left_join(data, by = "name")
 
-### b Standard seed mixes of experiment 1 ---------------------------------------------------------------------------------------------------
+### b Standard seed mixes of experiment 1 -------------------------------------------------------------
 data <- seedmixtures1 %>% 
   filter(seedmix == "Standard") %>%
   count(name, presence) %>%
@@ -171,7 +169,7 @@ data <- seedmixtures1 %>%
 traits <- traits %>%
   left_join(data, by = "name")
 
-### c Experiment 2 ---------------------------------------------------------------------------------------------------
+### c Experiment 2 -------------------------------------------------------------------------------------
 data <- seedmixtures2 %>% 
   count(name, presence) %>%
   mutate(presence = factor(presence),
@@ -185,7 +183,7 @@ data <- seedmixtures2 %>%
 traits <- traits %>%
   left_join(data, by = "name")
 
-### d Experiment 3 ---------------------------------------------------------------------------------------------------
+### d Experiment 3 -------------------------------------------------------------------------------------
 data <- seedmixtures3 %>% 
   count(name, presence) %>%
   mutate(presence = factor(presence),
@@ -200,9 +198,9 @@ traits <- traits %>%
 
 
 
-#++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-# C Export ################################################################################################################
-#++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+# C Export #############################################################################################
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 
 write_csv(traits, here("data/processed/data_processed_experiment_1_2_3_traits.csv"))
