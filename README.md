@@ -50,5 +50,5 @@ Contact markus1.bauer@tum.de for any further information.
 
 __Dataset DOI__
 
-[![DOI](https://zenodo.org/???)](https://doi.org/????/zenodo.???)
+[![DOI](https://zenodo.org/badge/273461030.svg)](https://zenodo.org/badge/latestdoi/273461030)
 
