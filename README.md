@@ -1,5 +1,4 @@
-# Testing waste bricks as recultivation substrate
-
+# Using crushed bricks for urban greening
 _Markus Bauer <a href="https://orcid.org/0000-0001-5372-4174"><img src="https://info.orcid.org/wp-content/uploads/2019/11/orcid_16x16.png" width="16" height = "16"></a>, Martin Krause, Valentin Heizinger and Johannes Kollmann <a href="https://orcid.org/0000-0002-4990-3636"><img src="https://info.orcid.org/wp-content/uploads/2019/11/orcid_16x16.png" width="16" height = "16"></a>_  
 
 ***
@@ -13,9 +12,9 @@ _Markus Bauer <a href="https://orcid.org/0000-0001-5372-4174"><img src="https://
 ## Content of the repository
 
 1. __Data__: the folder `data` contains  
-    * The `raw` and `processed` data files of the first and second experiment (.txt) 
-    * The `raw` and `processed` data files of the third experiment (.txt) 
-    * `photos` of different substrates (.jpg)
+    * The `raw` and `processed` data files of the first and second experiment (.csv) 
+    * The `raw` and `processed` data files of the third experiment (.csv) 
+    * `photos` of the different substrates (.jpg)
     
 3. __Outputs__: the folder `outputs` contains  
     * The `figures` (.tiff) generated
@@ -45,11 +44,11 @@ Contact markus1.bauer@tum.de for any further information.
 
 **Citation:**
 
-> Bauer M, Krause M, Heizinger V and Kollmann J (submitted). Using waste bricks for recultivation: no negative effects of brick-augmented substrates with varying acid pre-treatment, soil type and moisture on contrasting seed mixtures. https://doi.org/10.xxx
+> Bauer M, Krause M, Heizinger V and Kollmann J (submitted). Using crushed waste bricks for urban greening with contrasting grassland mixtures: no negative effects of brick-augmented substrates varying in soil type, moisture and acid pre-treatment. https://doi.org/10.xxx
 
 ***
 
 __Dataset DOI__
 
-[![DOI](https://zenodo.org/???)](https://doi.org/????/zenodo.???) following via Zenodo or gfbio
+[![DOI](https://zenodo.org/???)](https://doi.org/????/zenodo.???)
 
