@@ -21,7 +21,8 @@ _Markus Bauer <a href="https://orcid.org/0000-0001-5372-4174"><img src="https://
     * The `statistics` tables of the models (.csv)
     
 4. __R__: the folder `R` contains  
-    * Scripts (.R) to generate all figures used in the manuscript and in the supporting information
+    * Scripts to calculate all models (.R)
+    * Scripts to generate all figures (.R)
 
 ***
 
@@ -44,7 +45,7 @@ Contact markus1.bauer@tum.de for any further information.
 
 **Citation:**
 
-> Bauer M, Krause M, Heizinger V and Kollmann J (submitted). Using crushed waste bricks for urban greening with contrasting grassland mixtures: no negative effects of brick-augmented substrates varying in soil type, moisture and acid pre-treatment. https://doi.org/10.xxx
+> Bauer M, Krause M, Heizinger V and Kollmann J (under review). Using crushed waste bricks for urban greening with contrasting grassland mixtures: no negative effects of brick-augmented substrates varying in soil type, moisture and acid pre-treatment. https://doi.org/10.xxx
 
 ***
 
