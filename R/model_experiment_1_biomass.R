@@ -20,10 +20,11 @@ library(emmeans)
 
 ### Start ###
 rm(list = ls())
-setwd(here("data/processed"))
+setwd(here("data", "processed"))
 
 ### Load data ###
-environment <- read_csv("data_processed_experiment_1_environment.csv", col_names = T, na = "na", locale = locale(decimal_mark = "."),
+environment <- read_csv("data_processed_experiment_1_environment.csv", col_names = TRUE,
+                        na = "na", locale = locale(decimal_mark = "."),
                           col_types = 
                        cols(
                          .default = "d",
@@ -179,4 +180,4 @@ plot(emm, comparison = T)
 plot(emm, comparison = T)
 
 ### Save ###
-write.csv(tidytable, here("outputs/statistics/table_anova_experiment_1_biomass.csv"))
+write.csv(tidytable, here("outputs", "statistics", "table_anova_experiment_1_biomass.csv"))
