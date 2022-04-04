@@ -17,7 +17,7 @@ library(tidyverse)
 ### Start ###
 rm(list = ls())
 setwd(here("data", "raw"))
-#library(installr);updateR(browse_news=F, install_R=T, copy_packages = T,copy_Rprofile.site = T,keep_old_packages = T, update_packages = T)
+#installr::updateR(browse_news = FALSE, install_R = TRUE, copy_packages = TRUE, copy_Rprofile.site = TRUE, keep_old_packages = TRUE, update_packages = TRUE)
 remotes::install_github(file.path("inbo", "checklist"))
 checklist::setup_source()
 checklist::check_source()
