@@ -15,16 +15,16 @@ library(EMLassemblyline)
 
 ### Start ###
 rm(list = ls())
-setwd(here())
+setwd(here("data", "raw"))
 
 
 
-#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-# A Collect metadata ##############################################################################
-#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+#++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+# A Collect metadata ##########################################################
+#++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 
-### 1 Methods and units ###########################################################################
+### 1 Methods and units #######################################################
 
 #methods_file <- here("data/text/methods.odt")
 #methods <- set_methods(methods_file)
@@ -32,26 +32,26 @@ setwd(here())
 #EMLassemblyline::view_unit_dictionary() # List of standard units, which should be used in metadata file
 
 
-### 2 Raw data ###################################################################################
+### 2 Raw data ################################################################
 
-### a data_raw_species  --------------------------------------------------------------------------
-attributes <- read_csv(here("data/raw/data_raw_species_metadata.csv"))
+### a data_raw_species  -------------------------------------------------------
+attributes <- read_csv("data_raw_species_metadata.csv")
 physical_raw_species <- set_physical("data_raw_species.csv")
 
-### b data_raw_traits  ---------------------------------------------------------------------------
-attributes <- read_csv(here("data/raw/data_raw_traits_metadata.csv")) %>%
+### b data_raw_traits  --------------------------------------------------------
+attributes <- read_csv("data_raw_traits_metadata.csv") %>%
   select(-type, -factor)
 physical_raw_traits <- set_physical("data_raw_traits.csv")
 
-### c data_raw_sites  ----------------------------------------------------------------------------
-attributes <- read_csv(here("data/raw/data_raw_sites_metadata.csv")) %>%
+### c data_raw_sites  ---------------------------------------------------------
+attributes <- read_csv("data_raw_sites_metadata.csv") %>%
   select(-type, -factor)
 physical_raw_sites <- set_physical("data_raw_sites.csv")
 
-### 3 Processed data #############################################################################
+### 3 Processed data #########################################################
 
 
-### 4 Put data table together ####################################################################
+### 4 Put data table together ################################################
 
 dataTable <- list(
   list(
@@ -74,7 +74,7 @@ dataTable <- list(
   ))
 
 
-### 5 Contact ###################################################################################
+### 5 Contact #################################################################
 
 address <- list(
   deliveryPoint = "Emil-Ramann-Strasse 6",
@@ -137,7 +137,7 @@ contact <-
   )
 
 
-### 6 Temporal and spatial coverage #####################################################################################
+### 6 Temporal and spatial coverage ##########################################
 
 geographicDescription <- "Greenhouse in Duernast near Freising"
 
@@ -159,7 +159,7 @@ coverage <- set_coverage(
 )
 
 
-### 7 Description ##############################################################################
+### 7 Description ############################################################
 
 pubDate = "2022"
 
@@ -183,13 +183,14 @@ keywordSet <- list(
   )
 )
 
-intellectualRights <- "CC-BY-4.0: https://creativecommons.org/licenses/by/4.0/deed.en"
+intellectualRights <-
+  "CC-BY-4.0: https://creativecommons.org/licenses/by/4.0/deed.en"
 
 
 
-#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-# B finalize EML #############################################################################
-#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+#++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+# B finalize EML ##############################################################
+#++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 
 dataset <- list(
@@ -216,5 +217,6 @@ eml <- list(
 write_eml(eml, here("METADATA.xml"))
 eml_validate(here("METADATA.xml"))
 
-#emldown::render_eml(here("METADATA.xml"), open = T, outfile = here("METADATA.html"), publish_mode = F)
+emldown::render_eml(here("METADATA.xml"), open = TRUE,
+                    outfile = here("METADATA.html"), publish_mode = FALSE)
 

@@ -5,9 +5,9 @@
 
 
 
-#++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-# A Preparation #####################################################################################
-#++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+#++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+# A Preparation ###############################################################
+#++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 
 ### Packages ###
@@ -17,24 +17,26 @@ library(ggbeeswarm)
 
 ### Start ###
 rm(list = ls())
-setwd(here("data/processed"))
+setwd(here("data", "processed"))
 
 ### Load data ###
-establishment <- read_csv("data_processed_experiment_1_2_3_traits.csv", col_names = T, na = "na", col_types =
+establishment <- read_csv("data_processed_experiment_1_2_3_traits.csv",
+                          col_names = TRUE, na = "na", col_types =
                                cols(
                                  .default = "d",
                                  name = "f"
                                )) %>%
   select(name, estRate2)
-environment <- read_csv("data_processed_experiment_2_environment.csv", col_names = T, na = "na", col_types = 
+environment <- read_csv("data_processed_experiment_2_environment.csv",
+                        col_names = TRUE, na = "na", col_types =
                              cols(
                                .default = "?"
                                ))
 
 
-#++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-# B Statistics ######################################################################################
-#++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+#++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+# B Statistics ################################################################
+#++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 ### Establishment per plot ###
 environment %>% 
@@ -46,6 +48,7 @@ environment %>%
 
 ### Establishment per species of designed seed mixtures ###
 establishment %>% 
-  summarise(mean.estRate = mean(estRate2, na.rm = T), sd.estRate = sd(estRate2, na.rm = T))
+  summarise(mean.estRate = mean(estRate2, na.rm = TRUE),
+            sd.estRate = sd(estRate2, na.rm = TRUE))
 ###Calculate SE
 0.305 / sqrt(39)

@@ -5,9 +5,9 @@
 
 
 
-#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-# A Preparation ##################################################################################
-#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+#++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+# A Preparation ###############################################################
+#++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 ### Packages ###
 library(here)
@@ -16,10 +16,11 @@ library(Select)
 
 ### Start ###
 rm(list = ls())
-setwd(here("data/processed"))
+setwd(here("data", "processed"))
 
 ### Load species list ###
-traits <- read_csv("data_processed_experiment_1_2_3_traits.txt", col_names = T, na = "na", col_types =
+traits <- read_csv("data_processed_experiment_1_2_3_traits.txt",
+                   col_names = TRUE, na = "na", col_types =
                        cols(
                          .default = "d",
                          name = "f",
@@ -58,17 +59,21 @@ legumes <- traits %>%
 
 
 
-#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-# B Make seed mixtures ###########################################################################
-#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+#++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+# B Make seed mixtures ########################################################
+#++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 
-### Taxonomic selection ##########################################################################
+### Taxonomic selection #######################################################
 
-compositions <- as.data.frame(replicate(72, {comp <- c(as.character(sample(herbs$name, 12)),
-                                                       as.character(sample(grass$name, 5)),
-                                                       as.character(sample(legumes$name, 3))
-                                                   )})) %>%
+compositions <- as.data.frame(
+  replicate(
+    72, {comp <- c(as.character(sample(herbs$name, 12)),
+                   as.character(sample(grass$name, 5)),
+                   as.character(sample(legumes$name, 3))
+                   )}
+    )
+  ) %>%
   gather("comp", "name", 1:72)
 
 table(compositions$name)
@@ -78,15 +83,14 @@ compositions <- traits %>%
   inner_join(compositions, by = "name") %>%
   select(name, comp, sla, seedmass, r, grass, legume) %>%
   mutate(name = as.factor(name),
-         comp = as.numeric(gsub("V", "", comp))
-         )
+         comp = as.numeric(gsub("V", "", comp)))
 
 
-### Determine abundances with the Laughlin function ##########################################
+### Determine abundances with the Laughlin function ##########################
 
 ratioResults <- c(0)
 for (i in 1:72) { #intermediate
-  plotcompositions <- compositions[which(compositions$comp == i),]
+  plotcompositions <- compositions[which(compositions$comp == i), ]
   plotcompositions <- column_to_rownames(plotcompositions, "name")
   plotcompositions <- plotcompositions[,-(1)]
   mix <- selectSpecies(as.matrix(plotcompositions),
@@ -97,7 +101,7 @@ for (i in 1:72) { #intermediate
                                        legume = 0.1),
                        as.matrix(plotcompositions),
                        obj = "QH",
-                       capd = T
+                       capd = TRUE
                        )
   ratioResults <- append(ratioResults, mix$prob)
 }
@@ -105,34 +109,60 @@ compositions <- arrange(compositions, comp)
 compositions$ratio <- ratioResults[-1]
 
 
-## 1. Control of seedmixtures ##############################################################
+## 1. Control of seedmixtures ################################################
 
 ###Does a species dominate single plots?
-compositions[which(compositions$ratio > 0.75),]
+compositions[which(compositions$ratio > 0.75), ]
 ###Is the summed ratio of all species 1 per plot?
 plotRatio <- compositions %>% 
   group_by(comp) %>%
   summarise(sum = sum(ratio))
-plotRatio[which(plotRatio$sum < 0.99 | plotRatio$sum > 1.01),]
+plotRatio[which(plotRatio$sum < 0.99 | plotRatio$sum > 1.01), ]
 ###What is the total seed weight per plot?
 plotWeights <- compositions %>% 
   group_by(comp) %>% 
   summarise(sum = sum(weight))
 table(plotWeights$sum)
 ###correct unsolvable taxonomic composition
-compositions[compositions$comp == 4, "name"] <- as.character(comp <- c(as.character(sample(herbs$name, 12)),as.character(sample(grass$name, 5)),as.character(sample(legumes$name, 3))))
-compositions[compositions$comp == 15, "name"] <- as.character(comp <- c(as.character(sample(herbs$name, 12)),as.character(sample(grass$name, 5)),as.character(sample(legumes$name, 3))))
-compositions[compositions$comp == 16, "name"] <- as.character(comp <- c(as.character(sample(herbs$name, 12)),as.character(sample(grass$name, 5)),as.character(sample(legumes$name, 3))))
-compositions[compositions$comp == 40, "name"] <- as.character(comp <- c(as.character(sample(herbs$name, 12)),as.character(sample(grass$name, 5)),as.character(sample(legumes$name, 3))))
-compositions[compositions$comp == 56, "name"] <- as.character(comp <- c(as.character(sample(herbs$name, 12)),as.character(sample(grass$name, 5)),as.character(sample(legumes$name, 3))))
+compositions[compositions$comp == 4, "name"] <-
+  as.character(comp <-
+                 c(as.character(sample(herbs$name, 12)),
+                   as.character(sample(grass$name, 5)),
+                   as.character(sample(legumes$name, 3)))
+               )
+compositions[compositions$comp == 15, "name"] <-
+  as.character(comp <-
+                 c(as.character(sample(herbs$name, 12)),
+                   as.character(sample(grass$name, 5)),
+                   as.character(sample(legumes$name, 3)))
+               )
+compositions[compositions$comp == 16, "name"] <-
+  as.character(comp <-
+                 c(as.character(sample(herbs$name, 12)),
+                   as.character(sample(grass$name, 5)),
+                   as.character(sample(legumes$name, 3)))
+               )
+compositions[compositions$comp == 40, "name"] <-
+  as.character(comp <-
+                 c(as.character(sample(herbs$name, 12)),
+                   as.character(sample(grass$name, 5)),
+                   as.character(sample(legumes$name, 3)))
+               )
+compositions[compositions$comp == 56, "name"] <-
+  as.character(comp <-
+                 c(as.character(sample(herbs$name, 12)),
+                   as.character(sample(grass$name, 5)),
+                   as.character(sample(legumes$name, 3)))
+               )
 names <- select(compositions, name, comp)
 compositions <- traits %>%
   inner_join(names, by = "name") %>%
   select(name, comp, sla, seedmass, r, grass, legumes)
-####Correct wrong mixture ratios (always change comp number in first and last row of this section)
-plotcompositions <- compositions[which(compositions$comp == 56),]
+#### Correct wrong mixture ratios (always change comp number in first
+#### and last row of this section)
+plotcompositions <- compositions[which(compositions$comp == 56), ]
 plotcompositions <- column_to_rownames(plotcompositions, "name")
-plotcompositions <- plotcompositions[,-1]
+plotcompositions <- plotcompositions[, -1]
 mix <- selectSpecies(as.matrix(plotcompositions),
                      constraints = c(sla = 3.068053,
                                      seedmass = 0,
@@ -141,31 +171,31 @@ mix <- selectSpecies(as.matrix(plotcompositions),
                                      legumes = 0.1),
                      as.matrix(plotcompositions),
                      obj = "QH",
-                     capd = T
+                     capd = TRUE
                      )
 X56 <- mix$prob
 ###implement new ratios to compositions
 compositions <- arrange(compositions,comp)
 compositions$ratio <- ratioResults
-compositions[compositions$comp == 4,"ratio"] <- X4
-compositions[compositions$comp == 15,"ratio"] <- X15
-compositions[compositions$comp == 16,"ratio"] <- X16
-compositions[compositions$comp == 40,"ratio"] <- X40
-compositions[compositions$comp == 56,"ratio"] <- X56
+compositions[compositions$comp == 4, "ratio"] <- X4
+compositions[compositions$comp == 15, "ratio"] <- X15
+compositions[compositions$comp == 16, "ratio"] <- X16
+compositions[compositions$comp == 40, "ratio"] <- X40
+compositions[compositions$comp == 56, "ratio"] <- X56
 ratioResults <- compositions$ratio
 rm(X4,X15,X16,X40,X56)
 
 
-## 2. Control of seedmixtures ###########################################################
+## 2. Control of seedmixtures ################################################
 
 ###Does a species dominate single plots?
-compositions[which(compositions$ratio > 0.6),]
+compositions[which(compositions$ratio > 0.6), ]
 ###Is the summed ratio of all species 1 per plot?
 plotRatio <- compositions %>% 
   group_by(comp) %>% 
   summarise(sum = sum(ratio))
 table(round(plotRatio$sum, 2))
-plotRatio[which(plotRatio$sum < 0.995 | plotRatio$sum > 1.005),]
+plotRatio[which(plotRatio$sum < 0.995 | plotRatio$sum > 1.005), ]
 ###What is the total seed weight per plot?
 plotWeights <- compositions %>% 
   group_by(comp) %>% 
@@ -173,7 +203,7 @@ plotWeights <- compositions %>%
 table(plotWeights$sum)
 
 
-## How much seeds do we have to buy? ####################################################
+## How much seeds do we have to buy? #########################################
 
 compositions %>%
   group_by(name) %>%
@@ -181,10 +211,13 @@ compositions %>%
 
 
 
-#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-# C Export ###############################################################################
-#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+# C Export ###################################################################
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 
 compositions$weight <- round(compositions$ratio * 0.48, 2)
-#write_csv(compositions, here("data/raw/data_raw_experiment_1_2_compositions.csv"))
+
+write_csv(compositions,
+          here("data", "raw",
+               "data_raw_experiment_1_2_compositions.csv"))

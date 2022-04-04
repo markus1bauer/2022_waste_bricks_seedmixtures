@@ -5,9 +5,9 @@
 
 
 
-#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-# A Preparation ##################################################################################
-#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+#++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+# A Preparation ###############################################################
+#++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 
 ### Packages ###
@@ -16,10 +16,11 @@ library(tidyverse)
 
 ### Start ###
 rm(list = ls())
-setwd(here("data/processed"))
+setwd(here("data", "processed"))
 
 ### Load data ###
-data <- read_table2("supp_data_processed_experiment_3.txt", col_names = T, na = "na", col_types = 
+data <- read_table2("supp_data_processed_experiment_3.txt",
+                    col_names = TRUE, na = "na", col_types =
                        cols(
                          .default = "d",
                          substrate = "f",
@@ -28,14 +29,16 @@ data <- read_table2("supp_data_processed_experiment_3.txt", col_names = T, na = 
 
 
 
-#++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-# B Plotten #####################################################################################
-#++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+#++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+# B Plotten ###################################################################
+#++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
 themeMB <- function(){
   theme(
     panel.background = element_rect(fill = "white"),
     panel.grid = element_line(color = "grey80"),
-    text  = element_text(size=10, color = "black"),
+    text  = element_text(size = 10, color = "black"),
     axis.line.y = element_line(),
     axis.line.x = element_line(),
     axis.text.x = element_text(angle = 270),
@@ -47,12 +50,17 @@ themeMB <- function(){
   )
 }
 
-ggplot(data, aes(x = grainSize, y = grainSizeCum, color = substrateAbb, linetype = substrateAbb)) +
+ggplot(data, aes(x = grainSize, y = grainSizeCum, color = substrateAbb,
+                 linetype = substrateAbb)) +
   geom_line(size = 0.8) +
-  scale_color_manual(values = c("red","green","red2","green2","red4","green4")) +
-  scale_linetype_manual(values = c("dotted","dotted","dashed","dashed","solid","solid")) +
-  scale_x_log10(breaks = c(0.002,0.063,0.2,0.63,2,4,8,16,25,31.5)) +
-  labs(x = "Grain size [mm]", y = "Cumulative ratio [wt%]", linetype = "", color = "") +
+  scale_color_manual(values = c("red", "green", "red2", "green2",
+                                "red4", "green4")) +
+  scale_linetype_manual(values = c("dotted", "dotted", "dashed", "dashed",
+                                   "solid", "solid")) +
+  scale_x_log10(breaks = c(0.002, 0.063, 0.2, 0.63, 2, 4, 8, 16, 25, 31.5)) +
+  labs(x = "Grain size [mm]", y = "Cumulative ratio [wt%]", linetype = "",
+       color = "") +
   themeMB()
-ggsave("figure_A3_(800dpi_16x10cm).tiff",
-      dpi = 800, width = 16, height = 10, units = "cm", path = here("outputs/figures/supp"))
+ggsave("figure_a3_800dpi_16x10cm.tiff",
+      dpi = 800, width = 16, height = 10, units = "cm",
+      path = here("outputs", "figures", "supp"))

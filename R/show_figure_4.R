@@ -5,9 +5,9 @@
 
 
 
-#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-# A Preparation ##################################################################################
-#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+#++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+# A Preparation ###############################################################
+#++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 
 ### Packages ###
@@ -20,16 +20,21 @@ library(ggeffects)
 
 ### Start ###
 rm(list = ls())
-setwd(here("data/processed"))
+setwd(here("data", "processed"))
 
 ### Load data ###
-environment <- read_table("data_processed_experiment_3_environment.txt", col_names = T, na="na", col_types =
+environment <- read_table("data_processed_experiment_3_environment.txt",
+                          col_names = TRUE, na="na", col_types =
                        cols(
                          plot = "f",
-                         brickRatio = col_factor(levels = c("5","30")),
-                         texture = col_factor(levels=c("Loam","Medium","Sand")),
-                         compaction = col_factor(levels=c("Control","Compaction")),
-                         coal = col_factor(levels=c("Control","Coal")),
+                         brickRatio = col_factor(levels = c("5", "30")),
+                         texture = col_factor(
+                           levels = c("Loam", "Medium", "Sand")
+                           ),
+                         compaction = col_factor(
+                           levels = c("Control", "Compaction")
+                           ),
+                         coal = col_factor(levels = c("Control", "Coal")),
                          biomass = "d",
                          estRate = "d"
                        )
@@ -41,12 +46,12 @@ m2 <- lm(log(biomass) ~ (brickRatio + texture + compaction)^2 + coal +
 
 
 
-#++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-# B Plotten #####################################################################################
-#++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+# B Plotten ##################################################################
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 
-themeMB <- function(){
+theme_mb <- function(){
   theme(
     panel.background = element_rect(fill = "white"),
     text  = element_text(size = 10, color = "black"),
@@ -63,10 +68,12 @@ themeMB <- function(){
 ### brickRatio:soil texture ###
 pd <- position_dodge(.6)
 pdata <- ggemmeans(m2, terms = c("brickRatio","texture"), type = "fe")
-pdata <- rename(pdata, biomass = predicted, brickRatio = x, texture = group);
+pdata <- rename(pdata, biomass = predicted, brickRatio = x, texture = group)
 meandata <- filter(pdata, brickRatio == "5")
-ggplot(pdata,aes(brickRatio, biomass, shape = brickRatio, ymin = conf.low, ymax = conf.high))+
-  geom_quasirandom(data = environment, aes(brickRatio, biomass, shape = brickRatio),
+ggplot(pdata,aes(brickRatio, biomass, shape = brickRatio,
+                 ymin = conf.low, ymax = conf.high))+
+  geom_quasirandom(data = environment, aes(brickRatio, biomass,
+                                           shape = brickRatio),
                    color = "grey70", dodge.width = .6, size = 0.7)+
   geom_hline(aes(yintercept = biomass), meandata, 
              color = "grey70", size = .25) +
@@ -77,11 +84,14 @@ ggplot(pdata,aes(brickRatio, biomass, shape = brickRatio, ymin = conf.low, ymax 
   geom_errorbar(position = pd, width = 0.0, size = 0.4)+
   geom_point(position = pd, size = 2.5)+
   facet_grid(.~ texture)+
-  scale_y_continuous(limits = c(0,18), breaks = seq(-100,100,5)) +
-  scale_colour_manual(values = c("grey40","black")) +
-  scale_shape_manual(values = c(1,16)) +
-  labs(x = "Brick ratio [vol%]",y = expression(paste("Biomass [g]")), shape = "",color = "") +
-  guides(shape = F)+
-  themeMB()
-#ggsave("figure_4_(800dpi_8x5cm).tiff",
-#       dpi = 800, width = 8, height = 5, units = "cm", path = here("outputs/figures"))
+  scale_y_continuous(limits = c(0, 18), breaks = seq(-100, 100, 5)) +
+  scale_colour_manual(values = c("grey40", "black")) +
+  scale_shape_manual(values = c(1, 16)) +
+  labs(x = "Brick ratio [vol%]", y = expression(paste("Biomass [g]")),
+       shape = "", color = "") +
+  guides(shape = FALSE)+
+  theme_mb()
+
+ggsave("figure_4_800dpi_8x5cm.tiff",
+       dpi = 800, width = 8, height = 5, units = "cm",
+       path = here("outputs", "figures"))
