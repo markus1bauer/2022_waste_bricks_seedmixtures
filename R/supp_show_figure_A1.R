@@ -25,7 +25,7 @@ edata <- read_table2("supp_data_processed_experiment_1.txt",
                          .default = "d",
                          substrate = "f",
                          substrateAbb = "f"
-                       )        
+                       )      
 )
 
 
@@ -35,11 +35,11 @@ edata <- read_table2("supp_data_processed_experiment_1.txt",
 #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 
-theme_mb <- function(){
+theme_mb <- function() {
   theme(
     panel.background = element_rect(fill = "white"),
     panel.grid = element_line(color = "grey80"),
-    text  = element_text(size=10, color = "black"),
+    text  = element_text(size = 10, color = "black"),
     axis.line.y = element_line(),
     axis.line.x = element_line(),
     axis.text.x = element_text(angle = 270),

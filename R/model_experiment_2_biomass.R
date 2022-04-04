@@ -20,7 +20,7 @@ library(emmeans)
 
 ### Start ###
 rm(list = ls())
-setwd(here("data/processed"))
+setwd(here("data", "processed"))
 
 ### Load data ###
 environment <- read_csv("data_processed_experiment_2_environment.csv",
@@ -115,30 +115,30 @@ ggplot(environment, aes(log(biomass))) +
 
 #### a models -----------------------------------------------------------------
 #random structure:
-m1 <- lmer((biomass) ~ f.watering * brickType + (1|block), environment,
+m1 <- lmer((biomass) ~ f.watering * brickType + (1 | block), environment,
            REML = FALSE)
 VarCorr(m1)
 #3way (both):
-m2 <- lmer(log(biomass) ~ (f.watering + brickRatio + brickType + seedmix)^2 +  
-              seedmix:brickRatio:brickType + f.watering:brickRatio:brickType + 
-              (1|block), environment, REML = FALSE)
+m2 <- lmer(log(biomass) ~ (f.watering + brickRatio + brickType + seedmix)^2 + 
+              seedmix:brickRatio:brickType + f.watering:brickRatio:brickType +
+              (1 | block), environment, REML = FALSE)
 simulateResiduals(m2, plot = TRUE)
 isSingular(m2)
 #3way (f.watering:brickRatio:brickType):
-m3 <- lmer(log(biomass) ~ (f.watering + brickRatio + brickType)^2 + seedmix +  
-              f.watering:brickRatio:brickType + 
-              (1|block), environment, REML = FALSE)
+m3 <- lmer(log(biomass) ~ (f.watering + brickRatio + brickType)^2 + seedmix + 
+              f.watering:brickRatio:brickType +
+              (1 | block), environment, REML = FALSE)
 simulateResiduals(m3, plot = TRUE)
 isSingular(m3)
 #2way (full):
-m4 <- lmer(log(biomass) ~ (f.watering + brickRatio + brickType)^2 + seedmix + 
-              (1|block), environment, REML = FALSE)
+m4 <- lmer(log(biomass) ~ (f.watering + brickRatio + brickType)^2 + seedmix +
+              (1 | block), environment, REML = FALSE)
 simulateResiduals(m4, plot = TRUE)
 isSingular(m4)
 #2way (brickType:brickRatio):
-m5 <- lmer(log(biomass) ~ f.watering + seedmix + brickType + brickRatio + 
-              brickType:brickRatio + 
-              (1|block), environment, REML = FALSE)
+m5 <- lmer(log(biomass) ~ f.watering + seedmix + brickType + brickRatio +
+              brickType:brickRatio +
+              (1 | block), environment, REML = FALSE)
 simulateResiduals(m5, plot = TRUE)
 isSingular(m5)
 
@@ -148,7 +148,7 @@ rm(m1, m2, m3, m4)
 
 #### c model check ------------------------------------------------------------
 simulationOutput <- simulateResiduals(m5, plot = TRUE)
-par(mfrow=c(2,2));
+par(mfrow = c(2, 2))
 plotResiduals(main = "brickType", simulationOutput$scaledResiduals,
               environment$brickType)
 plotResiduals(main = "f.watering", simulationOutput$scaledResiduals,
@@ -168,7 +168,7 @@ plotResiduals(main = "block", simulationOutput$scaledResiduals,
 ### Model output --------------------------------------------------------------
 m5 <- lmer(log(biomass) ~ f.watering + seedmix + brickType + brickRatio +
              brickType:brickRatio +
-             (1|block), environment, REML = FALSE)
+             (1 | block), environment, REML = FALSE)
 MuMIn::r.squaredGLMM(m5)
 VarCorr(m5)
 sjPlot::plot_model(m5, type = "re", show.values = TRUE)
@@ -178,7 +178,7 @@ tidytable <- broom::tidy(table)
 ### Effect sizes --------------------------------------------------------------
 (emm <- emmeans(m5, pairwise ~ brickType | brickRatio, typ = "response"))
 (emm <- emmeans(m5, pairwise ~ brickType * brickRatio, typ = "response"))
-plot(emm, comparison = T)
+plot(emm, comparison = TRUE)
 
 ### Save ###
 write.csv(tidytable, here("outputs", "statistics",

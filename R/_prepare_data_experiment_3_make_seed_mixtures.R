@@ -68,10 +68,12 @@ legumes <- traits %>%
 
 compositions <- as.data.frame(
   replicate(
-    72, {comp <- c(as.character(sample(herbs$name, 12)),
+    72, 
+    {comp <- c(as.character(sample(herbs$name, 12)),
                    as.character(sample(grass$name, 5)),
                    as.character(sample(legumes$name, 3))
-                   )}
+               )
+    }
     )
   ) %>%
   gather("comp", "name", 1:72)
@@ -92,7 +94,7 @@ ratioResults <- c(0)
 for (i in 1:72) { #intermediate
   plotcompositions <- compositions[which(compositions$comp == i), ]
   plotcompositions <- column_to_rownames(plotcompositions, "name")
-  plotcompositions <- plotcompositions[,-(1)]
+  plotcompositions <- plotcompositions[, -(1)]
   mix <- selectSpecies(as.matrix(plotcompositions),
                        constraints = c(sla = 3.068053,
                                        seedmass = 0,
@@ -114,13 +116,13 @@ compositions$ratio <- ratioResults[-1]
 ###Does a species dominate single plots?
 compositions[which(compositions$ratio > 0.75), ]
 ###Is the summed ratio of all species 1 per plot?
-plotRatio <- compositions %>% 
+plotRatio <- compositions %>%
   group_by(comp) %>%
   summarise(sum = sum(ratio))
 plotRatio[which(plotRatio$sum < 0.99 | plotRatio$sum > 1.01), ]
 ###What is the total seed weight per plot?
-plotWeights <- compositions %>% 
-  group_by(comp) %>% 
+plotWeights <- compositions %>%
+  group_by(comp) %>%
   summarise(sum = sum(weight))
 table(plotWeights$sum)
 ###correct unsolvable taxonomic composition
@@ -175,7 +177,7 @@ mix <- selectSpecies(as.matrix(plotcompositions),
                      )
 X56 <- mix$prob
 ###implement new ratios to compositions
-compositions <- arrange(compositions,comp)
+compositions <- arrange(compositions, comp)
 compositions$ratio <- ratioResults
 compositions[compositions$comp == 4, "ratio"] <- X4
 compositions[compositions$comp == 15, "ratio"] <- X15
@@ -183,7 +185,7 @@ compositions[compositions$comp == 16, "ratio"] <- X16
 compositions[compositions$comp == 40, "ratio"] <- X40
 compositions[compositions$comp == 56, "ratio"] <- X56
 ratioResults <- compositions$ratio
-rm(X4,X15,X16,X40,X56)
+rm(X4, X15, X16, X40, X56)
 
 
 ## 2. Control of seedmixtures ################################################
@@ -191,14 +193,14 @@ rm(X4,X15,X16,X40,X56)
 ###Does a species dominate single plots?
 compositions[which(compositions$ratio > 0.6), ]
 ###Is the summed ratio of all species 1 per plot?
-plotRatio <- compositions %>% 
-  group_by(comp) %>% 
+plotRatio <- compositions %>%
+  group_by(comp) %>%
   summarise(sum = sum(ratio))
 table(round(plotRatio$sum, 2))
 plotRatio[which(plotRatio$sum < 0.995 | plotRatio$sum > 1.005), ]
 ###What is the total seed weight per plot?
-plotWeights <- compositions %>% 
-  group_by(comp) %>% 
+plotWeights <- compositions %>%
+  group_by(comp) %>%
   summarise(sum = sum(weight))
 table(plotWeights$sum)
 

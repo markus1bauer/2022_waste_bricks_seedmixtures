@@ -11,7 +11,7 @@
 
 
 ### Packages ###
-#library(installr);updateR(browse_news=F, install_R=T, copy_packages = T,copy_Rprofile.site = T,keep_old_packages = T, update_packages = T)
+#installr::updateR(browse_news = F, install_R = T, copy_packages = T, copy_Rprofile.site = T, keep_old_packages = T, update_packages = T)
 library(here)
 library(tidyverse)
 library(data.table)
@@ -36,12 +36,12 @@ seedmixtures3 <- read_csv("data_raw_experiment_3_seed_mixtures.csv",
 environment12 <- read_csv("data_raw_experiment_1_2_environment.csv",
                           col_names = TRUE, na = c("na", "NA", ""),
                           col_types =
-                          cols(.default = "?")) 
+                          cols(.default = "?"))
 
 environment3 <- read_csv("data_raw_experiment_3_environment.csv",
                          col_names = TRUE, na = c("na", "NA", ""),
                          col_types =
-                          cols(.default = "?")) 
+                          cols(.default = "?"))
 
 traits <- read_csv("data_raw_experiment_1_2_3_traits.csv",
                    col_names = TRUE, na = c("na", "NA", ""),
@@ -76,7 +76,7 @@ seedmixtures2 <- environment2 %>%
 ## 2 Include traits ###########################################################
 
 ### a Specific leaf area ------------------------------------------------------
-slaData <- fread("data_raw_traitbase_try_20190411_6084_sla.txt", 
+slaData <- fread("data_raw_traitbase_try_20190411_6084_sla.txt",
                  header = TRUE, sep = "\t", dec = ".", quote = "",
                  data.table = TRUE) %>%
   rename(name = AccSpeciesName) %>%
@@ -93,7 +93,7 @@ traits <- traits %>%
   rename(slaTry = value)
 
 ### b Canopy height at maturity -----------------------------------------------
-heightData <- fread("data_raw_traitbase_try_20190220_5762_height-seedmass.txt", 
+heightData <- fread("data_raw_traitbase_try_20190220_5762_height-seedmass.txt",
                  header = TRUE, sep = "\t", dec = ".", quote = "",
                  data.table = TRUE) %>%
   rename(name = AccSpeciesName) %>%
@@ -127,9 +127,10 @@ traits <- traits %>%
   rename(heightTry = value)
 
 ### c Seed mass --------------------------------------------------------------
-seedmassData <- fread("data_raw_traitbase_try_20190220_5762_height-seedmass.txt", 
-                    header = TRUE, sep = "\t", dec = ".", quote = "",
-                    data.table = TRUE) %>%
+seedmassData <- fread(
+  "data_raw_traitbase_try_20190220_5762_height-seedmass.txt",
+  header = TRUE, sep = "\t", dec = ".", quote = "", data.table = TRUE
+  ) %>%
   rename(name = AccSpeciesName) %>%
   select(name, TraitID, TraitName, StdValue) %>%
   filter(TraitID == 26) %>%
@@ -176,12 +177,12 @@ rm(tryData, slaData, seedmassData, heightData, test)
 ## 3 Establishment rate of species ############################################
 
 ### a Designed seed mixes of experiment 1 -------------------------------------
-data <- seedmixtures1 %>% 
+data <- seedmixtures1 %>%
   filter(seedmix != "Standard") %>%
   count(name, presence) %>%
   mutate(presence = factor(presence),
          presence = fct_recode(presence, pres1Design = "1", abs1Design = "0")
-         ) %>% 
+         ) %>%
   tidyr::spread(presence, n) %>%
   mutate(abs1Design = replace(abs1Design, is.na(abs1Design), 0),
          estRate1Design =  pres1Design / (abs1Design + pres1Design),
@@ -190,7 +191,7 @@ traits <- traits %>%
   left_join(data, by = "name")
 
 ### b Standard seed mixes of experiment 1 -------------------------------------
-data <- seedmixtures1 %>% 
+data <- seedmixtures1 %>%
   filter(seedmix == "Standard") %>%
   count(name, presence) %>%
   mutate(presence = factor(presence),
@@ -206,7 +207,7 @@ traits <- traits %>%
   left_join(data, by = "name")
 
 ### c Experiment 2 -----------------------------------------------------------
-data <- seedmixtures2 %>% 
+data <- seedmixtures2 %>%
   count(name, presence) %>%
   mutate(presence = factor(presence),
          presence = fct_recode(presence, pres2 = "1", abs2 = "0")
@@ -220,7 +221,7 @@ traits <- traits %>%
   left_join(data, by = "name")
 
 ### d Experiment 3 -----------------------------------------------------------
-data <- seedmixtures3 %>% 
+data <- seedmixtures3 %>%
   count(name, presence) %>%
   mutate(presence = factor(presence),
          presence = fct_recode(presence, pres3 = "1", abs3 = "0")) %>%

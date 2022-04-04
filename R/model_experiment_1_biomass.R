@@ -33,7 +33,7 @@ environment <- read_csv("data_processed_experiment_1_environment.csv",
                          block = "f",
                          position = "f",
                          brickType = col_factor(
-                           levels = c("Clean","Demolition")
+                           levels = c("Clean", "Demolition")
                            ),
                          seedmix = col_factor(
                            levels = c("Standard", "Robust",
@@ -78,7 +78,7 @@ ggplot(environment, aes(brickRatio, biomass, color = acid)) +
   geom_boxplot() +
   geom_quasirandom(dodge.width = .7)
 #2way (brickRatio:watering):
-ggplot(environment, aes(f.watering, biomass,color = brickRatio)) +
+ggplot(environment, aes(f.watering, biomass, color = brickRatio)) +
   geom_boxplot() +
   geom_quasirandom(dodge.width = .7)
 #2way (brickRatio:seedmix):
@@ -86,7 +86,7 @@ ggplot(environment, aes(seedmix, biomass, color = brickRatio)) +
   geom_boxplot() +
   geom_quasirandom(dodge.width = .7)
 #2way (seedmix:watering):
-ggplot(environment, aes(f.watering, biomass,color = seedmix)) +
+ggplot(environment, aes(f.watering, biomass, color = seedmix)) +
   geom_boxplot() +
   geom_quasirandom(dodge.width = .7)
 #2way (acid:watering):
@@ -125,7 +125,7 @@ ggplot(environment, aes(block, biomass, color = seedmix)) +
   geom_boxplot() +
   geom_quasirandom(dodge.width = .7)
 
-##### b Outliers, zero-inflation, transformations? -----------------------------------------------------
+##### b Outliers, zero-inflation, transformations? ----------------------------
 par(mfrow = c(2, 2))
 dotchart((environment$biomass),
          groups = factor(environment$brickRatio), main = "Cleveland dotplot")
@@ -152,45 +152,45 @@ ggplot(environment, aes(log(biomass))) +
 
 #### a models -----------------------------------------------------------------
 #random structure
-m1 <- lmer((biomass) ~ f.watering * seedmix + (1|block), environment,
+m1 <- lmer((biomass) ~ f.watering * seedmix + (1 | block), environment,
            REML = FALSE)
 VarCorr(m1)
 #4w-model
-m2 <- lmer(log(biomass) ~ (brickRatio + acid + f.watering + seedmix)^2 +  
-              brickRatio:f.watering:seedmix + brickRatio:acid:seedmix + 
-              brickRatio:acid:f.watering:seedmix + 
-              (1|block), environment, REML = FALSE)
+m2 <- lmer(log(biomass) ~ (brickRatio + acid + f.watering + seedmix)^2 +
+              brickRatio:f.watering:seedmix + brickRatio:acid:seedmix +
+              brickRatio:acid:f.watering:seedmix +
+              (1 | block), environment, REML = FALSE)
 simulateResiduals(m2, plot = TRUE)
 isSingular(m2)
 #full 3w-model
 m3 <- lmer(log(biomass) ~ (brickRatio + acid + f.watering + seedmix) +
-              brickRatio:acid + brickRatio:f.watering + brickRatio:seedmix + 
+              brickRatio:acid + brickRatio:f.watering + brickRatio:seedmix +
               f.watering:seedmix + acid:seedmix +
-              brickRatio:f.watering:seedmix + brickRatio:acid:seedmix + 
-              (1|block), environment, REML = FALSE)
+              brickRatio:f.watering:seedmix + brickRatio:acid:seedmix +
+              (1 | block), environment, REML = FALSE)
 simulateResiduals(m3, plot = TRUE)
 isSingular(m3)
 #3w-model brick:water:mix
 m4 <- lmer(log(biomass) ~ (brickRatio + acid + f.watering + seedmix) +
-              brickRatio:acid + brickRatio:f.watering + brickRatio:seedmix + 
+              brickRatio:acid + brickRatio:f.watering + brickRatio:seedmix +
               f.watering:seedmix +
-              brickRatio:f.watering:seedmix + 
-              (1|block), environment, REML = FALSE)
+              brickRatio:f.watering:seedmix +
+              (1 | block), environment, REML = FALSE)
 simulateResiduals(m4, plot = TRUE)
 isSingular(m4)
 #3w-model brick:acid:mix
-m5 <- lmer(log(biomass) ~ (brickRatio + acid + f.watering + seedmix) +  
-              brickRatio:acid + brickRatio:f.watering + brickRatio:seedmix + 
-              f.watering:seedmix + acid:seedmix + 
-              brickRatio:acid:seedmix + 
-              (1|block), environment, REML = FALSE)
+m5 <- lmer(log(biomass) ~ (brickRatio + acid + f.watering + seedmix) +
+              brickRatio:acid + brickRatio:f.watering + brickRatio:seedmix +
+              f.watering:seedmix + acid:seedmix +
+              brickRatio:acid:seedmix +
+              (1 | block), environment, REML = FALSE)
 simulateResiduals(m5, plot = TRUE)
 isSingular(m5)
 #2w-model
-m6 <- lmer(log(biomass) ~ (brickRatio + acid + f.watering + seedmix) + 
-              brickRatio:acid + brickRatio:f.watering + brickRatio:seedmix + 
-              f.watering:seedmix + 
-              (1|block), environment, REML = FALSE)
+m6 <- lmer(log(biomass) ~ (brickRatio + acid + f.watering + seedmix) +
+              brickRatio:acid + brickRatio:f.watering + brickRatio:seedmix +
+              f.watering:seedmix +
+              (1 | block), environment, REML = FALSE)
 simulateResiduals(m6, plot = TRUE)
 isSingular(m6)
 
@@ -233,7 +233,7 @@ contrast(emmeans(m5, ~ seedmix * f.watering,
                  type = "response"),
          "trt.vs.ctrl", ref = 1)
 (emm <- emmeans(m5, revpairwise ~ brickRatio * acid | seedmix,
-                type="response"))
+                type = "response"))
 plot(emm, comparison = TRUE)
 (emm <- emmeans(m5, revpairwise ~ brickRatio | f.watering,
                 type = "response"))

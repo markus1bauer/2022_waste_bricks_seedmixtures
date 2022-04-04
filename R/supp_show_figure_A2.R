@@ -15,7 +15,7 @@ library(tidyverse)
 
 ### Start ###
 rm(list = ls())
-setwd(here("data/processed"))
+setwd(here("data", "processed"))
 
 ### Load data ###
 edata <- read_table2("supp_data_processed_experiment_2.txt",
@@ -33,7 +33,7 @@ edata <- read_table2("supp_data_processed_experiment_2.txt",
 #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 
-theme_mb <- function(){
+theme_mb <- function() {
   theme(
     panel.background = element_rect(fill = "white"),
     panel.grid = element_line(color = "grey80"),
@@ -55,6 +55,7 @@ ggplot(edata, aes(x = grainSize, y = grainSizeCum, color = substrateAbb)) +
   scale_x_log10(breaks = c(0.002, 0.063, 0.2, 0.63, 2, 4, 8, 16, 25, 31.5)) +
   labs(x = "Grain size [mm]", y = "Cumulative ratio [wt%]", color = "") +
   theme_mb()
+
 ggsave("figure_a2_800dpi_16x10cm.tiff",
       dpi = 800, width = 16, height = 10, units = "cm",
       path = here("outputs", "figures", "supp"))

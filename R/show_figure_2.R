@@ -50,9 +50,9 @@ environment <- read_table("data_processed_experiment_2_environment.txt",
                                     "Medium_moist" = "Medium moist"))
 
 ### Chosen model ###
-m5 <- lmer(log(biomass) ~ f.watering + brickRatio + brickType + seedmix + 
-             brickType:brickRatio + 
-             (1|block), environment, REML = F)
+m5 <- lmer(log(biomass) ~ f.watering + brickRatio + brickType + seedmix +
+             brickType:brickRatio +
+             (1 | block), environment, REML = FALSE)
 
 
 
@@ -61,7 +61,7 @@ m5 <- lmer(log(biomass) ~ f.watering + brickRatio + brickType + seedmix +
 #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 
-themeMB <- function(){
+theme_mb <- function() {
   theme(
     panel.background = element_rect(fill = "white"),
     text  = element_text(size = 9, color = "black"),
@@ -81,14 +81,14 @@ pdata <- rename(pdata, biomass = predicted, brickRatio = x, brickType = group)
 meandata <- filter(pdata, brickRatio == "5")
 pd <- position_dodge(.6)
 ggplot(pdata, aes(brickRatio, biomass, shape = brickRatio,
-                  ymin = conf.low, ymax = conf.high))+
-  geom_quasirandom(data = environment, aes(brickRatio, biomass), 
-                   color = "grey70", dodge.width = .6, size = 0.7)+
-  geom_hline(aes(yintercept = biomass), meandata, 
+                  ymin = conf.low, ymax = conf.high)) +
+  geom_quasirandom(data = environment, aes(brickRatio, biomass),
+                   color = "grey70", dodge.width = .6, size = 0.7) +
+  geom_hline(aes(yintercept = biomass), meandata,
              color = "grey70", size = .25) +
-  geom_hline(aes(yintercept = conf.low), meandata, 
+  geom_hline(aes(yintercept = conf.low), meandata,
              color = "grey70", linetype = "dashed", size = .25) +
-  geom_hline(aes(yintercept = conf.high), meandata, 
+  geom_hline(aes(yintercept = conf.high), meandata,
              color = "grey70", linetype = "dashed", size = .25) +
   geom_errorbar(position = pd, width = 0.0, size = 0.4) +
   geom_point(position = pd, size = 2.5) +
@@ -97,8 +97,8 @@ ggplot(pdata, aes(brickRatio, biomass, shape = brickRatio,
   scale_shape_manual(values = c(1, 16, 16, 16)) +
   labs(x = "Brick ratio [vol%]", y = expression(paste("Biomass [g]")),
        shape = "", color = "") +
-  guides(shape = FALSE)+
-  themeMB()
+  guides(shape = FALSE) +
+  theme_mb()
 ggsave("figure_2_800dpi_6.5x5cm.tiff",
        dpi = 800, width = 6.5, height = 5, units = "cm",
        path = here("outputs", "figures"))

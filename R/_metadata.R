@@ -85,7 +85,7 @@ address <- list(
 
 creator <- eml$creator(
   individualName = eml$individualName(
-    givenName = "Markus", 
+    givenName = "Markus",
     surName = "Bauer"
   ),
   positionName = "PhD student",
@@ -99,7 +99,7 @@ creator <- eml$creator(
 associatedParty <- list(
   eml$associatedParty(
     individualName = eml$individualName(
-      givenName = "Martin", 
+      givenName = "Martin",
       surName = "Krause"
     ),
     role = "Researcher",
@@ -107,7 +107,7 @@ associatedParty <- list(
   ),
   eml$associatedParty(
     individualName = eml$individualName(
-      givenName = "Valentin", 
+      givenName = "Valentin",
       surName = "Heizinger"
     ),
     role = "Researcher",
@@ -115,7 +115,7 @@ associatedParty <- list(
   ),
   eml$associatedParty(
     individualName = eml$individualName(
-      givenName = "Johannes", 
+      givenName = "Johannes",
       surName = "Kollmann"
     ),
     role = "Professor",
@@ -127,7 +127,7 @@ associatedParty <- list(
   )
 )
 
-contact <- 
+contact <-
   list(
     individualName = creator$individualName,
     electronicMailAddress = creator$electronicMailAddress,
@@ -142,17 +142,17 @@ contact <-
 geographicDescription <- "Greenhouse in Duernast near Freising"
 
 coverage <- set_coverage(
-  
+
   begin = "2018-11-01", end = "2020-07-31",
-  
+
   sci_names = list(list(
     Kingdom = "Plantae",
     Division = "Tracheophyta",
     Subdivision = "Spermatophytina"
   )),
-  
+
   geographicDescription = geographicDescription,
-  west = 11.69114 , east = 11.69114,
+  west = 11.69114, east = 11.69114,
   north = 48.40577, south = 48.40577,
   altitudeMin = 481, altitudeMaximum = 481,
   altitudeUnits = "meter"
@@ -161,9 +161,9 @@ coverage <- set_coverage(
 
 ### 7 Description ############################################################
 
-pubDate = "2022"
+pubDate <- "2022"
 
-title = "Data of 'Using crushed waste bricks for urban greening: no negative effects of brick-augmented substrates with varying acid pre-treatment, soil type and moisture on contrasting seed mixtures' by Bauer, Kruse, Heizinger and Kollmann"
+title <- "Data of 'Using crushed waste bricks for urban greening: no negative effects of brick-augmented substrates with varying acid pre-treatment, soil type and moisture on contrasting seed mixtures' by Bauer, Kruse, Heizinger and Kollmann"
 
 abstract <- "This dataset contains data from greenhouse experiments testing the effects of brick quantity and quality, acid pre-treatment, soil type and soil moisture on the biomass of designed seed mixtures. The substrates consisted of different brick ratios (5% vs. 30%), brick types (clean production waste vs. demolition material), and brick treatments (acid vs. control) and were tested with three trait-based mixtures and one non-regional standard mixture. The trait-based mixtures were developed based on native species pool and the functional plant traits specific leaf area, seed mass and grass-to-legume ratio."
 
@@ -219,4 +219,3 @@ eml_validate(here("METADATA.xml"))
 
 emldown::render_eml(here("METADATA.xml"), open = TRUE,
                     outfile = here("METADATA.html"), publish_mode = FALSE)
-

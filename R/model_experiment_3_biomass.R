@@ -41,7 +41,7 @@ environment <- read_csv("data_processed_experiment_3_environment.csv",
                          coal = col_factor(levels = c("Control", "Coal")),
                          biomass = "d",
                          estRate = "d"
-                       )) 
+                       ))
 
 
 
@@ -82,14 +82,14 @@ ggplot(environment, aes(brickRatio, biomass, color = compaction)) +
   geom_quasirandom(data = environment,
                    aes(brickRatio, biomass, color = compaction),
                    dodge.width = .7) +
-  facet_grid(.~ texture)
+  facet_grid(. ~ texture)
 #3way (brickRatio:texture:coal)
 ggplot(environment, aes(brickRatio, biomass, color = coal)) +
   geom_boxplot() +
   geom_quasirandom(data = environment,
                    aes(brickRatio, biomass, color = coal),
                    dodge.width = .7) +
-  facet_grid(.~ texture)
+  facet_grid(. ~ texture)
 
 ##### b Outliers, zero-inflation, transformations? ----------------------------
 par(mfrow = c(2, 2))
@@ -131,17 +131,17 @@ simulateResiduals(m3, plot = TRUE)
 m4 <- lm(log(biomass) ~ brickRatio + texture + compaction + coal +
             brickRatio:compaction + texture:compaction, environment)
 simulateResiduals(m4, plot = TRUE)
-m5 <- lm(log(biomass) ~ brickRatio + texture + compaction + coal + 
+m5 <- lm(log(biomass) ~ brickRatio + texture + compaction + coal +
             brickRatio:texture, environment)
 simulateResiduals(m5, plot = TRUE)
 
 #### b comparison ------------------------------------------------------------
-anova(m1,m2,m3,m4,m5) #--> m2
-rm(m1,m3,m4,m5)
+anova(m1, m2, m3, m4, m5) #--> m2
+rm(m1, m3, m4, m5)
 
 #### c model check ------------------------------------------------------------
 simulationOutput <- simulateResiduals(m2, plot = TRUE)
-par(mfrow = c(2, 2));
+par(mfrow = c(2, 2))
 plotResiduals(main = "brickType", simulationOutput$scaledResiduals,
               environment$brickType)
 plotResiduals(main = "f.watering", simulationOutput$scaledResiduals,
@@ -165,10 +165,10 @@ tidytable <- broom::tidy(table)
 
 ### Effect sizes --------------------------------------------------------------
 (emm <- emmeans(m2, revpairwise ~ brickRatio | texture, type = "response"))
-plot(emm, comparisons = T)
+plot(emm, comparisons = TRUE)
 (emm <- emmeans(m2, revpairwise ~ brickRatio * compaction | texture,
                 type = "response"))
-plot(emm, comparisons = T)
+plot(emm, comparisons = TRUE)
 emm3way <- emmeans(m2, ~ brickRatio * texture * compaction)
 pwpp((emm3way), by = "texture", type = "response")
 

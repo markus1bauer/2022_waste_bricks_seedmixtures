@@ -24,7 +24,7 @@ setwd(here("data", "processed"))
 
 ### Load data ###
 environment <- read_table("data_processed_experiment_3_environment.txt",
-                          col_names = TRUE, na="na", col_types =
+                          col_names = TRUE, na = "na", col_types =
                        cols(
                          plot = "f",
                          brickRatio = col_factor(levels = c("5", "30")),
@@ -51,7 +51,7 @@ m2 <- lm(log(biomass) ~ (brickRatio + texture + compaction)^2 + coal +
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 
-theme_mb <- function(){
+theme_mb <- function() {
   theme(
     panel.background = element_rect(fill = "white"),
     text  = element_text(size = 10, color = "black"),
@@ -67,29 +67,29 @@ theme_mb <- function(){
 
 ### brickRatio:soil texture ###
 pd <- position_dodge(.6)
-pdata <- ggemmeans(m2, terms = c("brickRatio","texture"), type = "fe")
+pdata <- ggemmeans(m2, terms = c("brickRatio", "texture"), type = "fe")
 pdata <- rename(pdata, biomass = predicted, brickRatio = x, texture = group)
 meandata <- filter(pdata, brickRatio == "5")
-ggplot(pdata,aes(brickRatio, biomass, shape = brickRatio,
-                 ymin = conf.low, ymax = conf.high))+
+ggplot(pdata, aes(brickRatio, biomass, shape = brickRatio,
+                 ymin = conf.low, ymax = conf.high)) +
   geom_quasirandom(data = environment, aes(brickRatio, biomass,
                                            shape = brickRatio),
-                   color = "grey70", dodge.width = .6, size = 0.7)+
-  geom_hline(aes(yintercept = biomass), meandata, 
+                   color = "grey70", dodge.width = .6, size = 0.7) +
+  geom_hline(aes(yintercept = biomass), meandata,
              color = "grey70", size = .25) +
-  geom_hline(aes(yintercept = conf.low), meandata, 
+  geom_hline(aes(yintercept = conf.low), meandata,
              color = "grey70", linetype = "dashed", size = .25) +
-  geom_hline(aes(yintercept = conf.high), meandata, 
+  geom_hline(aes(yintercept = conf.high), meandata,
              color = "grey70", linetype = "dashed", size = .25) +
-  geom_errorbar(position = pd, width = 0.0, size = 0.4)+
-  geom_point(position = pd, size = 2.5)+
-  facet_grid(.~ texture)+
+  geom_errorbar(position = pd, width = 0.0, size = 0.4) +
+  geom_point(position = pd, size = 2.5) +
+  facet_grid(. ~ texture) +
   scale_y_continuous(limits = c(0, 18), breaks = seq(-100, 100, 5)) +
   scale_colour_manual(values = c("grey40", "black")) +
   scale_shape_manual(values = c(1, 16)) +
   labs(x = "Brick ratio [vol%]", y = expression(paste("Biomass [g]")),
        shape = "", color = "") +
-  guides(shape = FALSE)+
+  guides(shape = FALSE) +
   theme_mb()
 
 ggsave("figure_4_800dpi_8x5cm.tiff",

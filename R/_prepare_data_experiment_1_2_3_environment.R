@@ -18,7 +18,7 @@ library(tidyverse)
 rm(list = ls())
 setwd(here("data", "raw"))
 #installr::updateR(browse_news = FALSE, install_R = TRUE, copy_packages = TRUE, copy_Rprofile.site = TRUE, keep_old_packages = TRUE, update_packages = TRUE)
-remotes::install_github(file.path("inbo", "checklist"))
+#remotes::install_github(file.path("inbo", "checklist"))
 checklist::setup_source()
 checklist::check_source()
 
@@ -52,7 +52,7 @@ environment3 <- read_csv("data_raw_experiment_3_environment.csv",
                               substrate = "f",
                               brickRatio = col_factor(levels = c("5", "30")),
                               texture = col_factor(
-                                levels = c("Loam","Medium", "Sand")
+                                levels = c("Loam", "Medium", "Sand")
                                 ),
                               compaction = col_factor(
                                 levels = c("Control", "Compaction")
@@ -60,7 +60,7 @@ environment3 <- read_csv("data_raw_experiment_3_environment.csv",
                               coal = col_factor(levels = c("Control", "Coal")),
                               biomass = "d"
                             ))
-  
+
 
 
 #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -68,7 +68,7 @@ environment3 <- read_csv("data_raw_experiment_3_environment.csv",
 #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 
-environment12 <- environment12 %>% 
+environment12 <- environment12 %>%
   mutate(conf.low = c(1:160),
          conf.high = c(1:160),
          biomass = grassMass + forbMass,
@@ -94,7 +94,7 @@ environment3 <- environment3 %>%
          estRate = specPres / (specPres + specAbs)
          ) %>%
   select(-date, -substrate)
-  
+
 
 
 #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

@@ -17,7 +17,7 @@ library(ggbeeswarm)
 
 ### Start ###
 rm(list = ls())
-setwd(here("data/processed"))
+setwd(here("data", "processed"))
 
 ### Load data ###
 establishment <- read_csv("data_processed_experiment_1_2_3_traits.csv",
@@ -40,8 +40,8 @@ environment <- read_csv("data_processed_experiment_1_environment.csv",
 
 
 ### Establishment per plot ###
-environment %>% 
-  group_by(seedmix) %>% 
+environment %>%
+  group_by(seedmix) %>%
   summarise(mean.estRate = mean(estRate),
             sd.estRate = sd(estRate))
 ###Calculate SE
@@ -51,14 +51,14 @@ environment %>%
 0.102 / sqrt(32)
 
 ### Establishment per species of designed seed mixtures ###
-establishment %>% 
+establishment %>%
   summarise(mean.estRate = mean(estRate1Design, na.rm = TRUE),
             sd.estRate = sd(estRate1Design, na.rm = TRUE))
 ###Calculate SE
 0.309 / sqrt(39)
 
 ### Establishment per species of standarad seed mixture ###
-establishment %>% 
+establishment %>%
   summarise(mean.estRate = mean(estRate1Standard, na.rm = TRUE),
             sd.estRate = sd(estRate1Standard, na.rm = TRUE))
 ###Calculate SE

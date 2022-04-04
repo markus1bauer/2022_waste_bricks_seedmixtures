@@ -39,15 +39,15 @@ environment <- read_csv("data_processed_experiment_2_environment.csv",
 #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 ### Establishment per plot ###
-environment %>% 
-  group_by(seedmix) %>% 
+environment %>%
+  group_by(seedmix) %>%
   summarise(mean.estRate = mean(estRate), sd.estRate = sd(estRate))
 ###Calculate SE
 0.0906 / sqrt(32)
 0.112 / sqrt(32)
 
 ### Establishment per species of designed seed mixtures ###
-establishment %>% 
+establishment %>%
   summarise(mean.estRate = mean(estRate2, na.rm = TRUE),
             sd.estRate = sd(estRate2, na.rm = TRUE))
 ###Calculate SE

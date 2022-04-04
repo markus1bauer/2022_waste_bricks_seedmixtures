@@ -49,11 +49,11 @@ environment <- read_table("data_processed_experiment_1_environment.txt",
                                     "Medium_moist" = "Medium moist"))
 
 #### Chosen model ###
-m5 <- lmer(log(biomass) ~ (brickRatio + acid + f.watering + seedmix) +  
-             brickRatio:acid + brickRatio:f.watering + brickRatio:seedmix + 
-             f.watering:seedmix + acid:seedmix + 
-             brickRatio:acid:seedmix + 
-             (1|block), environment, REML = FALSE)
+m5 <- lmer(log(biomass) ~ (brickRatio + acid + f.watering + seedmix) +
+             brickRatio:acid + brickRatio:f.watering + brickRatio:seedmix +
+             f.watering:seedmix + acid:seedmix +
+             brickRatio:acid:seedmix +
+             (1 | block), environment, REML = FALSE)
 
 
 
@@ -62,7 +62,7 @@ m5 <- lmer(log(biomass) ~ (brickRatio + acid + f.watering + seedmix) +
 #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 
-theme_mb <- function(){
+theme_mb <- function() {
   theme(
     panel.background = element_rect(fill = "white"),
     text  = element_text(size = 10, color = "black"),
@@ -82,14 +82,14 @@ pdata <- rename(pdata, biomass = predicted, seedmix = x, f.watering = group)
 meandata <- filter(pdata, seedmix == "Standard")
 pd <- position_dodge(.6)
 ggplot(pdata, aes(seedmix, biomass, shape = seedmix,
-                  ymin = conf.low, ymax = conf.high))+
-  geom_quasirandom(data = environment, aes(seedmix, biomass), 
+                  ymin = conf.low, ymax = conf.high)) +
+  geom_quasirandom(data = environment, aes(seedmix, biomass),
                    color = "grey70", dodge.width = .6, size = .7) +
-  geom_hline(aes(yintercept = biomass), meandata, 
+  geom_hline(aes(yintercept = biomass), meandata,
              color = "grey70", size = .25) +
-  geom_hline(aes(yintercept = conf.low), meandata, 
+  geom_hline(aes(yintercept = conf.low), meandata,
              color = "grey70", linetype = "dashed", size = .25) +
-  geom_hline(aes(yintercept = conf.high), meandata, 
+  geom_hline(aes(yintercept = conf.high), meandata,
              color = "grey70", linetype = "dashed", size = .25) +
   geom_errorbar(position = pd, width = .0, size = .4) +
   geom_point(position = pd, size = 2.5) +
@@ -97,7 +97,7 @@ ggplot(pdata, aes(seedmix, biomass, shape = seedmix,
   scale_y_continuous(limits = c(0, 33), breaks = seq(-100, 100, 5)) +
   scale_shape_manual(values = c(1, 16, 16, 16)) +
   labs(x = "", y = expression(paste("Biomass [g]")), shape = "", color = "") +
-  guides(x = guide_axis(angle = 45), shape = FALSE)+
+  guides(x = guide_axis(angle = 45), shape = FALSE) +
   theme_mb()
 
 ggsave("figure_5_800dpi_16x6cm.tiff",

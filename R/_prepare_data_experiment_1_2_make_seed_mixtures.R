@@ -28,7 +28,7 @@ traits <- read_csv("data_processed_experiment_1_2_3_traits.txt",
                        family = "f",
                        poolD = "f",
                        poolS = "f"
-                     )        
+                     )      
 )
 traits <- traits %>%
   filter(poolD == 1) %>%
@@ -66,10 +66,13 @@ legumes <- traits %>%
 
 ## 1 Taxonomic composition ####################################################
 
-compData <- as.data.frame(replicate(128, {comp <- c(sample(herbs$name, 12), 
-                                               sample(grass$name, 5),
-                                               sample(legume$name, 3)
-                                               )})) %>%
+compData <- as.data.frame(replicate(128, {
+  comp <- c(sample(herbs$name, 12),
+            sample(grass$name, 5),
+            sample(legume$name, 3)
+            )
+  }
+  )) %>%
   gather(compData, "comp", "name", 1:128)
 
 table(compData$name)
@@ -88,10 +91,10 @@ compData <- compData %>%
   select(name, comp, sla, seedmass, r, grass, legume) %>%
   mutate(comp = as.numeric(gsub("V", "", comp)))
 
-ratioResults <- c(0);
+ratioResults <- c(0)
 for (i in 1:48) { #robust
   plotcompData <- compData[which(compData$comp == i), ]
-  row.names(plotcompData) <- plotcompData[,"name"]
+  row.names(plotcompData) <- plotcompData[, "name"]
   plotcompData <- plotcompData[, -(1:2)]
   mix <- selectSpecies(as.matrix(plotcompData),
                        constraints = c(sla = 2.995732,
@@ -136,8 +139,8 @@ for (i in 81:128) { #vigorous
                        capd = TRUE)
   ratioResults <- append(ratioResults, mix$prob)
 }
-rm(plotcompData,mix)
-compData <- arrange(compData,comp)
+rm(plotcompData, mix)
+compData <- arrange(compData, comp)
 compData$ratio <- ratioResults
 
 
@@ -146,8 +149,8 @@ compData$ratio <- ratioResults
 ### a Control of seedmixtures ------------------------------------------------
 #### Control
 compData[which(compData$ratio > 0.75), ]
-plotRatio <- compData %>% 
-  group_by(comp) %>% 
+plotRatio <- compData %>%
+  group_by(comp) %>%
   summarise(sum = sum(ratio))
 table(round(plotRatio$sum, 2))
 plotRatio[which(plotRatio$sum < 0.99 | plotRatio$sum > 1.01), ]
@@ -232,7 +235,7 @@ mix <- selectSpecies(as.matrix(plotcompData),
 X128 <- mix$prob
 
 #### Implement new ratios to compData ####
-compData <- arrange(compData,comp)
+compData <- arrange(compData, comp)
 compData$ratio <- ratioResults
 compData[compData$comp == 7, "ratio"] <- X7
 compData[compData$comp == 25, "ratio"] <- X25
@@ -247,34 +250,34 @@ compData[compData$comp == 126, "ratio"] <- X126
 compData[compData$comp == 127, "ratio"] <- X127
 compData[compData$comp == 128, "ratio"] <- X128
 ratioResults <- compData$ratio
-rm(X7,X25,X71,X94,X103,X104,X106,X112,X117,X126,X127,X128)
+rm(X7, X25, X71, X94, X103, X104, X106, X112, X117, X126, X127, X128)
 
 ### b Control of seedmixtures ------------------------------------------------
 ####Control
 compData[which(compData$ratio > 0.6), ]
-plotRatio <- compData %>% 
-  group_by(comp) %>% 
+plotRatio <- compData %>%
+  group_by(comp) %>%
   summarise(sum = sum(ratio))
 table(round(plotRatio$sum, 2))
 plotRatio[which(plotRatio$sum < 0.995 | plotRatio$sum > 1.005), ]
 
 #### Correct unsolvable taxonomic composition ####
 compData[compData$comp == 48, "name"] <-
-  as.character(comp <- c(sample(herbs$name,12),
-                         sample(grass$name,5),
-                         sample(legume$name,3)))
+  as.character(comp <- c(sample(herbs$name, 12),
+                         sample(grass$name, 5),
+                         sample(legume$name, 3)))
 compData[compData$comp == 82, "name"] <-
-  as.character(comp <- c(sample(herbs$name,12),
-                         sample(grass$name,5),
-                         sample(legume$name,3)))
+  as.character(comp <- c(sample(herbs$name, 12),
+                         sample(grass$name, 5),
+                         sample(legume$name, 3)))
 compData[compData$comp == 83, "name"] <-
-  as.character(comp <- c(sample(herbs$name,12),
-                         sample(grass$name,5),
-                         sample(legume$name,3)))
+  as.character(comp <- c(sample(herbs$name, 12),
+                         sample(grass$name, 5),
+                         sample(legume$name, 3)))
 compData[compData$comp == 113, "name"] <-
-  as.character(comp <- c(sample(herbs$name,12),
-                         sample(grass$name,5),
-                         sample(legume$name,3)))
+  as.character(comp <- c(sample(herbs$name, 12),
+                         sample(grass$name, 5),
+                         sample(legume$name, 3)))
 names <- select(compData, name, comp)
 compData <- inner_join(vdata, names, by = "name")
 compData[c(which(is.na(compData$sla))), "sla"] <- 3.068053
@@ -298,19 +301,19 @@ mix <- selectSpecies(as.matrix(plotcompData),
 X48 <- mix$prob
 
 #### Implement new ratios to compData ####
-compData <- arrange(compData,comp)
+compData <- arrange(compData, comp)
 compData$ratio <- ratioResults
 compData[compData$comp == 82, "ratio"] <- X82
 compData[compData$comp == 83, "ratio"] <- X83
 compData[compData$comp == 113, "ratio"] <- X113
 ratioResults <- compData$ratio
-rm(X82,X83,X113)
+rm(X82, X83, X113)
 
 ### c Control of seedmixtures -------------------------------------------------
 #### Control
 compData[which(compData$ratio > 0.4), ]
-plotRatio <- compData %>% 
-  group_by(comp) %>% 
+plotRatio <- compData %>%
+  group_by(comp) %>%
   summarise(sum = sum(ratio))
 table(round(plotRatio$sum, 2))
 plotRatio[which(plotRatio$sum < 0.995 | plotRatio$sum > 1.005), ]
@@ -343,7 +346,7 @@ mix <- selectSpecies(as.matrix(plotcompData),
 X48 <- mix$prob
 
 #### Implement new ratios to compData ####
-compData <- arrange(compData,comp)
+compData <- arrange(compData, comp)
 compData$ratio <- ratioResults
 compData[compData$comp == 48, "ratio"] <- X48
 ratioResults <- compData$ratio
@@ -352,8 +355,8 @@ rm(X48)
 ### d Control of seedmixtures -------------------------------------------------
 #### Control
 compData[which(compData$ratio > 0.5), ]
-plotRatio <- compData %>% 
-  group_by(comp) %>% 
+plotRatio <- compData %>%
+  group_by(comp) %>%
   summarise(sum = sum(ratio))
 table(round(plotRatio$sum, 2))
 plotRatio[which(plotRatio$sum < 0.995 | plotRatio$sum > 1.005), ]
@@ -497,11 +500,11 @@ compData[compData$comp == 127, "comp"] <- "x159"
 compData[compData$comp == 128, "comp"] <- "x160"
 #### Export
 compData$weight <- round(compData$ratio * 0.48, 2)
-(weights <- compData %>%  
+(weights <- compData %>%
   group_by(name) %>%
   summarise(sum = sum(weight)))
-plotWeights <- compData %>% 
-  group_by(comp) %>% 
+plotWeights <- compData %>%
+  group_by(comp) %>%
   summarise(sum = sum(weight))
 table(plotWeights$sum)
 

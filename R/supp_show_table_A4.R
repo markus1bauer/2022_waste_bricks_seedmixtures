@@ -26,7 +26,7 @@ setwd(here("dat", "processed"))
 
 ### Load data ###
 edata <- read_table2("data_processed_experiment_1.txt",
-                     col_names = TRUE, na = "na", col_types = 
+                     col_names = TRUE, na = "na", col_types =
                        cols(
                          .default = "d",
                          plot = "f",
@@ -51,11 +51,11 @@ edata <- read_table2("data_processed_experiment_1.txt",
                                     "Medium_moist" = "Medium moist"))
 
 #### Chosen model ###
-m5 <- lmer(log(biomass) ~ (brickRatio + acid + f.watering + seedmix) +  
-             brickRatio:acid + brickRatio:f.watering + brickRatio:seedmix + 
-             f.watering:seedmix + acid:seedmix + 
-             brickRatio:acid:seedmix + 
-             (1|block), edata, REML = FALSE)
+m5 <- lmer(log(biomass) ~ (brickRatio + acid + f.watering + seedmix) +
+             brickRatio:acid + brickRatio:f.watering + brickRatio:seedmix +
+             f.watering:seedmix + acid:seedmix +
+             brickRatio:acid:seedmix +
+             (1 | block), edata, REML = FALSE)
 
 
 

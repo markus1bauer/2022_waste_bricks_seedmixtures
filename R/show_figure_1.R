@@ -52,11 +52,11 @@ environment <- read_table("data_processed_experiment_1_environment.txt",
                                     "Medium_moist" = "Medium moist"))
 
 ### Chosen model ###
-m5 <- lmer(log(biomass) ~ (brickRatio + acid + f.watering + seedmix) +  
-             brickRatio:acid + brickRatio:f.watering + brickRatio:seedmix + 
-             f.watering:seedmix + acid:seedmix + 
-             brickRatio:acid:seedmix + 
-             (1|block), environment, REML = FALSE)
+m5 <- lmer(log(biomass) ~ (brickRatio + acid + f.watering + seedmix) +
+             brickRatio:acid + brickRatio:f.watering + brickRatio:seedmix +
+             f.watering:seedmix + acid:seedmix +
+             brickRatio:acid:seedmix +
+             (1 | block), environment, REML = FALSE)
 
 
 
@@ -65,7 +65,7 @@ m5 <- lmer(log(biomass) ~ (brickRatio + acid + f.watering + seedmix) +
 #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 
-themeMB <- function(){
+theme_mb <- function() {
   theme(
     panel.background = element_rect(fill = "white"),
     text  = element_text(size = 10, color = "black"),
@@ -87,24 +87,24 @@ meandata <- filter(pdata, acid == "Control" & brickRatio == "5")
 pd <- position_dodge(.6)
 ggplot(pdata, aes(x = brickRatio, y = biomass, color = acid,
                   ymin = conf.low, ymax = conf.high)) +
-  geom_quasirandom(data = environment, aes(brickRatio, biomass, color = acid), 
+  geom_quasirandom(data = environment, aes(brickRatio, biomass, color = acid),
                    color = "grey70", dodge.width = .6, size = 0.7) +
-  geom_hline(aes(yintercept = biomass), meandata, 
+  geom_hline(aes(yintercept = biomass), meandata,
              color = "grey70", size = .25) +
-  geom_hline(aes(yintercept = conf.low), meandata, 
+  geom_hline(aes(yintercept = conf.low), meandata,
              color = "grey70", linetype = "dashed", size = .25) +
-  geom_hline(aes(yintercept = conf.high), meandata, 
+  geom_hline(aes(yintercept = conf.high), meandata,
              color = "grey70", linetype = "dashed", size = .25) +
-  geom_errorbar(position = pd, width = 0.0, size = 0.4)+
-  geom_point(position = pd, size = 2.5)+
-  facet_grid(.~ seedmix)+
-  scale_y_continuous(limits = c(0,33), breaks = seq(-100,100,5)) +
-  scale_colour_manual(values = c("grey50","black")) +
+  geom_errorbar(position = pd, width = 0.0, size = 0.4) +
+  geom_point(position = pd, size = 2.5) +
+  facet_grid(. ~ seedmix) +
+  scale_y_continuous(limits = c(0, 33), breaks = seq(-100, 100, 5)) +
+  scale_colour_manual(values = c("grey50", "black")) +
   labs(subtitle = "Different seed mixtures on different substrates\nwith and without pre-treatment of bricks with acid",
        x = "Brick ratio [vol%]", y = expression(paste("Biomass [g]")),
        color = "") +
   guides(shape = FALSE) +
-  themeMB()
+  theme_mb()
 
 ggsave("figure_1_ser_abstract_300dpi_16x7cm.tiff",
        dpi = 300, width = 16, height = 7, units = "cm",
