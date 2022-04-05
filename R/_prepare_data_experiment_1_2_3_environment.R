@@ -17,10 +17,6 @@ library(tidyverse)
 ### Start ###
 rm(list = ls())
 setwd(here("data", "raw"))
-#installr::updateR(browse_news = FALSE, install_R = TRUE, copy_packages = TRUE, copy_Rprofile.site = TRUE, keep_old_packages = TRUE, update_packages = TRUE)
-#remotes::install_github(file.path("inbo", "checklist"))
-checklist::setup_source()
-checklist::check_source()
 
 ### Load data ###
 environment12 <- read_csv("data_raw_experiment_1_2_environment.csv",

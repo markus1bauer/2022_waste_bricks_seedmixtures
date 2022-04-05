@@ -11,7 +11,6 @@
 
 
 ### Packages ###
-#installr::updateR(browse_news = F, install_R = T, copy_packages = T, copy_Rprofile.site = T, keep_old_packages = T, update_packages = T)
 library(here)
 library(tidyverse)
 library(data.table)
