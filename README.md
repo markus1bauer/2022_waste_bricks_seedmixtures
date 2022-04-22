@@ -3,11 +3,10 @@ _Markus Bauer <a href="https://orcid.org/0000-0001-5372-4174"><img src="https://
 
 ***
 
-**Journal**: [XXX](https://www.???.??)
+**Journal**: [Urban Ecosystems](https://www.springer.com/journal/11252)
 
-**DOI**: [https://doi.org/???](https://doi.org/???)
+**DOI**: [https://doi.org/10.1007/s11252-022-01230-x](https://doi.org/10.1007/s11252-022-01230-x)
 
-**Supporting information**: [link](https://www.???.org/supplementarydata.pdf)
 
 ## Content of the repository
 
