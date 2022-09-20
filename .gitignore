@@ -2,3 +2,7 @@
 .Rhistory
 .RData
 .Ruserdata
+
+# my exclusions
+data/raw/data_raw_traitbase_try_20190220_5762_height-seedmass.txt
+data/raw/data_raw_traitbase_try_20190411_6084_sla.txt
