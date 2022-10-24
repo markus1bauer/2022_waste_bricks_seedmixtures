@@ -45,7 +45,7 @@ When using the __data available__ in this repository, please cite the original p
 
 **Publication**
 
-> Bauer M, Krause M, Heizinger V and Kollmann J (2022). Using crushed waste bricks for urban greening with contrasting grassland mixtures: no negative effects of brick-augmented substrates varying in soil type, moisture and acid pre-treatment. - _Urban Ecosystems_.
+> Bauer M, Krause M, Heizinger V and Kollmann J (2022). Using crushed waste bricks for urban greening with contrasting grassland mixtures: no negative effects of brick-augmented substrates varying in soil type, moisture and acid pre-treatment. - _Urban Ecosystems_ 25, 1369-1378. [https://doi.org/10.1007/s11252-022-01230-x](https://doi.org/10.1007/s11252-022-01230-x)
 
 __Dataset__
 
