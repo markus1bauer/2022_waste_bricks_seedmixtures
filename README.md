@@ -5,7 +5,7 @@ _Markus Bauer <a href="https://orcid.org/0000-0001-5372-4174"><img src="https://
 
 **Journal**: [Urban Ecosystems](https://www.springer.com/journal/11252)
 
-[![DOI:10.1007/s11252-022-01230-x](http://img.shields.io/badge/DOI-10.1007/s11252-022-01230-x-informational.svg)](https://doi.org/10.1007/s11252-022-01230-x)
+[![DOI:10.1007/s11252-022-01230-x](http://img.shields.io/badge/DOI-10.1007/s11252-022-01230-informational.svg)](https://doi.org/10.1007/s11252-022-01230-x)
 
 ## Content of the repository
 
