@@ -6,6 +6,7 @@ _Markus Bauer <a href="https://orcid.org/0000-0001-5372-4174"><img src="https://
 **Journal**: [Urban Ecosystems](https://www.springer.com/journal/11252)
 
 [![DOI:10.1007/s11252-022-01230-x](https://zenodo.org/badge/doi/10.1007/s11252-022-01230-x.svg)](https://doi.org/10.1007/s11252-022-01230-x)
+[![CC BY 4.0][cc-by-shield]][cc-by]
 
 ## Content of the repository
 
@@ -31,8 +32,6 @@ The used versions of R and the packages are saved in `2022_waste_bricks_trees/re
 You can restore this state by executing `renv::restore()` in the console.
 
 ***
-
-[![CC BY 4.0][cc-by-shield]][cc-by]
 
 This work is licensed under a
 [Creative Commons Attribution 4.0 International License][cc-by].
