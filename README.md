@@ -1,13 +1,13 @@
-# Using crushed bricks for urban greening
+# Data and code for Bauer et al. (2022) Urban Ecosyst
+
 _Markus Bauer <a href="https://orcid.org/0000-0001-5372-4174"><img src="https://info.orcid.org/wp-content/uploads/2019/11/orcid_16x16.png" width="16" height = "16"></a>, Martin Krause, Valentin Heizinger and Johannes Kollmann <a href="https://orcid.org/0000-0002-4990-3636"><img src="https://info.orcid.org/wp-content/uploads/2019/11/orcid_16x16.png" width="16" height = "16"></a>_  
 
-***
-
-**Journal**: [Urban Ecosystems](https://www.springer.com/journal/11252)
+Bauer M, Krause M, Heizinger V, Kollmann J (2022) __Using crushed waste bricks for urban greening with contrasting grassland mixtures: no negative effects of brick-augmented substrates varying in soil type, moisture and acid pre-treatment.__ &ndash; _Urban Ecosystems_ 25, 1369&ndash;1378.
 
 [![DOI:10.1007/s11252-022-01230-x](https://zenodo.org/badge/doi/10.1007/s11252-022-01230-x.svg)](https://doi.org/10.1007/s11252-022-01230-x)
 [![CC BY 4.0][cc-by-shield]][cc-by]
-
+<br>
+<br>
 ## Content of the repository
 
 1. __Data__: the folder `data` contains  
@@ -23,15 +23,13 @@ _Markus Bauer <a href="https://orcid.org/0000-0001-5372-4174"><img src="https://
     * Scripts to calculate all models (.R)
     * Scripts to generate all figures (.R)
 
-***
+#### Package versioning
 
-__Package versioning__
-
-The used versions of R and the packages are saved in `2022_waste_bricks_trees/renv.lock`.
+The used versions of R and the packages are saved in `2022_waste_bricks_seedmixtures/renv.lock`.
 
 You can restore this state by executing `renv::restore()` in the console.
 
-***
+## Citation
 
 [![CC BY 4.0][cc-by-shield]][cc-by]
 
@@ -45,7 +43,7 @@ When using the __data available__ in this repository, please cite the original p
 
 **Publication**
 
-> Bauer M, Krause M, Heizinger V, Kollmann J (2022) Using crushed waste bricks for urban greening with contrasting grassland mixtures: no negative effects of brick-augmented substrates varying in soil type, moisture and acid pre-treatment. &ndash; _Urban Ecosystems_ 25, 1369-1378. [DOI: 10.1007/s11252-022-01230-x](https://doi.org/10.1007/s11252-022-01230-x)
+> Bauer M, Krause M, Heizinger V, Kollmann J (2022) Using crushed waste bricks for urban greening with contrasting grassland mixtures: no negative effects of brick-augmented substrates varying in soil type, moisture and acid pre-treatment. &ndash; _Urban Ecosystems_ 25, 1369&ndash;1378. [DOI: 10.1007/s11252-022-01230-x](https://doi.org/10.1007/s11252-022-01230-x)
 
 __Dataset__
 
