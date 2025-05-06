@@ -57,9 +57,12 @@ environment <- read_csv("data_processed_experiment_1_environment.csv",
 #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 
+
 ### 1 Data exploration ########################################################
 
+
 #### a Graphs -----------------------------------------------------------------
+
 #simple effects:
 par(mfrow = c(2, 2))
 plot(biomass ~ brickRatio, environment)
@@ -125,7 +128,7 @@ ggplot(environment, aes(block, biomass, color = seedmix)) +
   geom_boxplot() +
   geom_quasirandom(dodge.width = .7)
 
-##### b Outliers, zero-inflation, transformations? ----------------------------
+#### b Outliers, zero-inflation, transformations? -----------------------------
 par(mfrow = c(2, 2))
 dotchart((environment$biomass),
          groups = factor(environment$brickRatio), main = "Cleveland dotplot")
